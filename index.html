@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Irgi Febryansyah - UI/UX Designer & IT Engineer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+darkMode: "class",
+theme: {
+extend: {
+"colors": {
+"primary": "#000000",
+"surface-container-highest": "#e1e3e4",
+"surface-dim": "#d9dadb",
+"on-secondary-fixed": "#410000",
+"on-secondary-fixed-variant": "#930100",
+"primary-fixed": "#dee0ff",
+"secondary-fixed": "#ffdad4",
+"surface-tint": "#535b8b",
+"primary-fixed-dim": "#bbc3fa",
+"deep-blue": "#002455",
+"on-primary": "#ffffff",
+"secondary-container": "#e81309",
+"tertiary-fixed-dim": "#ffb4ac",
+"on-surface": "#191c1d",
+"inverse-primary": "#bbc3fa",
+"on-tertiary": "#ffffff",
+"on-secondary": "#ffffff",
+"inverse-on-surface": "#f0f1f2",
+"on-surface-variant": "#46464f",
+"on-primary-container": "#7981b3",
+"secondary-fixed-dim": "#ffb4a8",
+"surface-container-high": "#e7e8e9",
+"tertiary": "#000000",
+"on-primary-fixed": "#0e1744",
+"inverse-surface": "#2e3132",
+"surface-bright": "#f8f9fa",
+"on-primary-fixed-variant": "#3b4472",
+"surface": "#f8f9fa",
+"on-tertiary-fixed": "#410003",
+"on-error": "#ffffff",
+"pure-black": "#000000",
+"on-error-container": "#93000a",
+"primary-container": "#0e1744",
+"secondary": "#bc0000",
+"background": "#f8f9fa",
+"tertiary-fixed": "#ffdad6",
+"on-background": "#191c1d",
+"on-tertiary-fixed-variant": "#93000f",
+"surface-container": "#edeeef",
+"tertiary-container": "#410003",
+"surface-variant": "#e1e3e4",
+"pure-white": "#FFFFFF",
+"outline": "#767680",
+"surface-container-low": "#f3f4f5",
+"error": "#ba1a1a",
+"on-secondary-container": "#fffbff",
+"surface-container-lowest": "#ffffff",
+"on-tertiary-container": "#fa3435",
+"error-container": "#ffdad6",
+"outline-variant": "#c6c5d0",
+"navy": "#050e3c",
+"vibrant-red": "#DC0000",
+"vibrant-red-hover": "#FF3838"
+},
+"borderRadius": {
+"DEFAULT": "0px",
+"lg": "0px",
+"xl": "0px",
+"full": "0px"
+},
+"spacing": {
+"shadow-offset": "6px",
+"margin-desktop": "48px",
+"unit": "4px",
+"margin-mobile": "16px",
+"gutter": "24px",
+"border-width": "3px"
+},
+"fontFamily": {
+"headline-md": ["Montserrat"],
+"label-sm": ["Montserrat"],
+"label-lg": ["Montserrat"],
+"headline-lg": ["Montserrat"],
+"display-lg": ["Montserrat"],
+"body-md": ["Montserrat"],
+"body-lg": ["Montserrat"],
+"display-lg-mobile": ["Montserrat"]
+},
+"fontSize": {
+"headline-md": ["24px", { "lineHeight": "1.2", "fontWeight": "800" }],
+"label-sm": ["12px", { "lineHeight": "1.0", "fontWeight": "700" }],
+"label-lg": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700" }],
+"headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "800" }],
+"display-lg": ["120px", { "lineHeight": "0.9", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+"body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "500" }],
+"body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "500" }],
+"display-lg-mobile": ["64px", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+},
+"boxShadow": {
+"hard": "6px 6px 0px 0px rgba(0,0,0,1)",
+"hard-lg": "12px 12px 0px 0px rgba(0,0,0,1)",
+"hard-sm": "4px 4px 0px 0px rgba(0,0,0,1)"
+}
+}
+}
+}
+</script>
+<style>
+.hard-shadow { box-shadow: 6px 6px 0px 0px #000; }
+.hard-shadow-lg { box-shadow: 12px 12px 0px 0px #000; }
+.hard-shadow-btn { box-shadow: 4px 4px 0px 0px #000; transition: all 0.2s; }
+.hard-shadow-btn:active { box-shadow: 0px 0px 0px 0px #000; transform: translate(4px, 4px); }
+.border-thick { border: 3px solid #000; }
+.border-thick-bottom { border-bottom: 3px solid #000; }
+.border-thick-top { border-top: 3px solid #000; }
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #dc0000;
+  border: 1px solid #000000;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff3838;
+}
+html {
+  scrollbar-color: #dc0000 #f8f9fa;
+  scrollbar-width: thin;
+}
+.neo-image-container {
+  border: 6px solid #000000;
+  box-shadow: 16px 16px 0px 0px #dc0000, 22px 22px 0px 0px #000000;
+  background-color: #dc0000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.neo-image-container:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 20px 20px 0px 0px #dc0000, 26px 26px 0px 0px #000000;
+}
+.viewport-frame {
+  border: 8px solid #000000;
+  box-sizing: border-box;
+  position: relative;
+}
+.nav-link {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+.nav-link:hover {
+  border: 3px solid #000000;
+  background-color: #dc0000;
+  color: #ffffff;
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 0;
+  animation: blink 1.5s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.8) translateY(30px); }
+  60% { opacity: 1; transform: scale(1.05) translateY(-5px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(-1deg); }
+}
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(-40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+@keyframes wiggleText {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-1.5deg); }
+  75% { transform: rotate(1.5deg); }
+}
+.anim-pop { animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.anim-float { animation: floaty 4s ease-in-out infinite; }
+.anim-slide-left { animation: slideInLeft 0.7s ease-out both; }
+.anim-slide-right { animation: slideInRight 0.7s ease-out both; }
+.anim-bounce { display: inline-block; animation: bounceDown 1.2s ease-in-out infinite; }
+.neo-image-container { cursor: pointer; }
+.neo-image-container img:hover { transform: scale(1.08); }
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .anim-pop, .anim-float, .anim-slide-left, .anim-slide-right, .anim-bounce, .giant-bg-text, .reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 768px) {
+    main > section { padding: 1.5rem !important; }
+  .neo-image-container { width: 100% !important; max-width: 280px !important; }
+  .font-display-lg { font-size: 3rem !important; line-height: 1 !important; }
+  .font-headline-lg { font-size: 1.75rem !important; }
+  .font-body-lg { font-size: 1rem !important; }
+  .border-[3px] { border-width: 2px !important; }
+  .hard-shadow { box-shadow: 4px 4px 0px 0px #000 !important; }
+  .hard-shadow-lg { box-shadow: 8px 8px 0px 0px #000 !important; }
+  canvas { z-index: 9999 !important; }
+}
+@media (max-width: 640px) {
+    .font-display-lg { font-size: 2.5rem !important; }
+  .font-headline-lg { font-size: 1.5rem !important; }
+  .font-headline-md { font-size: 1.25rem !important; }
+  .font-body-lg { font-size: 0.95rem !important; }
+  main > section { padding: 1rem !important; }
+  .px-margin-mobile { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .gap-8 { gap: 1rem !important; }
+  .gap-12 { gap: 1.5rem !important; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+}
+
+.bg-name-first {
+  font-size: 20vw;
+  font-weight: 900;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.05em;
+  text-shadow: 8px 8px 0px #dc0000, 12px 12px 0px #000000;
+  pointer-events: none;
+  user-select: none;
+}
+.bg-name-last {
+  font-size: 7.5vw;
+  font-weight: 900;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.03em;
+  text-shadow: 6px 6px 0px #dc0000, 9px 9px 0px #000000;
+  pointer-events: none;
+  user-select: none;
+}
+@media (max-width: 1024px) {
+  .bg-name-first { font-size: 18vw; }
+  .bg-name-last { font-size: 7.5vw; }
+}
+@media (max-width: 768px) {
+  .bg-name-first { font-size: 16vw; }
+  .bg-name-last { font-size: 7vw; }
+}
+@media (max-width: 640px) {
+  .bg-name-first { font-size: 14vw; }
+  .bg-name-last { font-size: 6vw; }
+}
+.giant-bg-text {
+  font-size: 20vw;
+  line-height: 0.85;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  letter-spacing: -0.05em;
+  text-shadow: 8px 8px 0px #dc0000, 12px 12px 0px #000000;
+  text-align: center;
+  white-space: pre-line;
+  width: 100%;
+}
+.name-stack-first {
+  font-size: 16vw;
+  font-weight: 900;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.05em;
+  text-shadow: 6px 6px 0px #dc0000, 9px 9px 0px #000000;
+  pointer-events: none;
+  user-select: none;
+}
+.name-stack-last {
+  font-size: 7vw;
+  font-weight: 900;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.03em;
+  text-shadow: 6px 6px 0px #dc0000, 9px 9px 0px #000000;
+  pointer-events: none;
+  user-select: none;
+}
+@media (max-width: 1024px) {
+  .name-stack-first { font-size: 16vw; }
+  .name-stack-last { font-size: 6.5vw; }
+}
+@media (max-width: 768px) {
+  .name-stack-first { font-size: 14vw; }
+  .name-stack-last { font-size: 6vw; }
+}
+@media (max-width: 640px) {
+  .name-stack-first { font-size: 12vw; }
+  .name-stack-last { font-size: 5vw; }
+}
+html {
+  scroll-behavior: smooth;
+}
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 0;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0);
+  animation: rippleAnim 0.5s linear;
+  pointer-events: none;
+}
+@keyframes rippleAnim {
+  to { transform: scale(4); opacity: 0; }
+}
+</style>
+</head>
+<body class="bg-background text-primary font-body-md min-h-screen flex flex-col selection:bg-vibrant-red selection:text-pure-white">
+
+<main class="flex-grow">
+<section class="viewport-frame relative bg-navy overflow-hidden px-4 md:px-6 md:px-12 py-0 min-h-screen flex flex-col justify-between items-center border-b-[3px] border-pure-black" id="home">
+
+<header class="relative z-20 flex justify-between items-start w-full pt-4 sm:pt-6 md:pt-12">
+<div>
+<a class="nav-link inline-block text-pure-white anim-slide-left" href="#about">IRGI.DEV</a>
+</div>
+<div>
+<a class="nav-link inline-block text-pure-white anim-slide-right" href="#contact">CONTACT</a>
+</div>
+</header>
+
+<div aria-hidden="true" class="select-none hidden lg:flex" style="position:absolute;top:0;right:0;bottom:0;left:0;flex-direction:column;align-items:center;justify-content:center;z-index:0;pointer-events:none;gap:1vh;">
+  <span style="font-size:min(40vw,40vh);font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:-0.04em;text-shadow:6px 6px 0px #dc0000,9px 9px 0px #000000;line-height:1;">IRGI</span>
+  <span style="font-size:min(20vw,20vh);font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:-0.04em;text-shadow:6px 6px 0px #dc0000,9px 9px 0px #000000;line-height:1;">FEBRYANSYAH</span>
+</div>
+
+<div class="relative z-10 flex-grow flex flex-col items-center justify-center w-full gap-6 md:gap-8">
+<div class="text-center lg:hidden">
+<span class="name-stack-first" style="display:block;line-height:0.9;margin-bottom:0.5rem;">IRGI</span>
+</div>
+<div class="neo-image-container relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video overflow-hidden bg-pure-white anim-pop anim-float">
+<img alt="Irgi Febryansyah - UI/UX Designer & IT Engineer" class="w-full h-full object-cover object-center transition-all duration-500" src="assets/image.png"/>
+</div>
+<div class="text-center lg:hidden">
+<span class="name-stack-last" style="display:block;line-height:0.9;">FEBRYANSYAH</span>
+</div>
+</div>
+
+<footer class="relative z-20 flex justify-between items-end w-full pb-4 sm:pb-6 md:pb-12">
+<div class="text-xs font-bold tracking-widest uppercase text-pure-white">
+Est. 2026
+</div>
+<div class="text-xs font-bold tracking-widest uppercase text-pure-white anim-bounce">Scroll to explore ↓</div>
+</footer>
+
+</section>
+<section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-24 bg-background border-b-[3px] border-pure-black" id="about">
+<div class="max-w-4xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg uppercase text-primary mb-4 border-b-[3px] border-pure-black pb-4">About Me</h2>
+<p class="font-display-lg text-headline-lg md:text-display-lg-mobile uppercase text-vibrant-red mb-12" style="font-weight:900;letter-spacing:-0.02em;">Irgi Febryansyah</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+<div>
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-6">Background</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-4">Graduate of Computer and Network Engineering from SMK Kosgoro Bogor, currently studying IT at Universitas Ibn Khaldun Bogor.</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-4">Specialized in UI/UX design, system maintenance, and network engineering through vocational training, internships, and active enterprise projects.</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Committed to user-centered design, continuous learning, and developing impactful digital products.</p>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-6">Location & Contact</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-3"><strong>Location:</strong> Tanah Sareal, Bogor City</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6"><strong>Email:</strong> irgifebry2006@gmail.com</p>
+<div class="flex flex-wrap gap-3">
+<a href="https://github.com/irgifebry" target="_blank" class="border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-pure-white hover:bg-vibrant-red hover:text-pure-white transition-colors">GitHub</a>
+<a href="https://www.instagram.com/irgi.syh/" target="_blank" class="border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-pure-white hover:bg-vibrant-red hover:text-pure-white transition-colors">Instagram</a>
+<a href="https://www.tiktok.com/@wymidk0" target="_blank" class="border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-pure-white hover:bg-vibrant-red hover:text-pure-white transition-colors">TikTok</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-24 bg-pure-white border-b-[3px] border-pure-black" id="skills">
+<div class="max-w-4xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg uppercase text-primary mb-12 border-b-[3px] border-pure-black pb-4">Technical Skills</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+<div>
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-6">Design & Development</h3>
+<div class="space-y-2">
+<p class="font-body-lg text-body-lg text-on-surface-variant">UI/UX Design (Figma, Wireframing, Prototyping)</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Web Development (HTML, CSS, JavaScript, React)</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Mobile Development (Android, React Native)</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Backend Development (Laravel, PHP)</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Computer Maintenance & Networking</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Machine Learning Basics (Python, Scikit-Learn)</p>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-6">Soft Skills</h3>
+<div class="space-y-2">
+<p class="font-body-lg text-body-lg text-on-surface-variant">Communication & Collaboration</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Problem-Solving & Analysis</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Time Management</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Detail-Oriented</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Teamwork</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Continuous Learning</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-24 bg-background border-b-[3px] border-pure-black">
+<div class="max-w-4xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg uppercase text-primary mb-12 border-b-[3px] border-pure-black pb-4">Experience</h2>
+<div class="space-y-12">
+<div class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 reveal">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-1">
+<h3 class="font-headline-md text-headline-md uppercase text-primary">The Sahira Hotel</h3>
+<span class="font-label-sm text-label-sm text-vibrant-red uppercase">Dec 2021 - Mar 2022</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 font-bold">Engineering & IT Intern</p>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-2">
+<li>Diagnosed and repaired network and hardware issues</li>
+<li>Supported team operations and maintenance</li>
+<li>Managed F&B department inventory tracking</li>
+</ul>
+</div>
+<div class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 reveal">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-1">
+<h3 class="font-headline-md text-headline-md uppercase text-primary">Lalamove</h3>
+<span class="font-label-sm text-label-sm text-vibrant-red uppercase">Apr 2025 - Present</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 font-bold">Freelance Driver Partner</p>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-2">
+<li>Managed independent operations and route planning</li>
+<li>Developed communication and negotiation skills</li>
+<li>Tracked earnings and optimized time management</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-24 bg-pure-white border-b-[3px] border-pure-black">
+<div class="max-w-4xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg uppercase text-primary mb-12 border-b-[3px] border-pure-black pb-4">Current Project</h2>
+<div class="bg-navy text-pure-white border-thick hard-shadow p-8 reveal">
+<h3 class="font-headline-md text-headline-md uppercase mb-4">U-Cademy LMS</h3>
+<p class="font-body-md text-body-md text-surface-container-highest mb-4">Learning Management System for Universitas Ibn Khaldun Bogor</p>
+<div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
+<div>
+<p class="font-label-sm text-label-sm uppercase text-surface-dim">Role</p>
+<p class="font-body-md text-body-md">UI/UX Web Designer</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm uppercase text-surface-dim">Timeline</p>
+<p class="font-body-md text-body-md">Feb 2026 - Jul 2026</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm uppercase text-surface-dim">Client</p>
+<p class="font-body-md text-body-md">UIKA</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm uppercase text-surface-dim">Company</p>
+<p class="font-body-md text-body-md">PT Unosoft</p>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-surface-container-highest mb-4">Designing UI/UX for integrated Web and Mobile Android LMS supporting hybrid learning (synchronous & asynchronous). Responsible for wireframes, mockups, prototypes, and design consistency with Islamic campus visual identity.</p>
+<p class="font-label-sm text-label-sm uppercase text-surface-dim mb-2">Scope</p>
+<p class="font-body-md text-body-md text-surface-container-highest">Admin & Lecturer Dashboard (Web) • Student App (Android) • Registration Flow • Class Management (16 sessions) • CBT Integration • Discussion Forum • Automatic Certification</p>
+</div>
+</div>
+</section>
+
+<section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-24 bg-background border-b-[3px] border-pure-black" id="projects">
+<div class="max-w-4xl mx-auto">
+<div class="flex justify-between items-end mb-16 border-b-[3px] border-pure-black pb-4">
+<h2 class="font-headline-lg text-headline-lg uppercase text-primary">Personal Projects</h2>
+<span class="font-headline-md text-headline-md text-vibrant-red">6 Projects</span>
+</div>
+<div class="grid grid-cols-1 gap-6 space-y-6">
+<a href="https://github.com/irgifebry/instainsight" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">InstaInsight</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Web tool for Instagram follower analysis - find unfollowers and mutual friends without password.</p>
+<div class="flex gap-2 flex-wrap">
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">React 19</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">TypeScript</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Tailwind</span>
+</div>
+</a>
+
+<a href="https://github.com/irgifebry/noblur" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">NoBlur</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Client-side web app for patching MP4/MOV video containers locally in browser to prevent compression on TikTok uploads.</p>
+<div class="flex gap-2 flex-wrap">
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">JavaScript</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">HTML5</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">CSS</span>
+</div>
+</a>
+
+<a href="https://github.com/irgifebry/rygent" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">Rygent</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Android client app for real-time PC/Server Linux monitoring - CPU, RAM, Disk, Network status.</p>
+<div class="flex gap-2 flex-wrap">
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Kotlin</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Java</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Android</span>
+</div>
+</a>
+
+<a href="https://github.com/irgifebry/playshop-id" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">PlayShop.ID</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Online game top-up platform with payment integration and inventory management.</p>
+<div class="flex gap-2 flex-wrap">
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">PHP</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">MySQL</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">JavaScript</span>
+</div>
+</a>
+
+<a href="https://github.com/irgifebry/wakesanse" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">WakeSanse</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Android native app workaround for devices with broken hardware buttons using intelligent sensor gestures.</p>
+<div class="flex gap-2 flex-wrap">
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Java</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Kotlin</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Android</span>
+</div>
+</a>
+
+<a href="https://github.com/irgifebry/stellarium-hilal-checker" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">Stellarium Hilal Checker</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Python CLI app for moon crescent visibility prediction using Machine Learning (Random Forest) and astronomy data.</p>
+<div class="flex gap-2 flex-wrap">
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Python</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">NumPy</span>
+<span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Scikit-Learn</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+
+<section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-32 bg-navy flex flex-col items-center justify-center text-center relative overflow-hidden border-b-[3px] border-pure-black" id="contact">
+
+<div class="absolute top-10 left-10 w-24 h-24 border-[3px] border-vibrant-red opacity-40" style="animation:floaty 3s ease-in-out infinite;"></div>
+<div class="absolute bottom-10 right-10 w-32 h-32 bg-vibrant-red border-[3px] border-pure-black opacity-40" style="animation:floaty 4s ease-in-out infinite reverse;"></div>
+<div class="absolute top-1/2 left-8 w-4 h-4 bg-pure-white opacity-20" style="animation:floaty 5s ease-in-out infinite 1s;"></div>
+<div class="absolute top-1/3 right-12 w-6 h-6 border-[3px] border-vibrant-red opacity-30" style="animation:floaty 3.5s ease-in-out infinite 0.5s;"></div>
+<div class="relative z-10 max-w-4xl mx-auto">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-pure-white uppercase mb-12 reveal">Let's Work Together</h2>
+<p class="font-body-lg text-body-lg text-surface-container-highest mb-12 max-w-2xl mx-auto reveal">Open to UI/UX design projects, web development, and digital innovation opportunities.</p>
+<a href="mailto:irgifebry2006@gmail.com" class="bg-vibrant-red text-pure-white border-thick hard-shadow-lg w-full sm:w-auto px-4 sm:px-6 md:px-8 lg:px-12 py-2 sm:py-3 md:py-3 lg:py-6 text-xs sm:text-sm md:text-base lg:text-headline-md font-bold lg:font-headline-md uppercase tracking-widest hover:bg-vibrant-red-hover transition-colors inline-flex items-center justify-center gap-2 md:gap-3 lg:gap-4 reveal">
+Get In Touch
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+</a>
+</div>
+</section>
+</main>
+
+<footer class="bg-primary text-pure-white border-t-[3px] border-pure-black flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6 md:py-12 gap-gutter">
+<div class="flex flex-col items-center md:items-start gap-3 md:gap-4 text-center md:text-left">
+<h3 class="font-headline-lg text-headline-lg text-pure-white uppercase">IRGI FEBRYANSYAH</h3>
+<p class="font-label-sm text-label-sm uppercase text-surface-container-highest">UI/UX Designer & IT Engineer from Bogor City</p>
+<p class="font-label-sm text-label-sm uppercase text-surface-container-highest">© 2026. All Rights Reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-6 md:mt-0">
+<a href="https://github.com/irgifebry" target="_blank" class="font-label-sm text-label-sm uppercase text-surface-container-highest hover:text-vibrant-red hover:underline decoration-[2px] underline-offset-4 transition-colors">GitHub</a>
+<a href="https://www.instagram.com/irgi.syh/" target="_blank" class="font-label-sm text-label-sm uppercase text-surface-container-highest hover:text-vibrant-red hover:underline decoration-[2px] underline-offset-4 transition-colors">Instagram</a>
+<a href="https://www.tiktok.com/@wymidk0" target="_blank" class="font-label-sm text-label-sm uppercase text-surface-container-highest hover:text-vibrant-red hover:underline decoration-[2px] underline-offset-4 transition-colors">TikTok</a>
+<a href="mailto:irgifebry2006@gmail.com" class="font-label-sm text-label-sm uppercase text-surface-container-highest hover:text-vibrant-red hover:underline decoration-[2px] underline-offset-4 transition-colors">Email</a>
+</div>
+</footer>
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<canvas id="cursor-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; mix-blend-mode: screen; opacity: 1;"></canvas>
+<script>
+const canvas = document.getElementById('cursor-bg');
+const ctx = canvas.getContext('2d');
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let targetX = mouseX;
+let targetY = mouseY;
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  mouseX += (targetX - mouseX) * 0.08;
+  mouseY += (targetY - mouseY) * 0.08;
+  const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 480);
+  gradient.addColorStop(0, 'rgba(220, 0, 0, 0.55)');
+  gradient.addColorStop(0.35, 'rgba(220, 0, 0, 0.18)');
+  gradient.addColorStop(0.7, 'rgba(5, 14, 60, 0.08)');
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  requestAnimationFrame(draw);
+}
+
+document.addEventListener('mousemove', (e) => {
+  targetX = e.clientX;
+  targetY = e.clientY;
+});
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  draw();
+}
+</script>
+<script>
+(function() {
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  const sections = document.querySelectorAll('main > section, footer');
+  let lastScrollY = window.scrollY;
+  let velocity = 0;
+  let currentLag = 0;
+  let ticking = false;
+  sections.forEach(s => { s.style.willChange = 'transform, filter'; });
+  function update() {
+    const newScrollY = window.scrollY;
+    velocity = newScrollY - lastScrollY;
+    lastScrollY = newScrollY;
+    const targetLag = Math.max(-60, Math.min(60, velocity * 1.2));
+    currentLag += (targetLag - currentLag) * 0.1;
+    const blurAmount = Math.min(3, Math.abs(currentLag) * 0.06);
+    sections.forEach(s => {
+      s.style.transform = `translateY(${currentLag}px)`;
+      s.style.filter = `blur(${blurAmount}px)`;
+    });
+    if (Math.abs(currentLag) > 0.1 || Math.abs(velocity) > 0.3) {
+      requestAnimationFrame(update);
+    } else {
+      sections.forEach(s => { s.style.transform = 'translateY(0px)'; s.style.filter = 'blur(0px)'; });
+      ticking = false;
+    }
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+})();
+</script>
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.classList.add('ripple-effect');
+  el.addEventListener('click', function(e) {
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 500);
+  });
+});
+</script>
+</body>
+</html>
