@@ -723,6 +723,8 @@ let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 let targetX = mouseX;
 let targetY = mouseY;
+let isTouch = 'ontouchstart' in window;
+let gyroPermissionRequested = false;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -741,10 +743,39 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
-document.addEventListener('mousemove', (e) => {
-  targetX = e.clientX;
-  targetY = e.clientY;
-});
+if (!isTouch) {
+  document.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+  });
+} else {
+  function requestGyroPermission() {
+    if (gyroPermissionRequested) return;
+    gyroPermissionRequested = true;
+
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(permissionState => {
+          if (permissionState === 'granted') {
+            window.addEventListener('deviceorientation', handleDeviceOrientation);
+          }
+        })
+        .catch(() => {});
+    } else if (typeof DeviceOrientationEvent !== 'undefined') {
+      window.addEventListener('deviceorientation', handleDeviceOrientation);
+    }
+  }
+
+  function handleDeviceOrientation(event) {
+    const gamma = event.gamma || 0;
+    const beta = event.beta || 0;
+
+    targetX = (gamma + 90) / 180 * window.innerWidth;
+    targetY = (beta + 180) / 360 * window.innerHeight;
+  }
+
+  document.addEventListener('touchstart', requestGyroPermission, { once: true });
+}
 
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
