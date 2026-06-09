@@ -375,6 +375,33 @@ html {
   object-fit: cover;
   display: block;
 }
+.video-container.project-video {
+  aspect-ratio: 16/9;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 250px;
+  min-height: 250px;
+}
+.video-container.project-video video {
+  object-fit: cover;
+}
+.video-container.project-video.video-native {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: auto;
+  overflow: visible;
+  background-color: #000000;
+}
+.video-container.project-video.video-native video {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  display: block;
+}
 .video-label {
   position: absolute;
   bottom: 0;
@@ -389,6 +416,64 @@ html {
   text-transform: uppercase;
   color: #ffffff;
   pointer-events: none;
+}
+[data-parallax] {
+  will-change: translate;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-parallax] { translate: none !important; }
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  background-color: #dc0000;
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0px 0px #000000;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  pointer-events: none;
+}
+.scroll-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.scroll-to-top:hover {
+  background-color: #ff3838;
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+.scroll-to-top:hover .scroll-to-top-icon {
+  animation: bounceUp 0.6s ease infinite;
+}
+.get-in-touch:hover i {
+  animation: mailBounce 0.5s ease infinite;
+}
+.scroll-to-top:active {
+  transform: translateY(2px);
+  box-shadow: 0px 0px 0px 0px #000000;
+}
+@keyframes bounceUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes mailBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-3px) rotate(-5deg); }
+  75% { transform: translateY(-3px) rotate(5deg); }
+}
+@media (max-width: 640px) {
+  .scroll-to-top { bottom: 1rem; right: 1rem; width: 40px; height: 40px; }
 }
 </style>
 </head>
@@ -406,19 +491,19 @@ html {
 </div>
 </header>
 
-<div aria-hidden="true" class="select-none hidden lg:flex" style="position:absolute;top:0;right:0;bottom:0;left:0;flex-direction:column;align-items:center;justify-content:center;z-index:0;pointer-events:none;gap:1vh;">
+<div aria-hidden="true" data-parallax="0.32" class="select-none hidden lg:flex" style="position:absolute;top:0;right:0;bottom:0;left:0;flex-direction:column;align-items:center;justify-content:center;z-index:0;pointer-events:none;gap:1vh;">
   <span style="font-size:min(40vw,40vh);font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:-0.04em;text-shadow:6px 6px 0px #dc0000,9px 9px 0px #000000;line-height:1;">IRGI</span>
   <span style="font-size:min(20vw,20vh);font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:-0.04em;text-shadow:6px 6px 0px #dc0000,9px 9px 0px #000000;line-height:1;">FEBRYANSYAH</span>
 </div>
 
 <div class="relative z-10 flex-grow flex flex-col items-center justify-center w-full gap-6 md:gap-8">
-<div class="text-center lg:hidden">
+<div class="text-center lg:hidden" data-parallax="0.3">
 <span class="name-stack-first" style="display:block;line-height:0.9;margin-bottom:0.5rem;">IRGI</span>
 </div>
-<div class="neo-image-container relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video overflow-hidden bg-pure-white anim-pop anim-float">
+<div data-parallax="0.24" class="neo-image-container relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video overflow-hidden bg-pure-white anim-pop anim-float">
 <img alt="Irgi Febryansyah - UI/UX Designer & IT Engineer" class="w-full h-full object-cover object-center transition-all duration-500" src="assets/image.png"/>
 </div>
-<div class="text-center lg:hidden">
+<div class="text-center lg:hidden" data-parallax="0.28">
 <span class="name-stack-last" style="display:block;line-height:0.9;">FEBRYANSYAH</span>
 </div>
 </div>
@@ -447,7 +532,7 @@ Est. 2026
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-3"><strong>Location:</strong> Tanah Sareal, Bogor City</p>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-6"><strong>Email:</strong> irgifebry2006@gmail.com</p>
 <div class="flex flex-wrap gap-3">
-<a href="https://github.com/irgifebry" target="_blank" class="border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors">GitHub</a>
+<a href="https://github.com/irgifebry" target="_blank" class="github-icon-link border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors inline-flex items-center gap-2">GitHub</a>
 <a href="https://www.instagram.com/irgi.syh/" target="_blank" class="border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors">Instagram</a>
 <a href="https://www.tiktok.com/@wymidk0" target="_blank" class="border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors">TikTok</a>
 </div>
@@ -583,7 +668,6 @@ Est. 2026
 <p class="font-body-md text-body-md text-surface-container-highest">Homepage • Dynamic Menu Catalog • Facility Gallery • Contact & OpenStreetMaps Integration • Admin Dashboard • Content Management UI • Responsive Design (Mobile First)</p>
 <div class="video-container">
 <video autoplay muted loop playsinline data-src="assets/Monalisa.mp4"></video>
-<span class="video-label">Live Preview</span>
 </div>
 </div>
 </div>
@@ -591,65 +675,79 @@ Est. 2026
 </section>
 
 <section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-24 bg-background border-b-[3px] border-pure-black" id="projects">
-<div class="max-w-4xl mx-auto">
+<div class="max-w-6xl mx-auto">
 <div class="flex justify-between items-end mb-16 border-b-[3px] border-pure-black pb-4">
 <h2 class="font-headline-lg text-headline-lg uppercase text-primary">Personal Projects</h2>
 <span class="font-headline-md text-headline-md text-vibrant-red">6 Projects</span>
 </div>
-<div class="grid grid-cols-1 gap-6 space-y-6">
-<div class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal">
-<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">InstaInsight</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Web tool for Instagram follower analysis - find unfollowers and mutual friends without password.</p>
-<div class="flex gap-2 flex-wrap mb-4">
+<div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 lg:items-stretch gap-6 mb-6">
+<div class="bg-pure-white border-thick hard-shadow p-6 hover:-translate-y-2 transition-transform reveal flex flex-col gap-4 h-full">
+<div class="flex-grow flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md uppercase text-primary">InstaInsight</h3>
+<p class="font-body-md text-body-md text-on-surface-variant min-h-[4em]">Web tool for Instagram follower analysis - find unfollowers and mutual friends without password.</p>
+</div>
+<div class="-mt-4 flex flex-col gap-2">
+<div class="flex gap-2 flex-wrap h-[3rem] items-center">
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">React 19</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">TypeScript</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Tailwind</span>
 </div>
-<div class="video-container">
+<div class="video-container project-video video-native w-full -mt-4">
 <video autoplay muted loop playsinline data-src="assets/InstaInsight.mp4"></video>
-<span class="video-label">Live Preview</span>
 </div>
-<div class="flex gap-3 mt-6">
+<div class="flex gap-3 mt-2">
 <a href="https://irgifebry.github.io/InstaInsight" target="_blank" class="border-thick hard-shadow-btn px-4 py-2 font-label-sm text-label-sm uppercase bg-vibrant-red text-pure-white hover:bg-vibrant-red-hover transition-colors ripple-effect">Visit Website</a>
 <a href="https://github.com/irgifebry/instainsight" target="_blank" class="border-thick hard-shadow-btn px-4 py-2 font-label-sm text-label-sm uppercase bg-pure-white text-primary hover:bg-surface-bright transition-colors ripple-effect">View Repository</a>
 </div>
 </div>
+</div>
 
-<div class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal">
-<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">NoBlur</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Client-side web app for patching MP4/MOV video containers locally in browser to prevent compression on TikTok uploads.</p>
-<div class="flex gap-2 flex-wrap mb-4">
+<div class="bg-pure-white border-thick hard-shadow p-6 hover:-translate-y-2 transition-transform reveal flex flex-col gap-4 h-full">
+<div class="flex-grow flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md uppercase text-primary">NoBlur</h3>
+<p class="font-body-md text-body-md text-on-surface-variant min-h-[4em]">Client-side web app for patching MP4/MOV video containers locally in browser to prevent compression on TikTok uploads.</p>
+</div>
+<div class="-mt-4 flex flex-col gap-2">
+<div class="flex gap-2 flex-wrap h-[3rem] items-center">
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">JavaScript</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">HTML5</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">CSS</span>
 </div>
-<div class="video-container">
+<div class="video-container project-video video-native w-full -mt-4">
 <video autoplay muted loop playsinline data-src="assets/NoBlur.mp4"></video>
-<span class="video-label">Live Preview</span>
 </div>
-<div class="flex gap-3 mt-6">
+<div class="flex gap-3 mt-2">
 <a href="https://irgifebry.github.io/NoBlur/" target="_blank" class="border-thick hard-shadow-btn px-4 py-2 font-label-sm text-label-sm uppercase bg-vibrant-red text-pure-white hover:bg-vibrant-red-hover transition-colors ripple-effect">Visit Website</a>
 <a href="https://github.com/irgifebry/noblur" target="_blank" class="border-thick hard-shadow-btn px-4 py-2 font-label-sm text-label-sm uppercase bg-pure-white text-primary hover:bg-surface-bright transition-colors ripple-effect">View Repository</a>
 </div>
 </div>
+</div>
 
-<a href="https://github.com/irgifebry/playshop-id" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
-<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">PlayShop.ID</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Online game top-up platform with payment integration and inventory management.</p>
-<div class="flex gap-2 flex-wrap mb-4">
+<div class="bg-pure-white border-thick hard-shadow p-6 hover:-translate-y-2 transition-transform reveal flex flex-col gap-4 h-full">
+<div class="flex-grow flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md uppercase text-primary">PlayShop.ID</h3>
+<p class="font-body-md text-body-md text-on-surface-variant min-h-[4em]">Online game top-up platform with payment integration and inventory management.</p>
+</div>
+<div class="-mt-4 flex flex-col gap-2">
+<div class="flex gap-2 flex-wrap h-[3rem] items-center">
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">PHP</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">MySQL</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">JavaScript</span>
 </div>
-<div class="video-container">
+<div class="video-container project-video video-native w-full -mt-4">
 <video autoplay muted loop playsinline data-src="assets/PlayShop.mp4"></video>
-<span class="video-label">Live Preview</span>
 </div>
-</a>
+<div class="flex gap-3 mt-2">
+<a href="https://github.com/irgifebry/playshop-id" target="_blank" class="border-thick hard-shadow-btn px-4 py-2 font-label-sm text-label-sm uppercase bg-pure-white text-primary hover:bg-surface-bright transition-colors ripple-effect">View Repository</a>
+</div>
+</div>
+</div>
+</div>
 
-<a href="https://github.com/irgifebry/rygent" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
-<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">Rygent</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Android client app for real-time PC/Server Linux monitoring - CPU, RAM, Disk, Network status.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<a href="https://github.com/irgifebry/rygent" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 lg:p-3 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2 lg:mb-0.5">Rygent</h3>
+<p class="font-body-md text-body-md lg:text-sm text-on-surface-variant mb-4 lg:mb-2">Android client app for real-time PC/Server Linux monitoring - CPU, RAM, Disk, Network status.</p>
 <div class="flex gap-2 flex-wrap">
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Kotlin</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Java</span>
@@ -657,9 +755,9 @@ Est. 2026
 </div>
 </a>
 
-<a href="https://github.com/irgifebry/wakesanse" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
-<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">WakeSanse</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Android native app workaround for devices with broken hardware buttons using intelligent sensor gestures.</p>
+<a href="https://github.com/irgifebry/wakesanse" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 lg:p-3 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2 lg:mb-0.5">WakeSanse</h3>
+<p class="font-body-md text-body-md lg:text-sm text-on-surface-variant mb-4 lg:mb-2">Android native app workaround for devices with broken hardware buttons using intelligent sensor gestures.</p>
 <div class="flex gap-2 flex-wrap">
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Java</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Kotlin</span>
@@ -667,9 +765,9 @@ Est. 2026
 </div>
 </a>
 
-<a href="https://github.com/irgifebry/stellarium-hilal-checker" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 hover:-translate-y-2 transition-transform reveal block">
-<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2">Stellarium Hilal Checker</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Python CLI app for moon crescent visibility prediction using Machine Learning (Random Forest) and astronomy data.</p>
+<a href="https://github.com/irgifebry/stellarium-hilal-checker" target="_blank" class="bg-pure-white border-thick hard-shadow p-4 sm:p-8 lg:p-3 hover:-translate-y-2 transition-transform reveal block">
+<h3 class="font-headline-md text-headline-md uppercase text-primary mb-2 lg:mb-0.5">Stellarium Hilal Checker</h3>
+<p class="font-body-md text-body-md lg:text-sm text-on-surface-variant mb-4 lg:mb-2">Python CLI app for moon crescent visibility prediction using Machine Learning (Random Forest) and astronomy data.</p>
 <div class="flex gap-2 flex-wrap">
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">Python</span>
 <span class="border-[2px] border-pure-black px-3 py-1 font-label-sm text-label-sm uppercase bg-surface-bright">NumPy</span>
@@ -682,16 +780,16 @@ Est. 2026
 
 <section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-32 bg-navy flex flex-col items-center justify-center text-center relative overflow-hidden border-b-[3px] border-pure-black" id="contact">
 
-<div class="absolute top-10 left-10 w-24 h-24 border-[3px] border-vibrant-red opacity-40" style="animation:floaty 3s ease-in-out infinite;"></div>
-<div class="absolute bottom-10 right-10 w-32 h-32 bg-vibrant-red border-[3px] border-pure-black opacity-40" style="animation:floaty 4s ease-in-out infinite reverse;"></div>
-<div class="absolute top-1/2 left-8 w-4 h-4 bg-pure-white opacity-20" style="animation:floaty 5s ease-in-out infinite 1s;"></div>
-<div class="absolute top-1/3 right-12 w-6 h-6 border-[3px] border-vibrant-red opacity-30" style="animation:floaty 3.5s ease-in-out infinite 0.5s;"></div>
-<div class="relative z-10 max-w-4xl mx-auto">
+<div class="absolute top-10 left-10 w-24 h-24 border-[3px] border-vibrant-red opacity-40" data-parallax="0.22" style="animation:floaty 3s ease-in-out infinite;"></div>
+<div class="absolute bottom-10 right-10 w-32 h-32 bg-vibrant-red border-[3px] border-pure-black opacity-40" data-parallax="0.18" style="animation:floaty 4s ease-in-out infinite reverse;"></div>
+<div class="absolute top-1/2 left-8 w-4 h-4 bg-pure-white opacity-20" data-parallax="0.3" style="animation:floaty 5s ease-in-out infinite 1s;"></div>
+<div class="absolute top-1/3 right-12 w-6 h-6 border-[3px] border-vibrant-red opacity-30" data-parallax="0.26" style="animation:floaty 3.5s ease-in-out infinite 0.5s;"></div>
+<div data-parallax="0.1" class="relative z-10 max-w-4xl mx-auto">
 <h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-pure-white uppercase mb-12 reveal">Let's Work Together</h2>
 <p class="font-body-lg text-body-lg text-surface-container-highest mb-12 max-w-2xl mx-auto reveal">Open to UI/UX design projects, web development, and digital innovation opportunities.</p>
-<a href="mailto:irgifebry2006@gmail.com" class="bg-vibrant-red text-pure-white border-thick hard-shadow-lg w-full sm:w-auto px-4 sm:px-6 md:px-8 lg:px-12 py-2 sm:py-3 md:py-3 lg:py-6 text-xs sm:text-sm md:text-base lg:text-headline-md font-bold lg:font-headline-md uppercase tracking-widest hover:bg-vibrant-red-hover transition-colors inline-flex items-center justify-center gap-2 md:gap-3 lg:gap-4 reveal">
+<a href="mailto:irgifebry2006@gmail.com" class="get-in-touch bg-vibrant-red text-pure-white border-thick hard-shadow-lg w-full sm:w-auto px-4 sm:px-6 md:px-8 lg:px-12 py-2 sm:py-3 md:py-3 lg:py-6 text-xs sm:text-sm md:text-base lg:text-headline-md font-bold lg:font-headline-md uppercase tracking-widest hover:bg-vibrant-red-hover transition-colors inline-flex items-center justify-center gap-2 md:gap-3 lg:gap-4">
 Get In Touch
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+<i class="ph ph-bold ph-envelope-simple" style="font-size:1.5em;line-height:1;"></i>
 </a>
 </div>
 </section>
@@ -850,6 +948,7 @@ document.querySelectorAll('a, button').forEach(el => {
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2"></script>
 <script>
 const videoObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -857,6 +956,14 @@ const videoObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       if (!video.src && video.dataset.src) {
         video.src = video.dataset.src;
+        if (video.closest('.video-native')) {
+          video.addEventListener('loadedmetadata', function onMeta() {
+            video.removeEventListener('loadedmetadata', onMeta);
+            if (video.videoWidth && video.videoHeight) {
+              video.parentElement.style.aspectRatio = video.videoWidth + '/' + video.videoHeight;
+            }
+          });
+        }
       }
       video.play().catch(() => {});
     } else {
@@ -865,6 +972,269 @@ const videoObserver = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '200px 0px', threshold: 0.1 });
 document.querySelectorAll('video[data-src]').forEach(v => videoObserver.observe(v));
+</script>
+<script>
+if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  const parallaxElements = document.querySelectorAll('[data-parallax]');
+  let ticking = false;
+
+  function updateParallax() {
+    const viewportMid = window.innerHeight / 2;
+
+    parallaxElements.forEach(el => {
+      const speed = parseFloat(el.dataset.parallax);
+      const rect = el.getBoundingClientRect();
+      const elementMid = rect.top + rect.height / 2;
+      const distFromMid = elementMid - viewportMid;
+      const offset = distFromMid * speed;
+      el.style.translate = `0 ${offset.toFixed(2)}px`;
+    });
+
+    ticking = false;
+  }
+
+  function requestParallax() {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', requestParallax, { passive: true });
+  window.addEventListener('resize', requestParallax);
+  updateParallax();
+}
+</script>
+<script>
+(function() {
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+
+  const catCanvas = document.createElement('canvas');
+  catCanvas.id = 'walking-cat';
+  catCanvas.setAttribute('aria-hidden', 'true');
+  catCanvas.style.cssText = 'position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:60;';
+  document.body.appendChild(catCanvas);
+
+  const ctx = catCanvas.getContext('2d');
+  const BLACK = '#000000';
+  const RED = '#DC0000';
+  const WHITE = '#FFFFFF';
+  const UNIT = 7;
+  const GROUND = window.innerHeight - 12;
+  const STRIDE_SPEED = 95;
+  const STEP_FREQUENCY = 9;
+
+  let catX = -140;
+  let catY = GROUND;
+  let walkPhase = 0;
+  let lastTimestamp = null;
+  let jumpState = { isJumping: false, jumpTime: 0, jumpDuration: 0.5 };
+  let meowBubbles = [];
+  let direction = 1;
+  let directionChangeTimer = 0;
+  let directionChangeDuration = 3 + Math.random() * 4;
+
+  function resizeCanvas() {
+    catCanvas.width = window.innerWidth;
+    catCanvas.height = window.innerHeight;
+    catY = catCanvas.height - 12;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function isOnCat(px, py) {
+    const b = { x: catX, y: catY - 80, width: 140, height: 90 };
+    return px >= b.x && px <= b.x + b.width && py >= b.y && py <= b.y + b.height;
+  }
+
+  window.addEventListener('click', (e) => {
+    const rect = catCanvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    if (isOnCat(mx, my)) {
+      if (!jumpState.isJumping) {
+        jumpState.isJumping = true;
+        jumpState.jumpTime = 0;
+      }
+      meowBubbles.push({ x: catX + 70, y: catY - 90, life: 1.2, maxLife: 1.2 });
+    }
+  });
+
+  function block(color, offsetX, offsetY, blockWidth, blockHeight, originX, baseY) {
+    ctx.fillStyle = color;
+    ctx.fillRect(
+      Math.round(originX + offsetX * UNIT),
+      Math.round(baseY - (offsetY + blockHeight) * UNIT),
+      Math.ceil(blockWidth * UNIT),
+      Math.ceil(blockHeight * UNIT)
+    );
+  }
+
+  function triangle(color, ax, ay, bx, by, cx, cy, originX, baseY) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(originX + ax * UNIT, baseY - ay * UNIT);
+    ctx.lineTo(originX + bx * UNIT, baseY - by * UNIT);
+    ctx.lineTo(originX + cx * UNIT, baseY - cy * UNIT);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function drawBubble(bx, by, alpha) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    const text = 'MEOW!';
+    ctx.font = 'bold 13px Montserrat, sans-serif';
+    const tw = ctx.measureText(text).width;
+    const pw = tw + 16;
+    const ph = 22;
+    const rx = bx - pw / 2;
+    const ry = by - ph;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.rect(rx, ry, pw, ph);
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(bx - 5, by);
+    ctx.lineTo(bx + 5, by);
+    ctx.lineTo(bx, by + 8);
+    ctx.closePath();
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+    ctx.strokeStyle = '#000000';
+    ctx.stroke();
+    ctx.fillStyle = '#DC0000';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, bx, ry + ph / 2);
+    ctx.restore();
+  }
+
+  function drawCatAt(originX, baseY, phase, jumpOffset) {
+    const bodyBob = jumpOffset > 0 ? 0 : Math.abs(Math.sin(phase)) * 0.3;
+    const liftA = jumpOffset > 0 ? 1.2 : Math.max(0, Math.sin(phase)) * 0.7;
+    const liftB = jumpOffset > 0 ? 0.6 : Math.max(0, Math.sin(phase + Math.PI)) * 0.7;
+    const tailSway = Math.sin(phase * 0.8) * (jumpOffset > 0 ? 1.4 : 0.7);
+    const lift = bodyBob;
+    const groundY = catCanvas.height - 12;
+
+    ctx.fillStyle = 'rgba(0,0,0,0.18)';
+    ctx.beginPath();
+    const shadowScale = jumpOffset > 0 ? Math.max(0.5, 1 - jumpOffset / 120) : 1;
+    ctx.ellipse(originX + 6 * UNIT, groundY + 3, 7 * UNIT * shadowScale, 5 * shadowScale, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    block(BLACK, 1.4, liftB, 1.3, 2.2 - liftB, originX, baseY);
+    block(BLACK, 3.4, liftA, 1.3, 2.2 - liftA, originX, baseY);
+    block(BLACK, 6.4, liftA, 1.3, 2.2 - liftA, originX, baseY);
+    block(BLACK, 8.2, liftB, 1.3, 2.2 - liftB, originX, baseY);
+
+    block(BLACK, -0.4, 3 + lift, 1.3, 1.4, originX, baseY);
+    block(BLACK, -1.2, 4.2 + tailSway + lift, 1.3, 1.5, originX, baseY);
+    block(BLACK, -1.4, 5.4 + tailSway + lift, 1.3, 1.3, originX, baseY);
+
+    block(BLACK, 1, 2 + lift, 8.2, 3, originX, baseY);
+
+    block(RED, 7.6, 2.2 + lift, 1, 2.6, originX, baseY);
+
+    block(BLACK, 8.2, 3 + lift, 4, 4, originX, baseY);
+
+    triangle(BLACK, 8.3, 7 + lift, 9.4, 7 + lift, 8.5, 9 + lift, originX, baseY);
+    triangle(BLACK, 11, 7 + lift, 12.1, 7 + lift, 11.9, 9 + lift, originX, baseY);
+
+    block(WHITE, 10.1, 5.1 + lift, 1, 1, originX, baseY);
+    block(BLACK, 10.5, 5.2 + lift, 0.5, 0.6, originX, baseY);
+    block(RED, 11.7, 4.1 + lift, 0.7, 0.7, originX, baseY);
+  }
+
+  function frame(timestamp) {
+    if (lastTimestamp === null) lastTimestamp = timestamp;
+    const delta = (timestamp - lastTimestamp) / 1000;
+    lastTimestamp = timestamp;
+
+    const groundY = catCanvas.height - 12;
+
+    catX += STRIDE_SPEED * direction * delta;
+    walkPhase += delta * STEP_FREQUENCY;
+
+    directionChangeTimer += delta;
+    if (directionChangeTimer >= directionChangeDuration) {
+      direction *= -1;
+      directionChangeTimer = 0;
+      directionChangeDuration = 3 + Math.random() * 4;
+    }
+
+    if (catX > catCanvas.width + 140) { catX = catCanvas.width + 139; direction = -1; }
+    if (catX < -140) { catX = -139; direction = 1; }
+
+    if (jumpState.isJumping) {
+      jumpState.jumpTime += delta;
+      if (jumpState.jumpTime >= jumpState.jumpDuration) {
+        jumpState.isJumping = false;
+        jumpState.jumpTime = 0;
+      }
+    }
+
+    const jumpProgress = jumpState.isJumping ? jumpState.jumpTime / jumpState.jumpDuration : 0;
+    const jumpOffset = Math.sin(jumpProgress * Math.PI) * 65;
+
+    meowBubbles = meowBubbles.filter(b => b.life > 0);
+    meowBubbles.forEach(b => {
+      b.life -= delta;
+      b.y -= 25 * delta;
+    });
+
+    ctx.clearRect(0, 0, catCanvas.width, catCanvas.height);
+    const drawY = catY - jumpOffset;
+    const centerX = catX + 6 * UNIT;
+
+    if (direction < 0) {
+      ctx.save();
+      ctx.translate(centerX, 0);
+      ctx.scale(-1, 1);
+      ctx.translate(-centerX, 0);
+      drawCatAt(catX, drawY, walkPhase, jumpOffset);
+      ctx.restore();
+    } else {
+      drawCatAt(catX, drawY, walkPhase, jumpOffset);
+    }
+
+    meowBubbles.forEach(b => {
+      const alpha = b.life / b.maxLife;
+      drawBubble(b.x, b.y, alpha);
+    });
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<button class="scroll-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<i class="ph ph-bold ph-arrow-up scroll-to-top-icon"></i>
+</button>
+<script>
+(function() {
+  var btn = document.querySelector('.scroll-to-top');
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        if (window.scrollY > 400) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
 </script>
 
 </body>
