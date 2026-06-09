@@ -719,61 +719,53 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 <script>
 const canvas = document.getElementById('cursor-bg');
 const ctx = canvas.getContext('2d');
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-let targetX = mouseX;
-let targetY = mouseY;
 let isTouch = 'ontouchstart' in window;
 let gyroPermissionRequested = false;
+
+let cx = window.innerWidth / 2;
+let cy = window.innerHeight / 2;
+let tx = cx;
+let ty = cy;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  mouseX += (targetX - mouseX) * 0.08;
-  mouseY += (targetY - mouseY) * 0.08;
-  const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 480);
-  gradient.addColorStop(0, 'rgba(220, 0, 0, 0.55)');
-  gradient.addColorStop(0.35, 'rgba(220, 0, 0, 0.18)');
-  gradient.addColorStop(0.7, 'rgba(5, 14, 60, 0.08)');
-  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-  ctx.fillStyle = gradient;
+  cx += (tx - cx) * 0.05;
+  cy += (ty - cy) * 0.05;
+
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 600);
+  g.addColorStop(0, 'rgba(220, 0, 0, 0.18)');
+  g.addColorStop(0.5, 'rgba(220, 0, 0, 0.06)');
+  g.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = g;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   requestAnimationFrame(draw);
 }
 
 if (!isTouch) {
   document.addEventListener('mousemove', (e) => {
-    targetX = e.clientX;
-    targetY = e.clientY;
+    tx = e.clientX;
+    ty = e.clientY;
   });
 } else {
   function requestGyroPermission() {
     if (gyroPermissionRequested) return;
     gyroPermissionRequested = true;
-
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
       DeviceOrientationEvent.requestPermission()
-        .then(permissionState => {
-          if (permissionState === 'granted') {
-            window.addEventListener('deviceorientation', handleDeviceOrientation);
-          }
-        })
+        .then(state => { if (state === 'granted') window.addEventListener('deviceorientation', handleGyro); })
         .catch(() => {});
     } else if (typeof DeviceOrientationEvent !== 'undefined') {
-      window.addEventListener('deviceorientation', handleDeviceOrientation);
+      window.addEventListener('deviceorientation', handleGyro);
     }
   }
-
-  function handleDeviceOrientation(event) {
-    const gamma = event.gamma || 0;
-    const beta = event.beta || 0;
-
-    targetX = (gamma + 90) / 180 * window.innerWidth;
-    targetY = (beta + 180) / 360 * window.innerHeight;
+  function handleGyro(e) {
+    tx = ((e.gamma || 0) + 90) / 180 * window.innerWidth;
+    ty = ((e.beta || 0) + 180) / 360 * window.innerHeight;
   }
-
   document.addEventListener('touchstart', requestGyroPermission, { once: true });
 }
 
