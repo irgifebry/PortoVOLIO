@@ -415,6 +415,134 @@ html {
   color: #ffffff;
   pointer-events: none;
 }
+
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal-video-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.video-modal video {
+  max-width: 90vw;
+  max-height: calc(90vh - 56px);
+  width: auto;
+  height: auto;
+  border: 3px solid #ffffff;
+  border-bottom: none;
+  cursor: default;
+  display: block;
+}
+
+.video-modal-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #000000;
+  border: 3px solid #ffffff;
+  border-top: none;
+  padding: 8px 12px;
+}
+
+.video-modal-play-btn {
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.video-modal-play-btn:hover {
+  color: #dc0000;
+}
+
+.video-modal-seek {
+  flex-grow: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #333333;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.video-modal-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #dc0000;
+  cursor: pointer;
+}
+
+.video-modal-seek::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #dc0000;
+  border: none;
+  cursor: pointer;
+}
+
+.video-modal-time {
+  color: #ffffff;
+  font-size: 12px;
+  font-family: monospace;
+  flex-shrink: 0;
+  min-width: 80px;
+  text-align: right;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #dc0000;
+  border-left: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+  border-top: none;
+  border-right: none;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10001;
+  transition: background-color 0.2s ease;
+}
+
+.video-modal-close:hover {
+  background-color: #ff3333;
+}
 [data-parallax] {
   will-change: translate;
 }
@@ -941,6 +1069,18 @@ document.querySelectorAll('a, button').forEach(el => {
   });
 });
 </script>
+<div class="video-modal" id="videoModal">
+<div class="video-modal-video-wrap">
+<button class="video-modal-close" onclick="closeModal()">×</button>
+<video autoplay muted loop playsinline></video>
+<div class="video-modal-controls">
+<button class="video-modal-play-btn" id="videoModalPlayBtn">⏸</button>
+<input type="range" class="video-modal-seek" id="videoModalSeek" min="0" max="100" value="0" step="0.1">
+<span class="video-modal-time" id="videoModalTime">0:00 / 0:00</span>
+</div>
+</div>
+</div>
+
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
@@ -969,6 +1109,68 @@ const videoObserver = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '200px 0px', threshold: 0.1 });
 document.querySelectorAll('video[data-src]').forEach(v => videoObserver.observe(v));
+
+function closeModal() {
+  const modal = document.getElementById('videoModal');
+  const modalVideo = modal.querySelector('video');
+  modalVideo.pause();
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.video-container').forEach(container => {
+  container.style.cursor = 'pointer';
+  container.addEventListener('click', () => {
+    const video = container.querySelector('video');
+    const modal = document.getElementById('videoModal');
+    const modalVideo = modal.querySelector('video');
+    modalVideo.src = video.src;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+const modalVideo = document.getElementById('videoModal').querySelector('video');
+const playBtn = document.getElementById('videoModalPlayBtn');
+const seekSlider = document.getElementById('videoModalSeek');
+const timeDisplay = document.getElementById('videoModalTime');
+const videoWrap = document.querySelector('.video-modal-video-wrap');
+
+function formatTime(s) {
+  if (isNaN(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+modalVideo.addEventListener('timeupdate', () => {
+  if (modalVideo.duration) {
+    seekSlider.value = (modalVideo.currentTime / modalVideo.duration) * 100;
+    timeDisplay.textContent = formatTime(modalVideo.currentTime) + ' / ' + formatTime(modalVideo.duration);
+  }
+});
+
+modalVideo.addEventListener('play', () => { playBtn.textContent = '⏸'; });
+modalVideo.addEventListener('pause', () => { playBtn.textContent = '▶'; });
+
+playBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (modalVideo.paused) { modalVideo.play(); } else { modalVideo.pause(); }
+});
+
+seekSlider.addEventListener('input', (e) => {
+  e.stopPropagation();
+  modalVideo.currentTime = (seekSlider.value / 100) * modalVideo.duration;
+});
+
+document.getElementById('videoModal').addEventListener('click', closeModal);
+
+modalVideo.addEventListener('click', (e) => { e.stopPropagation(); });
+videoWrap.addEventListener('click', (e) => { e.stopPropagation(); });
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
 </script>
 <script>
 if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
