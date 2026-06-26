@@ -608,14 +608,7 @@ html {
 <main class="flex-grow">
 <section class="viewport-frame relative bg-navy overflow-hidden px-4 md:px-6 md:px-12 py-0 min-h-screen flex flex-col justify-between items-center border-b-[3px] border-pure-black" id="home">
 
-<header class="relative z-20 flex justify-between items-start w-full pt-4 sm:pt-6 md:pt-12">
-<div>
-<a class="nav-link inline-block text-pure-white anim-slide-left" href="#about">IRGI.DEV</a>
-</div>
-<div>
-<a class="nav-link inline-block text-pure-white anim-slide-right" href="#contact">CONTACT</a>
-</div>
-</header>
+<canvas id="home-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
 
 <div aria-hidden="true" data-parallax="0.32" class="select-none hidden lg:flex" style="position:absolute;top:0;right:0;bottom:0;left:0;flex-direction:column;align-items:center;justify-content:center;z-index:0;pointer-events:none;gap:1vh;">
   <span style="font-size:min(40vw,40vh);font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:-0.04em;text-shadow:6px 6px 0px #dc0000,9px 9px 0px #000000;line-height:1;">IRGI</span>
@@ -655,11 +648,11 @@ Est. 2026
 </div>
 <div>
 <h3 class="font-headline-md text-headline-md uppercase text-primary mb-6">Contact</h3>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-6"><strong>Email:</strong> irgifebry2006@gmail.com</p>
 <div class="flex flex-wrap gap-3">
-<a href="https://github.com/irgifebry" target="_blank" class="github-icon-link border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors inline-flex items-center gap-2">GitHub</a>
-<a href="https://www.instagram.com/irgi.syh/" target="_blank" class="border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors">Instagram</a>
-<a href="https://www.tiktok.com/@wymidk0" target="_blank" class="border-[2px] border-pure-black px-4 py-2 font-label-sm text-label-sm uppercase bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors">TikTok</a>
+<a href="https://github.com/irgifebry" target="_blank" class="flex items-center justify-center border-[2px] border-pure-black px-4 py-2 bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors"><i class="ph ph-github-logo text-lg"></i></a>
+<a href="https://www.instagram.com/irgi.syh/" target="_blank" class="flex items-center justify-center border-[2px] border-pure-black px-4 py-2 bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors"><i class="ph ph-instagram-logo text-lg"></i></a>
+<a href="https://www.tiktok.com/@wymidk0" target="_blank" class="flex items-center justify-center border-[2px] border-pure-black px-4 py-2 bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors"><i class="ph ph-tiktok-logo text-lg"></i></a>
+<a href="mailto:irgifebry2006@gmail.com" class="flex items-center justify-center border-[2px] border-pure-black px-4 py-2 bg-surface-bright hover:bg-vibrant-red hover:text-pure-white transition-colors"><i class="ph ph-envelope text-lg"></i></a>
 </div>
 </div>
 </div>
@@ -907,6 +900,8 @@ Est. 2026
 
 <section class="px-margin-mobile md:px-margin-mobile md:px-margin-desktop py-16 md:py-32 bg-navy flex flex-col items-center justify-center text-center relative overflow-hidden border-b-[3px] border-pure-black" id="contact">
 
+<canvas id="contact-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
 <div class="absolute top-10 left-10 w-24 h-24 border-[3px] border-vibrant-red opacity-40" data-parallax="0.22" style="animation:floaty 3s ease-in-out infinite;"></div>
 <div class="absolute bottom-10 right-10 w-32 h-32 bg-vibrant-red border-[3px] border-pure-black opacity-40" data-parallax="0.18" style="animation:floaty 4s ease-in-out infinite reverse;"></div>
 <div class="absolute top-1/2 left-8 w-4 h-4 bg-pure-white opacity-20" data-parallax="0.3" style="animation:floaty 5s ease-in-out infinite 1s;"></div>
@@ -929,10 +924,10 @@ Get In Touch
 <p class="font-label-sm text-label-sm uppercase text-surface-container-highest">© 2026. All Rights Reserved.</p>
 </div>
 <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-6 md:mt-0">
-<a href="https://github.com/irgifebry" target="_blank" class="font-label-sm text-label-sm uppercase text-surface-container-highest hover:text-vibrant-red hover:underline decoration-[2px] underline-offset-4 transition-colors">GitHub</a>
-<a href="https://www.instagram.com/irgi.syh/" target="_blank" class="font-label-sm text-label-sm uppercase text-surface-container-highest hover:text-vibrant-red hover:underline decoration-[2px] underline-offset-4 transition-colors">Instagram</a>
-<a href="https://www.tiktok.com/@wymidk0" target="_blank" class="font-label-sm text-label-sm uppercase text-surface-container-highest hover:text-vibrant-red hover:underline decoration-[2px] underline-offset-4 transition-colors">TikTok</a>
-<a href="mailto:irgifebry2006@gmail.com" class="font-label-sm text-label-sm uppercase text-surface-container-highest hover:text-vibrant-red hover:underline decoration-[2px] underline-offset-4 transition-colors">Email</a>
+<a href="https://github.com/irgifebry" target="_blank" class="text-surface-container-highest hover:text-vibrant-red transition-colors"><i class="ph ph-github-logo text-xl"></i></a>
+<a href="https://www.instagram.com/irgi.syh/" target="_blank" class="text-surface-container-highest hover:text-vibrant-red transition-colors"><i class="ph ph-instagram-logo text-xl"></i></a>
+<a href="https://www.tiktok.com/@wymidk0" target="_blank" class="text-surface-container-highest hover:text-vibrant-red transition-colors"><i class="ph ph-tiktok-logo text-xl"></i></a>
+<a href="mailto:irgifebry2006@gmail.com" class="text-surface-container-highest hover:text-vibrant-red transition-colors"><i class="ph ph-envelope text-xl"></i></a>
 </div>
 </footer>
 <script>
@@ -948,68 +943,81 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-<canvas id="cursor-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; mix-blend-mode: screen; opacity: 1;"></canvas>
 <script>
-const canvas = document.getElementById('cursor-bg');
-const ctx = canvas.getContext('2d');
-let isTouch = 'ontouchstart' in window;
-let gyroPermissionRequested = false;
+function initSectionFX(canvasId, containerId) {
+  const canvas = document.getElementById(canvasId);
+  const container = document.getElementById(containerId);
+  const ctx = canvas.getContext('2d');
+  let cx = container.offsetWidth / 2;
+  let cy = container.offsetHeight / 2;
+  let tx = cx;
+  let ty = cy;
+  let scanOffset = 0;
+  let brightScan = 0;
 
-let cx = window.innerWidth / 2;
-let cy = window.innerHeight / 2;
-let tx = cx;
-let ty = cy;
+  function resize() {
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  cx += (tx - cx) * 0.05;
-  cy += (ty - cy) * 0.05;
-
-  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 600);
-  g.addColorStop(0, 'rgba(220, 0, 0, 0.18)');
-  g.addColorStop(0.5, 'rgba(220, 0, 0, 0.06)');
-  g.addColorStop(1, 'rgba(0, 0, 0, 0)');
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  requestAnimationFrame(draw);
-}
-
-if (!isTouch) {
-  document.addEventListener('mousemove', (e) => {
-    tx = e.clientX;
-    ty = e.clientY;
+  document.addEventListener('mousemove', function(e) {
+    const rect = container.getBoundingClientRect();
+    tx = e.clientX - rect.left;
+    ty = e.clientY - rect.top;
   });
-} else {
-  function requestGyroPermission() {
-    if (gyroPermissionRequested) return;
-    gyroPermissionRequested = true;
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-      DeviceOrientationEvent.requestPermission()
-        .then(state => { if (state === 'granted') window.addEventListener('deviceorientation', handleGyro); })
-        .catch(() => {});
-    } else if (typeof DeviceOrientationEvent !== 'undefined') {
-      window.addEventListener('deviceorientation', handleGyro);
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    scanOffset = (scanOffset + 1) % 3;
+    ctx.fillStyle = 'rgba(220, 0, 0, 0.18)';
+    for (let y = scanOffset; y < canvas.height; y += 3) {
+      ctx.fillRect(0, y, canvas.width, 1);
     }
+
+    brightScan = (brightScan + 1.5) % canvas.height;
+    const sg = ctx.createLinearGradient(0, brightScan - 30, 0, brightScan + 30);
+    sg.addColorStop(0, 'rgba(220, 0, 0, 0)');
+    sg.addColorStop(0.5, 'rgba(220, 0, 0, 0.08)');
+    sg.addColorStop(1, 'rgba(220, 0, 0, 0)');
+    ctx.fillStyle = sg;
+    ctx.fillRect(0, brightScan - 30, canvas.width, 60);
+
+    if (window.innerWidth >= 768) {
+      cx += (tx - cx) * 0.05;
+      cy += (ty - cy) * 0.05;
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-out';
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 250);
+      g.addColorStop(0, 'rgba(0,0,0,0.7)');
+      g.addColorStop(0.6, 'rgba(0,0,0,0.3)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.restore();
+    }
+
+    const vg = ctx.createRadialGradient(
+      canvas.width / 2, canvas.height / 2, canvas.height * 0.3,
+      canvas.width / 2, canvas.height / 2, canvas.height * 0.8
+    );
+    vg.addColorStop(0, 'rgba(0,0,0,0)');
+    vg.addColorStop(1, 'rgba(0,0,0,0.15)');
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    requestAnimationFrame(draw);
   }
-  function handleGyro(e) {
-    tx = ((e.gamma || 0) + 90) / 180 * window.innerWidth;
-    ty = ((e.beta || 0) + 180) / 360 * window.innerHeight;
+
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    draw();
   }
-  document.addEventListener('touchstart', requestGyroPermission, { once: true });
 }
 
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-  draw();
-}
+initSectionFX('home-canvas', 'home');
+initSectionFX('contact-canvas', 'contact');
 </script>
 <script>
 (function() {
@@ -1074,7 +1082,7 @@ document.querySelectorAll('a, button').forEach(el => {
 <button class="video-modal-close" onclick="closeModal()">×</button>
 <video autoplay muted loop playsinline></video>
 <div class="video-modal-controls">
-<button class="video-modal-play-btn" id="videoModalPlayBtn">⏸</button>
+<button class="video-modal-play-btn" id="videoModalPlayBtn"><i class="ph ph-pause"></i></button>
 <input type="range" class="video-modal-seek" id="videoModalSeek" min="0" max="100" value="0" step="0.1">
 <span class="video-modal-time" id="videoModalTime">0:00 / 0:00</span>
 </div>
@@ -1150,8 +1158,8 @@ modalVideo.addEventListener('timeupdate', () => {
   }
 });
 
-modalVideo.addEventListener('play', () => { playBtn.textContent = '⏸'; });
-modalVideo.addEventListener('pause', () => { playBtn.textContent = '▶'; });
+modalVideo.addEventListener('play', () => { playBtn.innerHTML = '<i class="ph ph-pause"></i>'; });
+modalVideo.addEventListener('pause', () => { playBtn.innerHTML = '<i class="ph ph-play"></i>'; });
 
 playBtn.addEventListener('click', (e) => {
   e.stopPropagation();
