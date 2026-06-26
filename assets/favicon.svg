@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#ffffff" viewBox="0 0 256 256"><path d="M91.5,128,45.8,82.3a8.1,8.1,0,0,1,11.4-11.4l51.4,51.4a8.1,8.1,0,0,1,0,11.4L57.2,185.1a8.1,8.1,0,0,1-11.4-11.4Zm122.9,51.4L163,128l51.4-51.4a8.1,8.1,0,0,0-11.4-11.4L100.2,116.6a8.1,8.1,0,0,0,0,11.4L203,230.9a8.1,8.1,0,0,0,11.4-11.4Z"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#050e3c"/>
+  <rect x="2" y="2" width="60" height="60" fill="none" stroke="#DC0000" stroke-width="4"/>
+  <text x="32" y="46" font-family="Montserrat,Arial,sans-serif" font-size="40" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="-2">I</text>
+</svg>
