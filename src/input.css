@@ -21,6 +21,25 @@ body.dark {
   color: #f0f0f0;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(230, 57, 70, 0.35);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(230, 57, 70, 0.85);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(230, 57, 70, 0.35) transparent;
+}
+
 .skip-link {
   position: absolute;
   top: -100%;
