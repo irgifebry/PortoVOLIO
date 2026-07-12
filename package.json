@@ -1,5 +1,23 @@
 {
   "dependencies": {
-    "@vercel/speed-insights": "^2.0.0"
-  }
+    "@vercel/speed-insights": "^2.0.0",
+    "playwright": "^1.61.1"
+  },
+  "name": "portofolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irgifebry/PortoVOLIO.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/irgifebry/PortoVOLIO/issues"
+  },
+  "homepage": "https://github.com/irgifebry/PortoVOLIO#readme"
 }
