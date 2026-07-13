@@ -526,6 +526,9 @@ main { display: block; }
   .trace-rail { display: none; }
   .shell, .footer-inner { margin-left: 0; }
 }
+@media (min-width: 1001px) {
+  .scroll-progress { display: none; }
+}
 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 2.2rem; }
