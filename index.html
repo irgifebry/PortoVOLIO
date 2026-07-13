@@ -6,380 +6,422 @@
 <title>Irgi Febryansyah — UI/UX Designer &amp; IT Engineer</title>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="shortcut icon" href="assets/favicon.svg">
-<meta name="description" content="Irgi Febryansyah — UI/UX Designer & IT Engineer. Portfolio showcasing web design, mobile apps, and IT engineering projects.">
-<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme:light)">
-<meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme:dark)">
+<meta name="description" content="Irgi Febryansyah — UI/UX Designer & IT Engineer. Designs the surface, builds the substrate — one route from interface to infrastructure.">
+<meta name="theme-color" content="#0B0F14">
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)}</script>
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800;900&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-topbar" aria-hidden="true">
+    <div class="sk-nav">
+      <div class="sk-nav-item"></div>
+      <div class="sk-nav-item"></div>
+      <div class="sk-nav-item"></div>
+      <div class="sk-nav-item"></div>
+      <div class="sk-nav-item"></div>
+    </div>
+    <div class="sk-burger"><span></span><span></span><span></span></div>
+  </div>
+  <div class="loader-rail" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="loader-shell">
+    <div class="loader-lead">
+      <div class="sk-line sk-name"></div>
+      <div class="sk-line sk-name sk-short"></div>
+      <div class="sk-line sk-text"></div>
+      <div class="sk-actions">
+        <div class="sk-btn"></div>
+        <div class="sk-btn sk-btn-ghost"></div>
+      </div>
+    </div>
+    <div class="sk-panel sk-panel-desktop">
+      <div class="sk-row"></div>
+      <div class="sk-row"></div>
+      <div class="sk-row"></div>
+      <div class="sk-row"></div>
+    </div>
+    <div class="sk-stack sk-panel-mobile">
+      <div class="sk-block"></div>
+      <div class="sk-block"></div>
+      <div class="sk-block"></div>
+      <div class="sk-block"></div>
+    </div>
+  </div>
+</div>
+
+<div class="hello" id="hello" aria-hidden="true">
+  <div class="hello-term">
+    <div class="hello-bar"><span></span><span></span><span></span></div>
+    <p class="hello-line"><span class="hello-prompt">irgi@portfolio:~$</span> <span id="helloText"></span><span class="hello-caret">_</span></p>
+  </div>
+</div>
+
 <a href="#main" class="skip-link">Skip to content</a>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar" aria-label="Navigation">
-  <div class="navbar-bg" aria-hidden="true"></div>
-  <div class="navbar-inner">
-    <div class="navbar-links" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="navbar-actions">
-      <button type="button" class="theme-toggle" aria-label="Toggle theme" id="themeToggle">
-        <i class="ph ph-moon" id="themeIcon"></i>
-      </button>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<div class="bg-grid" data-parallax="bg" data-speed="0.04" aria-hidden="true"></div>
+
+<nav class="trace-rail" aria-label="Route hops">
+  <span class="trace-line" id="traceLine" aria-hidden="true"></span>
+  <span class="trace-packet" id="tracePacket" aria-hidden="true"></span>
+  <div class="rail-hops">
+    <a href="#top" class="rail-hop" data-hop="hero" aria-label="Hop 0, entry">
+      <span class="rail-node" aria-hidden="true"></span><span class="rail-num">00</span>
+    </a>
+    <a href="#profile" class="rail-hop" data-hop="profile" aria-label="Hop 1, profile">
+      <span class="rail-node" aria-hidden="true"></span><span class="rail-num">01</span>
+    </a>
+    <a href="#capabilities" class="rail-hop" data-hop="capabilities" aria-label="Hop 2, capabilities">
+      <span class="rail-node" aria-hidden="true"></span><span class="rail-num">02</span>
+    </a>
+    <a href="#fieldlog" class="rail-hop" data-hop="fieldlog" aria-label="Hop 3, field log">
+      <span class="rail-node" aria-hidden="true"></span><span class="rail-num">03</span>
+    </a>
+    <a href="#delivered" class="rail-hop" data-hop="delivered" aria-label="Hop 4, delivered">
+      <span class="rail-node" aria-hidden="true"></span><span class="rail-num">04</span>
+    </a>
+    <a href="#contact" class="rail-hop" data-hop="contact" aria-label="Hop 5, contact">
+      <span class="rail-node" aria-hidden="true"></span><span class="rail-num">05</span>
+    </a>
+  </div>
+</nav>
+
+<header class="topbar" aria-label="Navigation">
+  <div class="topbar-inner">
+    <div class="tb-spacer"></div>
+    <nav class="tb-nav" id="navLinks" aria-label="Sections">
+      <div class="mn-head"><span>route</span><span>5 hops</span></div>
+      <a href="#profile"><span class="mn-num">01</span><span class="mn-label">profile</span><i class="ph ph-arrow-up-right mn-go"></i></a>
+      <a href="#capabilities"><span class="mn-num">02</span><span class="mn-label">stack</span><i class="ph ph-arrow-up-right mn-go"></i></a>
+      <a href="#fieldlog"><span class="mn-num">03</span><span class="mn-label">field log</span><i class="ph ph-arrow-up-right mn-go"></i></a>
+      <a href="#delivered"><span class="mn-num">04</span><span class="mn-label">delivered</span><i class="ph ph-arrow-up-right mn-go"></i></a>
+      <a href="#contact"><span class="mn-num">05</span><span class="mn-label">contact</span><i class="ph ph-arrow-up-right mn-go"></i></a>
+    </nav>
+    <div class="tb-actions">
       <button type="button" class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
-</nav>
+</header>
 
-<!-- ===== HERO ===== -->
-<section id="home" class="hero" aria-label="Home">
-  <div class="hero-bg">
-    <div class="hero-bg-glow"></div>
-  </div>
-  <div class="hero-content">
-    <p class="font-mono text-accent/70 text-sm font-medium mb-4 reveal">Hi, my name is</p>
-    <h1 class="hero-name reveal reveal-delay-1">
-      Irgi<br>
-      <span class="accent">Febryansyah</span>
-    </h1>
-    <p class="hero-tagline reveal reveal-delay-2">
-      UI/UX Designer &amp; IT Engineer
-    </p>
-    <div class="hero-actions reveal reveal-delay-3">
-      <a href="#projects" class="btn btn-primary">
-        <i class="ph ph-arrow-right"></i>
-        View Work
-      </a>
-      <a href="#contact" class="btn btn-outline">
-        <i class="ph ph-envelope-simple"></i>
-        Get In Touch
-      </a>
+<div class="shell">
+  <main id="main">
+  <a id="top"></a>
+
+  <section class="hop hero" aria-label="Introduction">
+    <div class="hero-grid">
+      <div class="hero-lead">
+        <p class="hero-whoami"><span class="hero-prompt">&gt;</span> whoami</p>
+        <h1 class="hero-name" data-parallax="hero" data-speed="-0.05">
+          <span class="ln">Irgi</span>
+          <span class="ln two">Febryansyah</span>
+        </h1>
+        <p class="hero-line" id="typeLine" data-text="designs the surface, builds the substrate."></p>
+        <div class="hero-actions">
+          <a href="#delivered" class="btn btn-fill">
+            <i class="ph ph-arrow-right"></i>
+            Trace the work
+          </a>
+          <a href="#contact" class="btn">
+            <i class="ph ph-envelope-simple"></i>
+            Open a route
+          </a>
+        </div>
+      </div>
+
+      <aside class="trace-out" data-parallax="hero" data-speed="0.08" aria-label="Route from interface to infrastructure">
+        <div class="trace-out-head">
+          <span class="dot d1" aria-hidden="true"></span>
+          <span class="dot d2" aria-hidden="true"></span>
+          <span class="dot d3" aria-hidden="true"></span>
+          <span>shell</span>
+        </div>
+        <div class="trace-out-body">
+          <div class="trace-row" style="--i:0"><span class="trace-hop-n">1</span><span class="trace-host is-design"><span class="layer">interface</span> · Figma / React</span><span class="trace-ms" data-ms="4">4 ms</span></div>
+          <div class="trace-row" style="--i:1"><span class="trace-hop-n">2</span><span class="trace-host is-design"><span class="layer">application</span> · Laravel / Python</span><span class="trace-ms" data-ms="9">9 ms</span></div>
+          <div class="trace-row" style="--i:2"><span class="trace-hop-n">3</span><span class="trace-host"><span class="layer">system</span> · Linux / servers</span><span class="trace-ms" data-ms="17">17 ms</span></div>
+          <div class="trace-row reached" style="--i:3"><span class="trace-hop-n">4</span><span class="trace-host"><span class="layer">infrastructure</span> · net / hardware</span><span class="trace-ms" data-ms="23">23 ms</span></div>
+        </div>
+      </aside>
     </div>
-  </div>
-</section>
 
-<!-- ===== MAIN ===== -->
-<main id="main">
-
-<!-- ===== ABOUT ===== -->
-<section id="about" class="py-section md:py-section-lg px-4 md:px-6" aria-label="About Me">
-  <div class="max-w-content mx-auto">
-    <div class="section-header reveal">
-      <span class="section-number">01</span>
-      <h2 class="section-title">About</h2>
-      <span class="section-line" aria-hidden="true"></span>
+    <div class="datastrip reveal">
+      <div class="datacell"><span class="datacell-k">Role</span><span class="datacell-v">UI/UX + IT Engineer</span></div>
+      <div class="datacell"><span class="datacell-k">Route</span><span class="datacell-v">design → system → net</span></div>
+      <div class="datacell"><span class="datacell-k">Uptime</span><span class="datacell-v"><span class="uptime" id="uptime">--d --:--:--</span></span></div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-      <div class="reveal reveal-delay-1">
-        <p class="text-base sm:text-lg leading-relaxed text-muted dark:text-dark-muted mb-4">
+  </section>
+
+  <section id="profile" class="hop" data-hop="profile" aria-label="Profile">
+    <div class="hop-head">
+      <span class="hop-index">hop 01</span>
+      <span class="hop-name">Profile</span>
+      <span class="hop-rule" aria-hidden="true"></span>
+      <span class="hop-rtt">rtt <b>12 ms</b></span>
+    </div>
+    <div class="grid-2">
+      <div class="reveal">
+        <p class="lede">
           Computer and Network Engineering grad from SMK Kosgoro Bogor, now studying IT at
-          Universitas Ibn Khaldun Bogor. Been working directly with UI/UX, servers, and networks —
-          learned from real projects, internships, and actual work, not just classrooms.
+          Universitas Ibn Khaldun Bogor. Works directly with <b>UI/UX, servers, and networks</b> —
+          learned from real projects, internships, and shipped products, not just classrooms.
         </p>
-        <p class="text-base sm:text-lg leading-relaxed text-muted dark:text-dark-muted">
-          Into building digital products that people actually find useful — not just pretty mockups.
+        <p class="muted-block">
+          Builds digital products people actually use — from Figma wireframes to the <b>Linux box
+          serving them</b>. Design and infrastructure as one job.
         </p>
       </div>
-      <div class="reveal reveal-delay-2">
-        <div class="flex flex-wrap gap-3">
-          <a href="https://github.com/irgifebry" target="_blank" rel="noopener" class="btn btn-outline text-sm" aria-label="GitHub">
-            <i class="ph ph-github-logo text-lg"></i>
-            GitHub
+      <div class="reveal reveal-delay-1">
+        <div class="pin-list" data-stagger>
+          <a href="https://github.com/irgifebry" target="_blank" rel="noopener" class="pin">
+            <i class="ph ph-github-logo"></i><span>GitHub</span><span class="pin-addr">/irgifebry</span><i class="ph ph-arrow-up-right pin-go"></i>
           </a>
-          <a href="https://www.instagram.com/irgi.syh/" target="_blank" rel="noopener" class="btn btn-outline text-sm" aria-label="Instagram">
-            <i class="ph ph-instagram-logo text-lg"></i>
-            Instagram
+          <a href="https://www.instagram.com/irgi.syh/" target="_blank" rel="noopener" class="pin">
+            <i class="ph ph-instagram-logo"></i><span>Instagram</span><span class="pin-addr">/irgi.syh</span><i class="ph ph-arrow-up-right pin-go"></i>
           </a>
-          <a href="https://www.tiktok.com/@wymidk0" target="_blank" rel="noopener" class="btn btn-outline text-sm" aria-label="TikTok">
-            <i class="ph ph-tiktok-logo text-lg"></i>
-            TikTok
+          <a href="https://www.tiktok.com/@wymidk0" target="_blank" rel="noopener" class="pin">
+            <i class="ph ph-tiktok-logo"></i><span>TikTok</span><span class="pin-addr">/@wymidk0</span><i class="ph ph-arrow-up-right pin-go"></i>
           </a>
-          <a href="mailto:irgifebry2006@gmail.com" class="btn btn-outline text-sm" aria-label="Email">
-            <i class="ph ph-envelope text-lg"></i>
-            Email
+          <a href="mailto:irgifebry2006@gmail.com" class="pin">
+            <i class="ph ph-envelope"></i><span>Email</span><span class="pin-addr">direct</span><i class="ph ph-arrow-up-right pin-go"></i>
           </a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== SKILLS ===== -->
-<section id="skills" class="py-section md:py-section-lg px-4 md:px-6" aria-label="Skills">
-  <div class="max-w-content mx-auto">
-    <div class="section-header reveal">
-      <span class="section-number">02</span>
-      <h2 class="section-title">Skills</h2>
-      <span class="section-line" aria-hidden="true"></span>
+  <section id="capabilities" class="hop" data-hop="capabilities" aria-label="Capabilities">
+    <div class="hop-head">
+      <span class="hop-index">hop 02</span>
+      <span class="hop-name">Stack</span>
+      <span class="hop-rule" aria-hidden="true"></span>
+      <span class="hop-rtt">rtt <b>8 ms</b></span>
     </div>
-    <div class="reveal reveal-delay-1">
-      <p class="text-muted dark:text-dark-muted mb-4 text-sm font-medium uppercase tracking-wider">Design and Development</p>
-      <div class="skill-grid mb-8">
-        <span class="skill-badge"><i class="ph ph-figma-logo"></i>Figma</span>
-        <span class="skill-badge"><i class="ph ph-code"></i>HTML/CSS</span>
-        <span class="skill-badge"><i class="ph ph-code"></i>JavaScript</span>
-        <span class="skill-badge"><i class="ph ph-atom"></i>React</span>
-        <span class="skill-badge"><i class="ph ph-device-mobile"></i>React Native</span>
-        <span class="skill-badge"><i class="ph ph-android-logo"></i>Android</span>
-        <span class="skill-badge"><i class="ph ph-lightning"></i>Laravel</span>
-        <span class="skill-badge"><i class="ph ph-database"></i>MySQL</span>
-        <span class="skill-badge"><i class="ph ph-python-logo"></i>Python</span>
-        <span class="skill-badge"><i class="ph ph-graph"></i>Scikit-Learn</span>
-        <span class="skill-badge"><i class="ph ph-git-branch"></i>Git</span>
-        <span class="skill-badge"><i class="ph ph-terminal"></i>Linux</span>
-      </div>
-      <p class="text-muted dark:text-dark-muted mb-4 text-sm font-medium uppercase tracking-wider">Networking and Infrastructure</p>
-      <div class="skill-grid">
-        <span class="skill-badge"><i class="ph ph-wifi-high"></i>Network Admin</span>
-        <span class="skill-badge"><i class="ph ph-cpu"></i>Hardware</span>
-        <span class="skill-badge"><i class="ph ph-shield-check"></i>System Maintenance</span>
+    <div class="feat-group g-design reveal">
+      <p class="feat-label">Design &amp; Development</p>
+      <div class="tag-grid" data-stagger>
+        <span class="tag"><i class="ph ph-figma-logo"></i>Figma</span>
+        <span class="tag"><i class="ph ph-code"></i>HTML / CSS</span>
+        <span class="tag"><i class="ph ph-code"></i>JavaScript</span>
+        <span class="tag"><i class="ph ph-atom"></i>React</span>
+        <span class="tag"><i class="ph ph-device-mobile"></i>React Native</span>
+        <span class="tag"><i class="ph ph-android-logo"></i>Android</span>
+        <span class="tag"><i class="ph ph-lightning"></i>Laravel</span>
+        <span class="tag"><i class="ph ph-database"></i>MySQL</span>
+        <span class="tag"><i class="ph ph-python-logo"></i>Python</span>
+        <span class="tag"><i class="ph ph-graph"></i>Scikit-Learn</span>
+        <span class="tag"><i class="ph ph-git-branch"></i>Git</span>
       </div>
     </div>
-  </div>
-</section>
+    <div class="feat-group g-wire reveal reveal-delay-1">
+      <p class="feat-label">Networking &amp; Infrastructure</p>
+      <div class="tag-grid" data-stagger>
+        <span class="tag"><i class="ph ph-wifi-high"></i>Network Admin</span>
+        <span class="tag"><i class="ph ph-cpu"></i>Hardware</span>
+        <span class="tag"><i class="ph ph-shield-check"></i>System Maintenance</span>
+        <span class="tag"><i class="ph ph-terminal"></i>Linux</span>
+      </div>
+    </div>
+  </section>
 
-<!-- ===== EXPERIENCE ===== -->
-<section class="py-section md:py-section-lg px-4 md:px-6" aria-label="Experience">
-  <div class="max-w-content mx-auto">
-    <div class="section-header reveal">
-      <span class="section-number">03</span>
-      <h2 class="section-title">Experience</h2>
-      <span class="section-line" aria-hidden="true"></span>
+  <section id="fieldlog" class="hop" data-hop="fieldlog" aria-label="Field log">
+    <div class="hop-head">
+      <span class="hop-index">hop 03</span>
+      <span class="hop-name">Field Log</span>
+      <span class="hop-rule" aria-hidden="true"></span>
+      <span class="hop-rtt">rtt <b>17 ms</b></span>
     </div>
-    <div class="card reveal max-w-2xl">
-      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-3">
-        <h3 class="font-display font-semibold text-lg">The Sahira Hotel</h3>
-        <span class="font-mono text-xs text-accent whitespace-nowrap">Dec 2021 — Mar 2022</span>
+    <div class="module reveal">
+      <div class="module-head">
+        <div>
+          <h3 class="module-title">The Sahira Hotel</h3>
+          <p class="module-sub">Engineering and IT Intern</p>
+        </div>
+        <span class="module-when">Dec 2021 — Mar 2022</span>
       </div>
-      <p class="font-mono text-sm text-muted dark:text-dark-muted mb-3">Engineering and IT Intern</p>
-      <ul class="space-y-1.5 text-sm sm:text-base text-muted dark:text-dark-muted leading-relaxed">
+      <ul class="module-list" data-stagger>
         <li>Diagnosed and repaired network and hardware issues</li>
         <li>Supported team operations and maintenance</li>
         <li>Managed F&amp;B department inventory tracking</li>
       </ul>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== CURRENT PROJECTS ===== -->
-<section id="projects" class="py-section md:py-section-lg px-4 md:px-6" aria-label="Current Projects">
-  <div class="max-w-content mx-auto">
-    <div class="section-header reveal">
-      <span class="section-number">04</span>
-      <h2 class="section-title">Current Projects</h2>
-      <span class="section-line" aria-hidden="true"></span>
+  <section id="delivered" class="hop" data-hop="delivered" aria-label="Delivered work">
+    <div class="hop-head">
+      <span class="hop-index">hop 04</span>
+      <span class="hop-name">Delivered</span>
+      <span class="hop-rule" aria-hidden="true"></span>
+      <span class="hop-rtt">client work</span>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- U-Cademy LMS -->
-      <div class="card card-current reveal flex flex-col">
-        <h3 class="font-display font-bold text-heading mb-2">U-Cademy LMS</h3>
-        <p class="text-sm text-muted dark:text-dark-muted mb-4">LMS for UIKA — class management, CBT, discussion forums, auto certification</p>
-        <div class="grid grid-cols-2 gap-3 mb-4 text-sm">
-          <div>
-            <p class="font-mono text-xs text-accent/60 uppercase tracking-wider">Role</p>
-            <p class="font-medium">UI/UX Web Designer</p>
-          </div>
-          <div>
-            <p class="font-mono text-xs text-accent/60 uppercase tracking-wider">Timeline</p>
-            <p class="font-medium">Feb — Jul 2026</p>
-          </div>
-          <div>
-            <p class="font-mono text-xs text-accent/60 uppercase tracking-wider">Client</p>
-            <p class="font-medium">UIKA</p>
-          </div>
-          <div>
-            <p class="font-mono text-xs text-accent/60 uppercase tracking-wider">Company</p>
-            <p class="font-medium">PT Unosoft</p>
-          </div>
+    <div class="work-grid">
+      <article class="module module-work reveal">
+        <div class="module-status"><i class="ph ph-check-circle" aria-hidden="true"></i>REACHED</div>
+        <h3 class="module-title">U-Cademy LMS</h3>
+        <p class="module-sub">LMS for UIKA — class management, CBT, discussion forums, auto certification</p>
+        <div class="spec">
+          <div><dt>Role</dt><dd>UI/UX Web Designer</dd></div>
+          <div><dt>Timeline</dt><dd>Feb — Jul 2026</dd></div>
+          <div><dt>Client</dt><dd>UIKA</dd></div>
+          <div><dt>Company</dt><dd>PT Unosoft</dd></div>
         </div>
-        <p class="text-sm leading-relaxed text-muted dark:text-dark-muted flex-grow">UI/UX designer for web and Android LMS — hybrid learning (sync and async). From wireframes to prototypes, keeping it aligned with the Islamic campus identity.</p>
-        <div class="mt-4 text-xs font-mono text-accent/60 uppercase tracking-wider">Admin &amp; lecturer dashboards, student app, CBT, discussion forum, auto certification — the full set.</div>
-      </div>
-      <!-- Restaurant Monalisa -->
-      <div class="card card-current reveal reveal-delay-1 flex flex-col">
-        <h3 class="font-display font-bold text-heading mb-2">Restaurant Monalisa</h3>
-        <p class="text-sm text-muted dark:text-dark-muted mb-4">Company profile and admin panel for a restaurant</p>
-        <div class="grid grid-cols-2 gap-3 mb-4 text-sm">
-          <div>
-            <p class="font-mono text-xs text-accent/60 uppercase tracking-wider">Role</p>
-            <p class="font-medium">Frontend and UI/UX</p>
-          </div>
-          <div>
-            <p class="font-mono text-xs text-accent/60 uppercase tracking-wider">Timeline</p>
-            <p class="font-medium">Apr — Jun 2026</p>
-          </div>
-          <div>
-            <p class="font-mono text-xs text-accent/60 uppercase tracking-wider">Client</p>
-            <p class="font-medium">Restaurant Monalisa</p>
-          </div>
+        <p class="module-note">UI/UX for web and Android LMS — hybrid learning. From wireframes to prototypes, aligned with the Islamic campus identity.</p>
+      </article>
+      <article class="module module-work reveal reveal-delay-1">
+        <div class="module-status"><i class="ph ph-check-circle" aria-hidden="true"></i>REACHED</div>
+        <h3 class="module-title">Restaurant Monalisa</h3>
+        <p class="module-sub">Company profile and admin panel for a restaurant</p>
+        <div class="spec">
+          <div><dt>Role</dt><dd>Frontend and UI/UX</dd></div>
+          <div><dt>Timeline</dt><dd>Apr — Jun 2026</dd></div>
+          <div><dt>Client</dt><dd>Restaurant Monalisa</dd></div>
         </div>
-        <p class="text-sm leading-relaxed text-muted dark:text-dark-muted flex-grow">Built responsive frontend from Figma mockups — HTML/CSS/JS, no framework, just vanilla.</p>
         <div class="video-card" data-video="assets/Monalisa.mp4">
+          <div class="video-card-overlay"><span class="video-card-play"><i class="ph ph-play"></i></span></div>
           <video muted loop playsinline data-src="assets/Monalisa.mp4" preload="none"></video>
         </div>
-        <div class="mt-3">
-          <a href="https://monalisa-resto.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary text-sm">
-            <i class="ph ph-arrow-up-right"></i>
-            Visit Website
-          </a>
-        </div>
-      </div>
+        <a href="https://monalisa-resto.vercel.app/" target="_blank" rel="noopener" class="btn btn-fill btn-sm">
+          <i class="ph ph-arrow-up-right"></i>
+          Visit website
+        </a>
+      </article>
     </div>
-  </div>
-</section>
 
-<!-- ===== PERSONAL PROJECTS ===== -->
-<section class="py-section md:py-section-lg px-4 md:px-6" aria-label="Personal Projects">
-  <div class="max-w-content mx-auto">
-    <div class="section-header reveal">
-      <span class="section-number">05</span>
-      <h2 class="section-title">Personal Projects</h2>
-      <span class="section-line" aria-hidden="true"></span>
+    <div class="hop-head sub-rule">
+      <span class="hop-index">·</span>
+      <span class="hop-name">Personal Builds</span>
+      <span class="hop-rule" aria-hidden="true"></span>
     </div>
-    <!-- Featured row (3 cols desktop) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
-      <!-- InstaInsight -->
-      <div class="card reveal flex flex-col">
-        <h3 class="font-display font-bold text-lg mb-1">InstaInsight</h3>
-        <p class="text-sm text-muted dark:text-dark-muted mb-3 flex-grow">Check who unfollowed you on IG — no password needed, just data.</p>
-        <div class="skill-grid mb-3">
-          <span class="skill-badge text-xs">React</span>
-          <span class="skill-badge text-xs">TypeScript</span>
-          <span class="skill-badge text-xs">Tailwind</span>
+    <div class="work-grid-3">
+      <article class="module module-work reveal">
+        <h3 class="module-title-sm">InstaInsight</h3>
+        <p class="module-sub">Check who unfollowed you on IG — no password needed, just data.</p>
+        <div class="tag-row" data-stagger>
+          <span class="tag tag-xs">React</span>
+          <span class="tag tag-xs">TypeScript</span>
+          <span class="tag tag-xs">Tailwind</span>
         </div>
         <div class="video-card" data-video="assets/InstaInsight.mp4">
+          <div class="video-card-overlay"><span class="video-card-play"><i class="ph ph-play"></i></span></div>
           <video muted loop playsinline data-src="assets/InstaInsight.mp4" preload="none"></video>
         </div>
-        <a href="https://irgifebry.github.io/InstaInsight" target="_blank" rel="noopener" class="btn btn-primary text-sm mt-3 self-start">
-          <i class="ph ph-arrow-up-right"></i>
-          Visit
+        <a href="https://irgifebry.github.io/InstaInsight" target="_blank" rel="noopener" class="btn btn-fill btn-sm btn-block">
+          <i class="ph ph-arrow-up-right"></i>Visit
         </a>
-      </div>
-      <!-- NoBlur -->
-      <div class="card reveal reveal-delay-1 flex flex-col">
-        <h3 class="font-display font-bold text-lg mb-1">NoBlur</h3>
-        <p class="text-sm text-muted dark:text-dark-muted mb-3 flex-grow">Fix TikTok compression blur — patches MP4/MOV headers locally, all in your browser.</p>
-        <div class="skill-grid mb-3">
-          <span class="skill-badge text-xs">JavaScript</span>
-          <span class="skill-badge text-xs">HTML5</span>
-          <span class="skill-badge text-xs">CSS</span>
+      </article>
+      <article class="module module-work reveal reveal-delay-1">
+        <h3 class="module-title-sm">NoBlur</h3>
+        <p class="module-sub">Fix TikTok compression blur — patches MP4/MOV headers locally, in-browser.</p>
+        <div class="tag-row" data-stagger>
+          <span class="tag tag-xs">JavaScript</span>
+          <span class="tag tag-xs">HTML5</span>
+          <span class="tag tag-xs">CSS</span>
         </div>
         <div class="video-card" data-video="assets/NoBlur.mp4">
+          <div class="video-card-overlay"><span class="video-card-play"><i class="ph ph-play"></i></span></div>
           <video muted loop playsinline data-src="assets/NoBlur.mp4" preload="none"></video>
         </div>
-        <a href="https://irgifebry.github.io/NoBlur/" target="_blank" rel="noopener" class="btn btn-primary text-sm mt-3 self-start">
-          <i class="ph ph-arrow-up-right"></i>
-          Visit
+        <a href="https://irgifebry.github.io/NoBlur/" target="_blank" rel="noopener" class="btn btn-fill btn-sm btn-block">
+          <i class="ph ph-arrow-up-right"></i>Visit
         </a>
-      </div>
-      <!-- PlayShop.ID -->
-      <div class="card reveal reveal-delay-2 flex flex-col">
-        <h3 class="font-display font-bold text-lg mb-1">PlayShop.ID</h3>
-        <p class="text-sm text-muted dark:text-dark-muted mb-3 flex-grow">Game top-up store — payments, stock management, the works.</p>
-        <div class="skill-grid mb-3">
-          <span class="skill-badge text-xs">PHP</span>
-          <span class="skill-badge text-xs">MySQL</span>
-          <span class="skill-badge text-xs">JavaScript</span>
+      </article>
+      <article class="module module-work reveal reveal-delay-2">
+        <h3 class="module-title-sm">PlayShop.ID</h3>
+        <p class="module-sub">Game top-up store — payments, stock management, the works.</p>
+        <div class="tag-row" data-stagger>
+          <span class="tag tag-xs">PHP</span>
+          <span class="tag tag-xs">MySQL</span>
+          <span class="tag tag-xs">JavaScript</span>
         </div>
         <div class="video-card" data-video="assets/PlayShop.mp4">
+          <div class="video-card-overlay"><span class="video-card-play"><i class="ph ph-play"></i></span></div>
           <video muted loop playsinline data-src="assets/PlayShop.mp4" preload="none"></video>
         </div>
-        <a href="https://playshop-id.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary text-sm mt-3 self-start">
-          <i class="ph ph-arrow-up-right"></i>
-          Visit
+        <a href="https://playshop-id.vercel.app/" target="_blank" rel="noopener" class="btn btn-fill btn-sm btn-block">
+          <i class="ph ph-arrow-up-right"></i>Visit
+        </a>
+      </article>
+    </div>
+
+    <div class="work-grid-3">
+      <a href="https://github.com/irgifebry/rygent" target="_blank" rel="noopener" class="module module-link reveal">
+        <h4 class="module-title-sm">Rygent</h4>
+        <p class="module-sub">Real-time Linux server monitor from your phone — CPU, RAM, disk, network.</p>
+        <div class="tag-row" data-stagger>
+          <span class="tag tag-xs">Kotlin</span>
+          <span class="tag tag-xs">Java</span>
+          <span class="tag tag-xs">Android</span>
+        </div>
+        <span class="module-go"><i class="ph ph-arrow-up-right"></i></span>
+      </a>
+      <a href="https://github.com/irgifebry/wakesanse" target="_blank" rel="noopener" class="module module-link reveal reveal-delay-1">
+        <h4 class="module-title-sm">WakeSanse</h4>
+        <p class="module-sub">Workaround for broken buttons — uses sensor gestures instead.</p>
+        <div class="tag-row" data-stagger>
+          <span class="tag tag-xs">Java</span>
+          <span class="tag tag-xs">Kotlin</span>
+          <span class="tag tag-xs">Android</span>
+        </div>
+        <span class="module-go"><i class="ph ph-arrow-up-right"></i></span>
+      </a>
+      <a href="https://github.com/irgifebry/stellarium-hilal-checker" target="_blank" rel="noopener" class="module module-link reveal reveal-delay-2">
+        <h4 class="module-title-sm">Hilal Checker</h4>
+        <p class="module-sub">Predicts moon crescent visibility — ML (Random Forest) + astronomy data.</p>
+        <div class="tag-row" data-stagger>
+          <span class="tag tag-xs">Python</span>
+          <span class="tag tag-xs">NumPy</span>
+          <span class="tag tag-xs">Scikit-Learn</span>
+        </div>
+        <span class="module-go"><i class="ph ph-arrow-up-right"></i></span>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="hop" data-hop="contact" aria-label="Contact">
+    <div class="hop-head">
+      <span class="hop-index">hop 05</span>
+      <span class="hop-name">Contact</span>
+      <span class="hop-rule" aria-hidden="true"></span>
+      <span class="hop-rtt">destination</span>
+    </div>
+    <div class="contact">
+      <h2 class="contact-title reveal">Let's build something that actually runs.</h2>
+      <p class="contact-sub reveal reveal-delay-1">Open to UI/UX design, web development, and digital infrastructure work.</p>
+      <div class="reveal reveal-delay-2">
+        <a href="mailto:irgifebry2006@gmail.com" class="btn btn-design btn-lg">
+          <i class="ph ph-envelope-simple"></i>
+          irgifebry2006@gmail.com
         </a>
       </div>
     </div>
-    <!-- Compact row (3 cols) -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-      <a href="https://github.com/irgifebry/rygent" target="_blank" rel="noopener" class="card reveal block no-underline text-inherit hover:-translate-y-1">
-        <h4 class="font-display font-bold text-base mb-1">Rygent</h4>
-        <p class="text-sm text-muted dark:text-dark-muted mb-3">Real-time Linux server monitor from your phone — CPU, RAM, disk, network.</p>
-        <div class="skill-grid">
-          <span class="skill-badge text-xs">Kotlin</span>
-          <span class="skill-badge text-xs">Java</span>
-          <span class="skill-badge text-xs">Android</span>
-        </div>
-      </a>
-      <a href="https://github.com/irgifebry/wakesanse" target="_blank" rel="noopener" class="card reveal reveal-delay-1 block no-underline text-inherit hover:-translate-y-1">
-        <h4 class="font-display font-bold text-base mb-1">WakeSanse</h4>
-        <p class="text-sm text-muted dark:text-dark-muted mb-3">Workaround for broken buttons — uses sensor gestures instead.</p>
-        <div class="skill-grid">
-          <span class="skill-badge text-xs">Java</span>
-          <span class="skill-badge text-xs">Kotlin</span>
-          <span class="skill-badge text-xs">Android</span>
-        </div>
-      </a>
-      <a href="https://github.com/irgifebry/stellarium-hilal-checker" target="_blank" rel="noopener" class="card reveal reveal-delay-2 block no-underline text-inherit hover:-translate-y-1">
-        <h4 class="font-display font-bold text-base mb-1">Hilal Checker</h4>
-        <p class="text-sm text-muted dark:text-dark-muted mb-3">Predicts moon crescent visibility — ML (Random Forest) + astronomy data, CLI tool.</p>
-        <div class="skill-grid">
-          <span class="skill-badge text-xs">Python</span>
-          <span class="skill-badge text-xs">NumPy</span>
-          <span class="skill-badge text-xs">Scikit-Learn</span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== CONTACT ===== -->
-<section id="contact" class="py-section md:py-section-lg px-4 md:px-6" aria-label="Contact">
-  <div class="max-w-content mx-auto text-center">
-    <div class="section-header justify-center reveal">
-      <span class="section-line" aria-hidden="true"></span>
-      <span class="section-number">06</span>
-      <h2 class="section-title">Let's Work Together</h2>
-      <span class="section-line" aria-hidden="true"></span>
-    </div>
-    <p class="text-muted dark:text-dark-muted max-w-lg mx-auto mb-8 text-lg leading-relaxed reveal reveal-delay-1">
-      Open to UI/UX design projects, web development, and digital innovation opportunities.
-    </p>
-    <div class="reveal reveal-delay-2">
-      <a href="mailto:irgifebry2006@gmail.com" class="btn btn-primary text-base px-8 py-3">
-        <i class="ph ph-envelope-simple text-xl"></i>
-        irgifebry2006@gmail.com
-      </a>
-    </div>
-  </div>
-</section>
+  </main>
+</div>
 
-</main>
-
-<!-- ===== FOOTER ===== -->
-<footer class="border-t border-border-light dark:border-dark-border py-8 px-4 md:px-6" aria-label="Footer">
-  <div class="max-w-content mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-    <div class="text-center sm:text-left">
-      <p class="font-display font-bold text-sm">IRGI FEBRYANSYAH</p>
-      <p class="text-xs text-muted dark:text-dark-muted mt-1">UI/UX Designer &amp; IT Engineer</p>
-      <p class="text-xs text-muted dark:text-dark-muted mt-1">&copy; 2026. All rights reserved.</p>
+<footer class="footer" id="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-name"><span class="caret">&gt;</span> IRGI FEBRYANSYAH</p>
+      <p class="footer-sub">UI/UX Designer &amp; IT Engineer</p>
+      <p class="footer-sub footer-dim">&copy; 2026 — routed and deployed by hand.</p>
     </div>
-    <div class="flex gap-4 text-lg">
-      <a href="https://github.com/irgifebry" target="_blank" rel="noopener" class="text-muted dark:text-dark-muted hover:text-accent transition-colors" aria-label="GitHub">
-        <i class="ph ph-github-logo"></i>
-      </a>
-      <a href="https://www.instagram.com/irgi.syh/" target="_blank" rel="noopener" class="text-muted dark:text-dark-muted hover:text-accent transition-colors" aria-label="Instagram">
-        <i class="ph ph-instagram-logo"></i>
-      </a>
-      <a href="https://www.tiktok.com/@wymidk0" target="_blank" rel="noopener" class="text-muted dark:text-dark-muted hover:text-accent transition-colors" aria-label="TikTok">
-        <i class="ph ph-tiktok-logo"></i>
-      </a>
-      <a href="mailto:irgifebry2006@gmail.com" class="text-muted dark:text-dark-muted hover:text-accent transition-colors" aria-label="Email">
-        <i class="ph ph-envelope"></i>
-      </a>
+    <div class="footer-social">
+      <a href="https://github.com/irgifebry" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
+      <a href="https://www.instagram.com/irgi.syh/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+      <a href="https://www.tiktok.com/@wymidk0" target="_blank" rel="noopener" aria-label="TikTok"><i class="ph ph-tiktok-logo"></i></a>
+      <a href="mailto:irgifebry2006@gmail.com" aria-label="Email"><i class="ph ph-envelope"></i></a>
     </div>
   </div>
 </footer>
 
-<!-- ===== VIDEO MODAL ===== -->
 <div class="video-modal" id="videoModal" role="dialog" aria-label="Video player">
   <div class="video-modal-inner">
     <button type="button" class="video-modal-close" id="videoModalClose" aria-label="Close video">&#x2715;</button>
@@ -392,65 +434,144 @@
   </div>
 </div>
 
-<!-- ===== SCROLL TO TOP ===== -->
 <button type="button" class="scroll-top" id="scrollTop" aria-label="Back to top">
   <i class="ph ph-arrow-up"></i>
 </button>
 
-<!-- ===== PHOSPHOR ICONS ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2" crossorigin="anonymous"></script>
 
-<!-- ===== JAVASCRIPT ===== -->
-
 <script>
-// ===== THEME TOGGLE =====
 (function() {
-  const toggle = document.getElementById('themeToggle');
-  const icon = document.getElementById('themeIcon');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const stored = localStorage.getItem('theme');
-  const isDark = stored ? stored === 'dark' : prefersDark;
-
-  function applyTheme(dark) {
-    document.documentElement.classList.toggle('dark', dark);
-    document.body.classList.toggle('dark', dark);
-    icon.className = dark ? 'ph ph-sun' : 'ph ph-moon';
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+  const MIN_VISIBLE = 3500;
+  const start = Date.now();
+  let loaded = false;
+  function hide() {
+    const wait = Math.max(0, MIN_VISIBLE - (Date.now() - start));
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      loader.addEventListener('transitionend', () => loader.remove(), { once: true });
+      setTimeout(() => loader.remove(), 600);
+    }, wait);
   }
-  applyTheme(isDark);
-
-  toggle.addEventListener('click', () => {
-    const now = document.documentElement.classList.contains('dark');
-    applyTheme(!now);
-    localStorage.setItem('theme', !now ? 'dark' : 'light');
-  });
+  function onLoad() { loaded = true; hide(); }
+  if (document.readyState === 'complete') onLoad();
+  else window.addEventListener('load', onLoad);
+  setTimeout(() => { if (!loaded) hide(); }, 12000);
 })();
 </script>
 
 <script>
-// ===== HAMBURGER MENU =====
 (function() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  if (!hamburger || !navLinks) return;
-  hamburger.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
-  });
+  const bar = document.getElementById('scrollProgress');
+  const line = document.getElementById('traceLine');
+  const bands = document.querySelectorAll('.rail-hop');
+  const sections = Array.from(document.querySelectorAll('.hop')).map(s => ({
+    el: s,
+    name: s.dataset.hop || s.id || 'hero'
+  }));
+  let ticking = false;
+  function activeHop() {
+    const trigger = window.innerHeight * 0.35;
+    let current = sections[0].name;
+    for (const { el, name } of sections) {
+      if (el.getBoundingClientRect().top <= trigger) current = name;
+    }
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) current = sections[sections.length - 1].name;
+    return current;
+  }
+  function update() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    bar.style.width = pct + '%';
+    if (line) line.style.height = pct + '%';
+    const current = activeHop();
+    bands.forEach(b => b.classList.toggle('active', b.dataset.hop === current));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
 })();
+</script>
 
-// ===== SCROLL REVEAL =====
+<script>
 (function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const h = document.getElementById('hamburger');
+  const n = document.getElementById('navLinks');
+  h.addEventListener('click', () => {
+    const o = n.classList.toggle('open');
+    h.classList.toggle('active');
+    h.setAttribute('aria-expanded', o);
+    document.body.style.overflow = o ? 'hidden' : '';
+  });
+  n.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    n.classList.remove('open');
+    h.classList.remove('active');
+    h.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }));
+})();
+</script>
+
+<script>
+(function() {
+  const rows = Array.from(document.querySelectorAll('.trace-row'));
+  const packet = document.getElementById('tracePacket');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function countUp(el) {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const target = parseInt(el.dataset.ms, 10);
+    if (reduce || !target) { el.textContent = target + ' ms'; return; }
+    const start = performance.now();
+    const dur = 500;
+    (function step(now) {
+      const p = Math.min(1, (now - start) / dur);
+      el.textContent = Math.round(target * p) + ' ms';
+      if (p < 1) requestAnimationFrame(step);
+    })(start);
+  }
+  function reveal(reached) {
+    rows.forEach((r, i) => {
+      const on = i < reached;
+      r.classList.toggle('show', on);
+      if (on) countUp(r.querySelector('.trace-ms'));
+    });
+  }
+
+  if (reduce) {
+    document.body.classList.add('loaded');
+    reveal(rows.length);
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    return;
+  }
+
+  document.body.classList.add('loaded');
+  reveal(rows.length);
+
+  let ticking = false;
+  function trace() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const y = h.scrollTop;
+    const pct = max > 0 ? Math.min(1, y / max) : 0;
+    // packet rides the rail, tracking the growing trace-line
+    packet.style.top = (pct * 100) + '%';
+    packet.classList.toggle('live', y > 4);
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(trace); ticking = true; }
+  }, { passive: true });
+  trace();
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -464,24 +585,6 @@
 </script>
 
 <script>
-// ===== NAVBAR SCROLL =====
-(function() {
-  const navbar = document.querySelector('.navbar');
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-})();
-</script>
-
-<script>
-// ===== SCROLL TO TOP =====
 (function() {
   const btn = document.getElementById('scrollTop');
   let ticking = false;
@@ -499,33 +602,44 @@
 </script>
 
 <script>
-// ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+(function() {
+  const el = document.getElementById('uptime');
+  if (!el) return;
+  const start = new Date('2026-07-01T00:00:00').getTime();
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    const d = Math.max(0, Date.now() - start);
+    const s = Math.floor(d / 1000);
+    const days = Math.floor(s / 86400);
+    const h = Math.floor((s % 86400) / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    el.textContent = pad(days) + 'd ' + pad(h) + ':' + pad(m) + ':' + pad(sec);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+<script>
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
 </script>
 
 <script>
-// ===== LAZY VIDEO LOADING =====
 (function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const video = entry.target;
       if (entry.isIntersecting) {
-        if (!video.src && video.dataset.src) {
-          video.src = video.dataset.src;
-          video.autoplay = true;
-        }
+        if (!video.src && video.dataset.src) { video.src = video.dataset.src; video.autoplay = true; }
         video.play().catch(() => {});
-      } else {
-        video.pause();
-      }
+      } else { video.pause(); }
     });
   }, { rootMargin: '200px 0px', threshold: 0.1 });
   document.querySelectorAll('video[data-src]').forEach(v => observer.observe(v));
@@ -533,7 +647,30 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 </script>
 
 <script>
-// ===== VIDEO LIGHTBOX =====
+(function() {
+  const el = document.getElementById('typeLine');
+  if (!el) return;
+  const text = el.dataset.text;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function render(str) {
+    el.innerHTML = str
+      .replace('designs', '<span class="verb-design">designs</span>')
+      .replace('builds', '<span class="verb-wire">builds</span>');
+  }
+  if (reduce) { render(text); el.classList.add('done'); return; }
+  let i = 0;
+  const tick = () => {
+    if (i <= text.length) { render(text.slice(0, i)); i++; setTimeout(tick, 34); }
+    else { el.classList.add('done'); }
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { tick(); io.disconnect(); } });
+  }, { threshold: 0.4 });
+  io.observe(el);
+})();
+</script>
+
+<script>
 (function() {
   const modal = document.getElementById('videoModal');
   const modalVideo = modal.querySelector('video');
@@ -541,51 +678,96 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   const seek = document.getElementById('videoModalSeek');
   const timeDisp = document.getElementById('videoModalTime');
   const closeBtn = document.getElementById('videoModalClose');
-
-  function fmt(s) {
-    if (isNaN(s)) return '0:00';
-    const m = Math.floor(s / 60), sec = Math.floor(s % 60);
-    return m + ':' + (sec < 10 ? '0' : '') + sec;
-  }
-
-  function openModal(src) {
-    modalVideo.src = src;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    modalVideo.pause();
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.video-card[data-video]').forEach(el => {
-    el.addEventListener('click', () => openModal(el.dataset.video));
-  });
-
+  function fmt(s) { if (isNaN(s)) return '0:00'; const m = Math.floor(s/60), sec = Math.floor(s%60); return m + ':' + (sec<10?'0':'') + sec; }
+  function open(src) { modalVideo.src = src; modal.classList.add('active'); document.body.style.overflow = 'hidden'; modalVideo.play(); }
+  function close() { modalVideo.pause(); modal.classList.remove('active'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.video-card[data-video]').forEach(el => { el.addEventListener('click', () => open(el.dataset.video)); });
   modalVideo.addEventListener('timeupdate', () => {
-    if (modalVideo.duration) {
-      seek.value = (modalVideo.currentTime / modalVideo.duration) * 100;
-      timeDisp.textContent = fmt(modalVideo.currentTime) + ' / ' + fmt(modalVideo.duration);
-    }
+    if (modalVideo.duration) { seek.value = (modalVideo.currentTime/modalVideo.duration)*100; timeDisp.textContent = fmt(modalVideo.currentTime)+' / '+fmt(modalVideo.duration); }
   });
   modalVideo.addEventListener('play', () => playBtn.innerHTML = '<i class="ph ph-pause"></i>');
   modalVideo.addEventListener('pause', () => playBtn.innerHTML = '<i class="ph ph-play"></i>');
-
-  playBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    modalVideo.paused ? modalVideo.play() : modalVideo.pause();
-  });
-  seek.addEventListener('input', (e) => {
-    e.stopPropagation();
-    modalVideo.currentTime = (seek.value / 100) * modalVideo.duration;
-  });
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', closeModal);
+  playBtn.addEventListener('click', (e) => { e.stopPropagation(); modalVideo.paused ? modalVideo.play() : modalVideo.pause(); });
+  seek.addEventListener('input', (e) => { e.stopPropagation(); if (modalVideo.duration) modalVideo.currentTime = (seek.value/100)*modalVideo.duration; });
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', close);
   modalVideo.addEventListener('click', e => e.stopPropagation());
   document.querySelector('.video-modal-inner').addEventListener('click', e => e.stopPropagation());
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+</script>
+
+<script>
+(function() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hello = document.getElementById('hello');
+  const textEl = document.getElementById('helloText');
+  if (!hello || !textEl) return;
+
+  const message = 'welcome to my portfolio.';
+
+  function dismiss() {
+    if (hello.classList.contains('gone')) return;
+    hello.classList.add('gone');
+    hello.setAttribute('aria-hidden', 'true');
+    hello.addEventListener('transitionend', () => hello.remove(), { once: true });
+    setTimeout(() => hello.remove(), 700);
+  }
+
+  function type() {
+    if (reduce) {
+      textEl.textContent = message;
+      setTimeout(dismiss, 600);
+      return;
+    }
+    let i = 0;
+    (function step() {
+      textEl.textContent = message.slice(0, i);
+      if (i <= message.length) { i++; setTimeout(step, 38); }
+      else setTimeout(dismiss, 700);
+    })();
+  }
+
+  setTimeout(type, 300);
+})();
+</script>
+
+<script>
+(function() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const layers = Array.from(document.querySelectorAll('[data-parallax]'));
+  const stagger = Array.from(document.querySelectorAll('[data-stagger]'));
+
+  if (!reduce) {
+    let ticking = false;
+    function apply() {
+      const y = window.scrollY || window.pageYOffset;
+      layers.forEach(el => {
+        const speed = parseFloat(el.dataset.speed) || 0;
+        el.style.transform = 'translate3d(0,' + (y * speed).toFixed(2) + 'px,0)';
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(apply); ticking = true; }
+    }, { passive: true });
+    apply();
+  }
+
+  if (reduce) {
+    stagger.forEach(el => el.classList.add('visible'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  stagger.forEach(el => io.observe(el));
 })();
 </script>
 
