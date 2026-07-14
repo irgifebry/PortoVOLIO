@@ -65,7 +65,7 @@
 
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-<div class="bg-grid" data-parallax="bg" data-speed="0.04" aria-hidden="true"></div>
+<div class="bg-grid" aria-hidden="true"></div>
 
 <nav class="trace-rail" aria-label="Route hops">
   <span class="trace-line" id="traceLine" aria-hidden="true"></span>
@@ -119,7 +119,7 @@
     <div class="hero-grid">
       <div class="hero-lead">
         <p class="hero-whoami"><span class="hero-prompt">&gt;</span> whoami</p>
-        <h1 class="hero-name" data-parallax="hero" data-speed="-0.05">
+        <h1 class="hero-name">
           <span class="ln">Irgi</span>
           <span class="ln two">Febryansyah</span>
         </h1>
@@ -136,7 +136,7 @@
         </div>
       </div>
 
-      <aside class="trace-out" data-parallax="hero" data-speed="0.08" aria-label="Route from interface to infrastructure">
+      <aside class="trace-out" aria-label="Route from interface to infrastructure">
         <div class="trace-out-head">
           <span class="dot d1" aria-hidden="true"></span>
           <span class="dot d2" aria-hidden="true"></span>
@@ -155,7 +155,7 @@
     <div class="datastrip reveal">
       <div class="datacell"><span class="datacell-k">Role</span><span class="datacell-v">UI/UX + IT Engineer</span></div>
       <div class="datacell"><span class="datacell-k">Route</span><span class="datacell-v">design → system → net</span></div>
-      <div class="datacell"><span class="datacell-k">Uptime</span><span class="datacell-v"><span class="uptime" id="uptime">--d --:--:--</span></span></div>
+      <div class="datacell"><span class="datacell-k">Local</span><span class="datacell-v"><span class="uptime" id="uptime">--:--:--</span></span></div>
     </div>
   </section>
 
@@ -451,6 +451,7 @@
     const wait = Math.max(0, MIN_VISIBLE - (Date.now() - start));
     setTimeout(() => {
       loader.classList.add('hidden');
+      window.dispatchEvent(new Event('loader:done'));
       loader.addEventListener('transitionend', () => loader.remove(), { once: true });
       setTimeout(() => loader.remove(), 600);
     }, wait);
@@ -605,16 +606,10 @@
 (function() {
   const el = document.getElementById('uptime');
   if (!el) return;
-  const start = new Date('2026-07-01T00:00:00').getTime();
   function pad(n) { return String(n).padStart(2, '0'); }
   function tick() {
-    const d = Math.max(0, Date.now() - start);
-    const s = Math.floor(d / 1000);
-    const days = Math.floor(s / 86400);
-    const h = Math.floor((s % 86400) / 3600);
-    const m = Math.floor((s % 3600) / 60);
-    const sec = s % 60;
-    el.textContent = pad(days) + 'd ' + pad(h) + ':' + pad(m) + ':' + pad(sec);
+    const now = new Date();
+    el.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
   }
   tick();
   setInterval(tick, 1000);
@@ -663,10 +658,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (i <= text.length) { render(text.slice(0, i)); i++; setTimeout(tick, 34); }
     else { el.classList.add('done'); }
   };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { tick(); io.disconnect(); } });
-  }, { threshold: 0.4 });
-  io.observe(el);
+  window.addEventListener('loader:done', () => { tick(); }, { once: true });
 })();
 </script>
 
@@ -735,24 +727,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 <script>
 (function() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const layers = Array.from(document.querySelectorAll('[data-parallax]'));
   const stagger = Array.from(document.querySelectorAll('[data-stagger]'));
-
-  if (!reduce) {
-    let ticking = false;
-    function apply() {
-      const y = window.scrollY || window.pageYOffset;
-      layers.forEach(el => {
-        const speed = parseFloat(el.dataset.speed) || 0;
-        el.style.transform = 'translate3d(0,' + (y * speed).toFixed(2) + 'px,0)';
-      });
-      ticking = false;
-    }
-    window.addEventListener('scroll', () => {
-      if (!ticking) { requestAnimationFrame(apply); ticking = true; }
-    }, { passive: true });
-    apply();
-  }
 
   if (reduce) {
     stagger.forEach(el => el.classList.add('visible'));

@@ -49,6 +49,7 @@ html { scroll-behavior: smooth; }
 .hello-prompt { color: var(--wire); }
 .hello-caret { color: var(--design); animation: helloBlink 1s step-end infinite; }
 @keyframes helloBlink { 50% { opacity: 0; } }
+@keyframes heroCaret { 50% { border-color: transparent; } }
 
 /* ── Loader skeleton ───────────────────────────── */
 .loader {
@@ -123,8 +124,6 @@ html { scroll-behavior: smooth; }
   mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 40%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 40%, transparent 100%);
 }
-
-[data-parallax] { will-change: transform; }
 
 body {
   margin: 0;
@@ -300,11 +299,16 @@ main { display: block; }
 .hero-line {
   font-family: var(--font-mono); font-size: .95rem; color: var(--text);
   min-height: 1.4em; margin: 1.5rem 0 2.2rem;
-  border-right: 2px solid var(--wire); white-space: nowrap; overflow: hidden; padding-right: .1rem;
+  white-space: nowrap; overflow: hidden;
+}
+.hero-line::after {
+  content: ""; display: inline-block; width: 2px; height: 1.1em;
+  margin-left: 2px; vertical-align: text-bottom; background: var(--wire);
+  animation: heroCaret .9s step-end infinite;
 }
 .hero-line .verb-design { color: var(--design); }
 .hero-line .verb-wire { color: var(--wire); }
-.hero-line.done { border-right: none; }
+.hero-line.done::after { opacity: 0; animation: none; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .7rem; }
 
 .hero-whoami {
