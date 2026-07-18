@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@theme {
+  --color-panel: #0c0e12;
+  --color-surface: #161a21;
+  --color-line: #262c36;
+  --color-text: #e8e6e0;
+  --color-dim: #8a93a1;
+  --color-amber: #ffb23e;
+  --color-teal: #3dd4c4;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --maxw: 1080px;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-panel);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  background-image: radial-gradient(
+    120% 80% at 50% -10%,
+    color-mix(in srgb, var(--color-amber) 7%, transparent),
+    transparent 60%
+  );
+  background-attachment: fixed;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-amber) 30%, transparent);
+  color: var(--color-text);
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+}
+
+.module {
+  position: relative;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.module::before,
+.module::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-color: var(--color-amber);
+  border-style: solid;
+  border-width: 0;
+}
+
+.module::before {
+  top: 10px;
+  left: 10px;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+
+.module::after {
+  bottom: 10px;
+  right: 10px;
+  border-bottom-width: 1.5px;
+  border-right-width: 1.5px;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-teal);
+  border: 1px solid color-mix(in srgb, var(--color-teal) 38%, transparent);
+  border-radius: 9999px;
+  padding: 0.22rem 0.7rem;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.spec-key {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-dim);
+  padding-top: 0.2rem;
+}
+
+.spec-val {
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.stagger > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+.stagger.is-visible > *:nth-child(2) { transition-delay: 0.07s; }
+.stagger.is-visible > *:nth-child(3) { transition-delay: 0.14s; }
+.stagger.is-visible > *:nth-child(4) { transition-delay: 0.21s; }
+.stagger.is-visible > *:nth-child(5) { transition-delay: 0.28s; }
+.stagger.is-visible > *:nth-child(6) { transition-delay: 0.35s; }
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-divider .rule {
+  flex: 1;
+  height: 1px;
+  background: var(--color-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .signal-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .blink {
+    animation: none;
+  }
+}

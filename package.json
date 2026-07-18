@@ -1,14 +1,27 @@
 {
-  "name": "portofolio",
-  "version": "1.0.0",
-  "description": "Irgi Febryansyah — UI/UX Designer & IT Engineer portfolio",
+  "name": "scaffold",
+  "version": "0.1.0",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/irgifebry/PortoVOLIO.git"
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
   },
-  "bugs": {
-    "url": "https://github.com/irgifebry/PortoVOLIO/issues"
+  "dependencies": {
+    "@phosphor-icons/web": "^2.1.2",
+    "next": "16.2.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
-  "homepage": "https://github.com/irgifebry/PortoVOLIO#readme"
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
 }
