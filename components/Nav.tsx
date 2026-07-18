@@ -1,31 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { Sun, Moon } from "lucide-react";
 
 const links = [
-  { href: "#profile", label: "profile" },
-  { href: "#capabilities", label: "stack" },
-  { href: "#fieldlog", label: "field log" },
-  { href: "#delivered", label: "delivered" },
-  { href: "#contact", label: "contact" },
+  { href: "#top", label: "Top" },
+  { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
+  { href: "#work", label: "Work" },
+  { href: "#contact", label: "Contact" },
 ];
 
-const sectionIds = ["main", "profile", "capabilities", "fieldlog", "delivered", "contact"];
+const sectionIds = ["top", "about", "experience", "work", "contact"];
 
 export default function Nav() {
-  const [open, setOpen] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [active, setActive] = useState("main");
+  const [active, setActive] = useState("top");
+  const navRef = useRef<HTMLElement>(null);
+  const [dotStyle, setDotStyle] = useState({ left: 0, opacity: 0 });
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    function onScroll() {
-      const h = document.documentElement;
-      const max = h.scrollHeight - h.clientHeight;
-      setProgress(max > 0 ? (h.scrollTop / max) * 100 : 0);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -38,77 +32,87 @@ export default function Nav() {
       const el = document.getElementById(id);
       if (el) io.observe(el);
     });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      io.disconnect();
-    };
+    return () => io.disconnect();
   }, []);
 
+  const activeIndex = links.findIndex((l) => l.href.slice(1) === active);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav || activeIndex === -1) return;
+    const activeEl = nav.children[activeIndex] as HTMLElement;
+    if (activeEl) {
+      const left = activeEl.offsetLeft + activeEl.offsetWidth / 2 - 2;
+      setDotStyle({ left, opacity: 1 });
+    }
+  }, [active, activeIndex]);
+
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setTheme(isDark ? "dark" : "light");
+  }, []);
+
+  const toggleTheme = () => {
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setTheme("light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setTheme("dark");
+    }
+  };
+
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--color-line)] bg-[var(--color-panel)]/85 backdrop-blur">
-      <div className="relative mx-auto flex h-14 max-w-[var(--maxw)] items-center justify-between px-5">
-        <a
-          href="#top"
-          className="font-[var(--font-display)] text-base font-semibold tracking-tight"
+    <div className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2">
+      <div className="status-bar px-5 py-2.5 shadow-2xl flex items-center gap-4 transition-all duration-300 hover:shadow-xl">
+        <nav
+          ref={navRef}
+          className="relative flex items-center gap-4 sm:gap-6"
+          aria-label="Main navigation"
         >
-          Irgi<span className="text-[var(--color-amber)]">.</span>
-        </a>
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Sections">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className={`group font-[var(--font-mono)] text-xs tracking-wide transition ${
+              onClick={(e) => scrollTo(e, l.href.slice(1))}
+              aria-current={active === l.href.slice(1) ? "true" : undefined}
+              className={`relative telemetry text-[11px] font-semibold transition-all duration-200 uppercase pb-1 hover:scale-[1.05] active:scale-95 ${
                 active === l.href.slice(1)
-                  ? "text-[var(--color-text)]"
-                  : "text-[var(--color-dim)] hover:text-[var(--color-text)]"
+                  ? "text-signal"
+                  : "text-steel hover:text-ink"
               }`}
             >
-              {active === l.href.slice(1) && (
-                <span className="mr-1 text-[var(--color-amber)]">▸</span>
-              )}
               {l.label}
             </a>
           ))}
+          <span
+            className="absolute bottom-0 h-1 w-1 rounded-full bg-signal transition-all duration-300 ease-out pointer-events-none"
+            style={{
+              transform: `translateX(${dotStyle.left}px)`,
+              opacity: dotStyle.opacity,
+            }}
+          />
         </nav>
+
+        <div className="h-4 w-px bg-hair" />
+
         <button
           type="button"
-          aria-label="Menu"
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
-          className="grid h-9 w-9 place-items-center rounded-md border border-[var(--color-line)] text-[var(--color-text)] md:hidden"
+          onClick={toggleTheme}
+          aria-label="Toggle color theme"
+          className="text-steel hover:text-ink transition-colors duration-200 cursor-pointer flex items-center"
         >
-          {open ? (
-            <i className="ph ph-x" aria-hidden="true" />
-          ) : (
-            <i className="ph ph-list" aria-hidden="true" />
-          )}
+          {theme === "dark" ? <Sun size={13} aria-hidden="true" /> : <Moon size={13} aria-hidden="true" />}
         </button>
-        <span
-          className="absolute bottom-0 left-0 h-0.5 bg-[var(--color-amber)] transition-[width]"
-          style={{ width: `${progress}%` }}
-          aria-hidden="true"
-        />
       </div>
-      {open && (
-        <nav
-          className="border-t border-[var(--color-line)] bg-[var(--color-panel)] px-5 py-3 md:hidden"
-          aria-label="Mobile sections"
-        >
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 py-2 font-[var(--font-mono)] text-xs text-[var(--color-dim)]"
-            >
-              <span className="text-[var(--color-amber)]">▸</span>
-              {l.label}
-            </a>
-          ))}
-        </nav>
-      )}
-    </header>
+    </div>
   );
 }

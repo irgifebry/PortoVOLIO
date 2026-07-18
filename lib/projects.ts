@@ -48,7 +48,6 @@ export const clientProjects: ClientProject[] = [
     role: "Frontend and UI/UX",
     timeline: "Apr — Jun 2026",
     client: "Restaurant Monalisa",
-    video: "/videos/Monalisa.mp4",
     url: "https://monalisaresto.site.je/",
   },
 ]

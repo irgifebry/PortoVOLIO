@@ -1,11 +1,14 @@
+"use client";
+
+import { useRef } from "react";
+import { ArrowUpRight, Mail, ArrowDown } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import Nav from "@/components/Nav";
-import Reveal from "@/components/Reveal";
-import TypeLine from "@/components/TypeLine";
 import LiveClock from "@/components/LiveClock";
-import ScrollTop from "@/components/ScrollTop";
 import VideoCard from "@/components/VideoCard";
 import VideoModal from "@/components/VideoModal";
-import SignalTrace from "@/components/SignalTrace";
 import {
   clientProjects,
   buildProjects,
@@ -16,386 +19,394 @@ import {
   fieldLog,
 } from "@/lib/projects";
 
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+const totalProjects =
+  clientProjects.length + buildProjects.length + moduleProjects.length;
+const stackLayers = designStack.length + infraStack.length;
+
 export default function Page() {
+  const mainRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    const sections = gsap.utils.toArray<HTMLElement>(".reveal-section");
+    sections.forEach((section) => {
+      const children = section.querySelectorAll(".reveal-item");
+      if (children.length > 0) {
+        gsap.from(children, {
+          y: 24,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.05,
+          ease: "power2.out",
+          scrollTrigger: { trigger: section, start: "top 85%", once: true },
+        });
+      }
+    });
+
+    const counters = gsap.utils.toArray<HTMLElement>(".count-up");
+    counters.forEach((el) => {
+      const target = Number(el.dataset.value);
+      const obj = { v: 0 };
+      gsap.to(obj, {
+        v: target,
+        duration: 1.2,
+        ease: "power1.out",
+        delay: 0.2,
+        scrollTrigger: { trigger: el, start: "top 95%", once: true },
+        onUpdate: () => {
+          el.textContent = String(Math.round(obj.v));
+        },
+      });
+    });
+  }, { scope: mainRef });
+
   return (
     <>
+      <a href="#main" className="skip-link">Skip to content</a>
       <Nav />
       <VideoModal />
-      <ScrollTop />
 
-      <main id="top" className="mx-auto max-w-[var(--maxw)] px-5 pb-24 pt-24">
+      <main ref={mainRef} id="main" className="w-full">
         <Hero />
-        <Profile />
-        <Capabilities />
-        <FieldLog />
-        <Delivered />
+        <About />
+        <Experience />
+        <Projects />
         <Contact />
       </main>
     </>
   );
 }
 
-function SectionDivider({ kicker, title }: { kicker: string; title: string }) {
-  return (
-    <Reveal className="section-divider">
-      <p className="label">{kicker}</p>
-      <h2 className="font-[var(--font-display)] text-2xl font-semibold tracking-tight sm:text-3xl">
-        {title}
-      </h2>
-      <span className="rule" aria-hidden="true" />
-    </Reveal>
-  );
-}
-
 function Hero() {
   return (
-    <section
-      id="main"
-      className="flex min-h-[80vh] flex-col justify-center py-12"
-    >
-      <Reveal>
-        <p className="label mb-6 flex items-center gap-2">
-          <span className="blink inline-block h-2 w-2 rounded-full bg-[var(--color-amber)]" />
-          designer &amp; engineer — currently online
-        </p>
-        <h1 className="font-[var(--font-display)] text-[clamp(3rem,11vw,7rem)] font-bold leading-[0.92] tracking-tight">
-          Irgi
-          <br />
-          Febryansyah
-        </h1>
-        <div className="mt-8">
-          <SignalTrace />
-        </div>
-      </Reveal>
-      <Reveal delay className="mt-10 max-w-xl">
-        <p className="font-[var(--font-display)] text-lg text-[var(--color-dim)] sm:text-xl">
-          Designs the surface, builds the substrate — one route from interface
-          to infrastructure.
-        </p>
-        <div className="mt-6">
-          <TypeLine text="designs screens · builds systems · keeps them running" />
-        </div>
-        <p className="mt-6 font-[var(--font-mono)] text-xs text-[var(--color-dim)]">
-          local time <LiveClock /> · based in indonesia · wib (utc+7)
-        </p>
-      </Reveal>
-    </section>
-  );
-}
+    <section id="top" className="relative px-6 min-h-[100dvh] flex flex-col justify-center max-w-6xl mx-auto py-12 md:px-10 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none opacity-[0.03]">
+        <div className="absolute inset-y-0 left-6 right-6 border-l border-r border-dashed border-hair" />
+        <div className="absolute inset-x-0 top-12 bottom-12 border-t border-b border-dashed border-hair" />
+      </div>
 
-function Profile() {
-  return (
-    <section id="profile" className="py-16">
-      <SectionDivider kicker="profile" title="Who I am" />
-      <Reveal className="grid gap-8 md:grid-cols-[1.5fr_1fr]">
-        <div className="space-y-5 text-lg leading-relaxed">
-          <p>
-            I work at the seam between design and engineering. I shape interfaces
-            in Figma, then build them in React, React Native, and Android — and
-            when the product ships, I&apos;m the one who keeps the servers,
-            networks, and hardware underneath it alive.
-          </p>
-          <p className="text-[var(--color-dim)]">
-            Most people pick one side. I picked the route through all of them,
-            because the best interface is the one whose foundation doesn&apos;t
-            fall over at 2 a.m.
+      <div className="reveal-section flex flex-col gap-10 relative z-10">
+        <div className="reveal-item flex items-center gap-4 select-none">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-signal font-semibold">Designer / Engineer</span>
+          <div className="h-px flex-1 border-t border-dashed border-signal/20 hidden sm:block" />
+        </div>
+
+        <div className="reveal-item relative border border-dashed border-hair/20 p-6 md:p-8">
+          <span className="absolute -top-2 left-3 font-mono text-[8px] uppercase tracking-wider text-steel bg-canvas px-1.5 select-none">H1 &middot; Display</span>
+          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-normal leading-none text-ink">
+            Irgi Febryansyah
+          </h1>
+          <span className="absolute -bottom-2 right-3 font-mono text-[8px] uppercase tracking-wider text-signal bg-canvas px-1.5 select-none">W: 100%</span>
+        </div>
+
+        <div className="reveal-item relative border-l border-dashed border-signal/30 pl-6 py-2">
+          <span className="absolute -top-2 left-6 font-mono text-[8px] uppercase tracking-wider text-signal bg-canvas px-1.5 select-none">Bio &middot; Text</span>
+          <p className="font-sans text-lg sm:text-xl md:text-2xl text-ink/70 leading-relaxed max-w-3xl">
+            I shape interfaces in Figma, build them in React, and architect the networks and servers underneath.
           </p>
         </div>
-        <div className="module">
-          <p className="label mb-4">on the route</p>
-          <div className="spec-row">
-            <span className="spec-key">design</span>
-            <span className="spec-val">UI/UX, prototypes, design systems</span>
+
+        <div className="reveal-item flex flex-col gap-8 md:flex-row md:items-center md:justify-between items-center justify-center pt-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a href="mailto:irgifebry2006@gmail.com" className="btn-signal">
+              <Mail size={18} aria-hidden="true" />
+              Start a project
+            </a>
+            <a href="#work" className="link-signal px-2 py-3">
+              Explore projects <ArrowDown size={14} aria-hidden="true" />
+            </a>
           </div>
-          <div className="spec-row">
-            <span className="spec-key">build</span>
-            <span className="spec-val">Web, Android, React Native apps</span>
-          </div>
-          <div className="spec-row">
-            <span className="spec-key">infra</span>
-            <span className="spec-val">Networks, Linux, hardware, ops</span>
-          </div>
-          <div className="spec-row">
-            <span className="spec-key">also</span>
-            <span className="spec-val">Python &amp; ML side experiments</span>
+
+          <div className="flex gap-10 font-mono text-xs text-steel select-none justify-center md:justify-start">
+            <div className="flex flex-col items-center md:items-start">
+              <div className="text-ink font-semibold text-lg flex items-center gap-1">
+                <span className="text-signal">[</span>
+                <span className="count-up" data-value={totalProjects}>0</span>
+                <span className="text-signal">]</span>
+              </div>
+              <div className="text-[10px] text-steel uppercase tracking-wider mt-1">Projects Built</div>
+            </div>
+            <div className="flex flex-col items-center md:items-start">
+              <div className="text-ink font-semibold text-lg flex items-center gap-1">
+                <span className="text-signal">[</span>
+                <span className="count-up" data-value={stackLayers}>0</span>
+                <span className="text-signal">]</span>
+              </div>
+              <div className="text-[10px] text-steel uppercase tracking-wider mt-1">Stack Layers</div>
+            </div>
           </div>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }
 
-function Capabilities() {
+function About() {
   return (
-    <section id="capabilities" className="py-16">
-      <SectionDivider kicker="stack" title="What I work with" />
-      <Reveal className="grid gap-6 md:grid-cols-2">
-        <StackBlock title="Design &amp; build" items={designStack} />
-        <StackBlock title="Infra &amp; operations" items={infraStack} />
-      </Reveal>
+    <section id="about" className="px-6 pt-32 pb-24 md:px-10 md:py-32 border-t border-hair">
+      <div className="mx-auto max-w-6xl">
+        <div className="reveal-section grid gap-12 lg:grid-cols-[250px_1fr]">
+          <div>
+            <h2 className="font-display text-4xl italic text-ink">About</h2>
+            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">The philosophy</p>
+          </div>
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div className="reveal-item space-y-6 text-lg leading-relaxed text-ink/70">
+              <p>
+                I work at the intersection of design and engineering. I shape
+                interfaces in Figma, then build them in React, React Native, and
+                Android — and when the product ships, I keep the servers,
+                networks, and hardware underneath it running.
+              </p>
+              <p className="text-steel">
+                Most people pick one side. I chose to understand the full picture,
+                because the best interface is one whose foundation does not fall
+                over at 2 a.m.
+              </p>
+            </div>
+
+            <div className="reveal-item space-y-8">
+              <div>
+                <p className="font-mono text-[10px] text-steel uppercase tracking-wider mb-3">Design &amp; build</p>
+                <div className="flex flex-wrap gap-2">
+                  {designStack.map((s) => (
+                    <span key={s} className="stack-tag">{s}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] text-steel uppercase tracking-wider mb-3">Infrastructure</p>
+                <div className="flex flex-wrap gap-2">
+                  {infraStack.map((s) => (
+                    <span key={s} className="stack-tag">{s}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
 
-function StackBlock({ title, items }: { title: string; items: string[] }) {
+function Experience() {
   return (
-    <div className="module">
-      <p className="label mb-5">{title}</p>
-      <div className="flex flex-wrap gap-2">
-        {items.map((t) => (
-          <span key={t} className="chip">
-            {t}
-          </span>
+    <section id="experience" className="px-6 pt-32 pb-24 md:px-10 md:py-32 border-t border-hair">
+      <div className="mx-auto max-w-6xl">
+        <div className="reveal-section grid gap-12 lg:grid-cols-[250px_1fr]">
+          <div>
+            <h2 className="font-display text-4xl italic text-ink">Experience</h2>
+            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">The path</p>
+          </div>
+          <div className="w-full reveal-item">
+            <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-2 border-b border-hair pb-4">
+              <div>
+                <h3 className="font-display text-3xl font-normal text-ink">{fieldLog.title}</h3>
+                <p className="text-lg text-steel">{fieldLog.role}</p>
+              </div>
+              <span className="font-mono text-xs text-signal border border-hair px-3 py-1 rounded-full">{fieldLog.period}</span>
+            </div>
+            <ul className="mt-6 space-y-4">
+              {fieldLog.items.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-ink/70">
+                  <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+                  <span className="text-base leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Projects() {
+  return (
+    <section id="work" className="px-6 pt-32 pb-24 md:px-10 md:py-32 border-t border-hair">
+      <div className="mx-auto max-w-6xl">
+        <div className="reveal-section grid gap-12 lg:grid-cols-[250px_1fr] items-start">
+          <div className="lg:sticky lg:top-24 h-fit">
+            <h2 className="font-display text-4xl italic text-ink">Work</h2>
+            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">The outputs</p>
+            <p className="mt-4 max-w-[180px] text-xs text-steel leading-relaxed">
+              Curated solutions across client projects, personal systems, and open source modules.
+            </p>
+          </div>
+
+          <div className="space-y-20">
+            <Group title="Client work" projects={clientProjects} kind="client" />
+            <Group title="Personal builds" projects={buildProjects} kind="build" />
+            <Group title="Open source" projects={moduleProjects} kind="module" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Group({
+  title,
+  projects,
+  kind,
+}: {
+  title: string;
+  projects: any[];
+  kind: "client" | "build" | "module";
+}) {
+  return (
+    <div className="reveal-section">
+      <p className="font-mono text-xs text-steel uppercase tracking-widest mb-6 border-b border-hair pb-2">{title}</p>
+      <div
+        className={
+          kind === "client"
+            ? "grid gap-8 md:grid-cols-2"
+            : kind === "build"
+            ? "grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        }
+      >
+        {projects.map((p) => (
+          <ProjectCard key={p.slug} project={p} kind={kind} />
         ))}
       </div>
     </div>
   );
 }
 
-function FieldLog() {
-  return (
-    <section id="fieldlog" className="py-16">
-      <SectionDivider kicker="field log" title="On the ground" />
-      <Reveal className="module">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h3 className="font-[var(--font-display)] text-2xl font-semibold">
-            {fieldLog.title}
-          </h3>
-          <span className="font-[var(--font-mono)] text-xs text-[var(--color-amber)]">
-            {fieldLog.role.toUpperCase()}
-          </span>
-        </div>
-        <p className="mt-1 font-[var(--font-mono)] text-xs text-[var(--color-dim)]">
-          {fieldLog.period}
-        </p>
-        <ul className="mt-6 space-y-3">
-          {fieldLog.items.map((it) => (
-            <li key={it} className="flex gap-3 text-[var(--color-dim)]">
-              <i
-                className="ph ph-arrow-right mt-1 text-[var(--color-teal)]"
-                aria-hidden="true"
-              />
-              <span>{it}</span>
-            </li>
+function ProjectCard({
+  project,
+  kind,
+  }: {
+  project: any;
+  kind: "client" | "build" | "module";
+}) {
+  if (kind === "module") {
+    return (
+      <a
+        href={project.url}
+        target="_blank"
+        rel="noreferrer"
+        className="node group block"
+        data-flip-id={`card-${project.slug}`}
+      >
+        <h3 className="mb-2 font-display text-2xl font-normal group-hover:text-signal transition-colors text-ink">{project.title}</h3>
+        <p className="mb-5 text-sm text-steel leading-relaxed">{project.subtitle}</p>
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.map((t: string) => (
+            <span key={t} className="tag">{t}</span>
           ))}
-        </ul>
-      </Reveal>
-    </section>
-  );
-}
+        </div>
+      </a>
+    );
+  }
 
-function Delivered() {
   return (
-    <section id="delivered" className="py-16">
-      <SectionDivider kicker="delivered" title="The work" />
-      <div className="space-y-16">
-        <WorkGroup title="Client work" hint="design-led, shipped">
-          <div className="grid gap-5 md:grid-cols-2">
-            {clientProjects.map((p) => (
-              <Reveal
-                key={p.slug}
-                className="module"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="font-[var(--font-display)] text-xl font-semibold">
-                    {p.title}
-                  </h3>
-                  {p.url && (
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="shrink-0 text-[var(--color-teal)] transition hover:text-[var(--color-amber)]"
-                      aria-label={`Open ${p.title}`}
-                    >
-                      <i className="ph ph-arrow-up-right text-lg" aria-hidden="true" />
-                    </a>
-                  )}
-                </div>
-                <p className="mt-2 text-[var(--color-dim)]">{p.subtitle}</p>
-                <div className="mt-5">
-                  {p.role && (
-                    <div className="spec-row">
-                      <span className="spec-key">role</span>
-                      <span className="spec-val">{p.role}</span>
-                    </div>
-                  )}
-                  {p.client && (
-                    <div className="spec-row">
-                      <span className="spec-key">client</span>
-                      <span className="spec-val">{p.client}</span>
-                    </div>
-                  )}
-                  {p.company && (
-                    <div className="spec-row">
-                      <span className="spec-key">company</span>
-                      <span className="spec-val">{p.company}</span>
-                    </div>
-                  )}
-                  <div className="spec-row">
-                    <span className="spec-key">timeline</span>
-                    <span className="spec-val">{p.timeline}</span>
-                  </div>
-                </div>
-                {p.note && (
-                  <p className="mt-4 border-l-2 border-[var(--color-amber)] pl-3 text-sm text-[var(--color-dim)]">
-                    {p.note}
-                  </p>
-                )}
-                {p.video && (
-                  <div className="mt-5">
-                    <VideoCard src={p.video} label={p.title} />
-                  </div>
-                )}
-              </Reveal>
+    <article className="node flex flex-col justify-between" data-flip-id={`card-${project.slug}`}>
+      <div>
+        <h3 className="mb-3 font-display text-2xl font-normal text-ink">{project.title}</h3>
+
+        {project.video && (
+          <div className="mb-5">
+            <VideoCard src={project.video} label={project.title} slug={project.slug} />
+          </div>
+        )}
+
+        <p className="mb-4 text-sm text-steel leading-relaxed">{project.subtitle}</p>
+
+        {kind === "client" && (
+          <div className="mb-5 flex flex-wrap items-baseline gap-x-2 gap-y-1 font-mono text-[11px] text-steel border-t border-hair/50 pt-3">
+            <span>{project.role}{project.company ? ` · ${project.company}` : ""}</span>
+            <span className="text-signal">{project.timeline}</span>
+          </div>
+        )}
+      </div>
+
+      <div className="flex items-center justify-between mt-4">
+        {project.tags ? (
+          <div className="flex flex-wrap gap-1.5">
+            {project.tags.map((t: string) => (
+              <span key={t} className="tag">{t}</span>
             ))}
           </div>
-        </WorkGroup>
+        ) : (
+          <div />
+        )}
 
-        <WorkGroup title="Builds" hint="things I made and shipped">
-          <Reveal className="stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {buildProjects.map((p) => (
-              <article key={p.slug} className="module flex flex-col">
-                <div className="aspect-[16/10]">
-                  {p.video && <VideoCard src={p.video} label={p.title} />}
-                </div>
-                <h3 className="mt-4 font-[var(--font-display)] text-lg font-semibold">
-                  {p.title}
-                </h3>
-                <p className="mt-1 text-sm text-[var(--color-dim)]">
-                  {p.subtitle}
-                </p>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {p.tags.map((t) => (
-                    <span key={t} className="chip">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                {p.url && (
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-4 inline-flex items-center gap-1 text-sm text-[var(--color-teal)] transition hover:text-[var(--color-amber)]"
-                  >
-                    Visit <i className="ph ph-arrow-up-right" aria-hidden="true" />
-                  </a>
-                )}
-              </article>
-            ))}
-          </Reveal>
-        </WorkGroup>
-
-        <WorkGroup title="Modules" hint="experiments &amp; open source">
-          <Reveal className="stagger grid gap-4 sm:grid-cols-3">
-            {moduleProjects.map((p) => (
-              <a
-                key={p.slug}
-                href={p.url}
-                target="_blank"
-                rel="noreferrer"
-                className="group module transition hover:border-[var(--color-teal)]"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-[var(--font-display)] text-lg font-semibold">
-                    {p.title}
-                  </h3>
-                  <i
-                    className="ph ph-arrow-up-right text-[var(--color-dim)] transition group-hover:text-[var(--color-amber)]"
-                    aria-hidden="true"
-                  />
-                </div>
-                <p className="mt-2 text-sm text-[var(--color-dim)]">
-                  {p.subtitle}
-                </p>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {p.tags.map((t) => (
-                    <span key={t} className="chip">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </a>
-            ))}
-          </Reveal>
-        </WorkGroup>
+        {project.url && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+            className="link-signal"
+          >
+            Open <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
+        )}
       </div>
-    </section>
-  );
-}
-
-function WorkGroup({
-  title,
-  hint,
-  children,
-}: {
-  title: string;
-  hint: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <div className="mb-6 flex items-baseline gap-3">
-        <h3 className="font-[var(--font-display)] text-xl font-semibold">
-          {title}
-        </h3>
-        <span className="font-[var(--font-mono)] text-xs text-[var(--color-dim)]">
-          / {hint}
-        </span>
-      </div>
-      {children}
-    </div>
+    </article>
   );
 }
 
 function Contact() {
   return (
-    <section id="contact" className="py-16">
-      <SectionDivider kicker="contact" title="Let's build the route" />
-      <Reveal className="module">
-        <p className="font-[var(--font-display)] text-2xl font-medium sm:text-3xl">
-          Got a surface to design or a substrate to keep standing?
-        </p>
-        <a
-          href="mailto:irgifebry2006@gmail.com"
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-amber)] px-5 py-2.5 font-[var(--font-mono)] text-sm font-medium text-[var(--color-panel)] transition hover:opacity-90"
-        >
-          <i className="ph ph-envelope-simple" aria-hidden="true" /> Email me
-        </a>
-        <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-          {socials.map((s) => (
+    <section id="contact" className="px-6 pt-32 pb-24 md:px-10 md:py-32 border-t border-hair max-w-6xl mx-auto w-full">
+      <div className="reveal-section">
+        <p className="font-mono text-[11px] text-steel uppercase tracking-widest mb-6">Contact</p>
+
+        <div className="grid gap-12 lg:grid-cols-[1fr_350px]">
+          <div>
+            <h2 className="reveal-item font-display text-5xl sm:text-6xl lg:text-7xl font-normal leading-tight text-ink">
+              Let us build <span className="italic text-steel">something</span> solid.
+            </h2>
+            <p className="reveal-item mt-6 max-w-lg text-lg text-steel leading-relaxed">
+              Have an interface to design, a product to build, or a network to keep running? I would like to hear about it.
+            </p>
+          </div>
+
+          <div className="reveal-item flex flex-col justify-between">
             <a
-              key={s.label}
-              href={s.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group inline-flex items-center gap-2 text-sm text-[var(--color-dim)] transition hover:text-[var(--color-text)]"
+              href="mailto:irgifebry2006@gmail.com"
+              className="group block border border-hair p-6 hover:border-signal transition-colors bg-panel/60"
             >
-              <i
-                className={`ph ph-${
-                  s.label === "GitHub"
-                    ? "github-logo"
-                    : s.label === "Instagram"
-                    ? "instagram-logo"
-                    : s.label === "TikTok"
-                    ? "tiktok-logo"
-                    : "envelope-simple"
-                }`}
-                aria-hidden="true"
-              />
-              <span className="font-[var(--font-mono)] text-xs text-[var(--color-dim)]">
-                {s.label}
+              <span className="font-mono text-[10px] text-steel uppercase tracking-wider block mb-2">My email</span>
+              <span className="font-display text-2xl sm:text-3xl text-ink group-hover:text-signal transition-colors flex items-center gap-3">
+                irgifebry2006@gmail.com
+                <ArrowUpRight size={20} className="text-steel group-hover:text-signal transition-colors" />
               </span>
-              <span>{s.handle}</span>
             </a>
-          ))}
+
+            <div className="mt-8 flex flex-wrap gap-6 border-t border-hair pt-6 lg:border-t-0 lg:pt-0 justify-start lg:justify-end">
+              {socials.filter(s => s.label !== "Email").map((s) => (
+                <a
+                  key={s.label}
+                  href={s.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-center gap-1.5 text-steel transition-colors hover:text-ink"
+                >
+                  <span className="font-mono text-xs font-semibold uppercase">{s.label}</span>
+                  <ArrowUpRight
+                    size={13}
+                    aria-hidden="true"
+                    className="opacity-60 group-hover:opacity-100 transition-opacity"
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-      </Reveal>
-      <p className="mt-10 text-center font-[var(--font-mono)] text-xs text-[var(--color-dim)]">
-        © {new Date().getFullYear()} irgi febryansyah — drawn from interface to
-        infrastructure.
-      </p>
+
+        <div className="reveal-item mt-24 flex flex-col gap-4 border-t border-hair pt-8 font-mono text-[11px] text-steel sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} Irgi Febryansyah</span>
+          <LiveClock />
+        </div>
+      </div>
     </section>
   );
 }

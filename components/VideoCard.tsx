@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { Play } from "lucide-react";
 
 type VideoCardProps = {
   src: string;
   label: string;
+  slug: string;
 };
 
-export default function VideoCard({ src, label }: VideoCardProps) {
+export default function VideoCard({ src, label, slug }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -31,8 +33,13 @@ export default function VideoCard({ src, label }: VideoCardProps) {
     return () => io.disconnect();
   }, [src]);
 
-  function open() {
-    window.dispatchEvent(new CustomEvent("open-video", { detail: src }));
+  function open(e: React.MouseEvent) {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    window.dispatchEvent(
+      new CustomEvent("open-video", {
+        detail: { src, slug, rect },
+      }),
+    );
   }
 
   return (
@@ -40,22 +47,24 @@ export default function VideoCard({ src, label }: VideoCardProps) {
       type="button"
       onClick={open}
       aria-label={`Play ${label} demo video`}
-      className="group relative block h-full w-full overflow-hidden rounded-lg border border-[var(--color-line)] bg-[var(--color-panel)] aspect-[16/10] transition hover:border-[var(--color-teal)]"
+      className="group relative block w-full overflow-hidden bg-zinc-950 cursor-pointer"
+      data-flip-id={`video-${slug}`}
     >
+      <span className="aspect-[16/9] block" />
       <video
         ref={videoRef}
         muted
         loop
         playsInline
         preload="none"
-        className="h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+        data-flip-id={`video-el-${slug}`}
       />
-      <span className="absolute inset-0 grid place-items-center bg-[var(--color-panel)]/30 transition group-hover:bg-[var(--color-panel)]/10">
-        <span className="grid h-12 w-12 place-items-center rounded-full bg-[var(--color-amber)] text-[var(--color-panel)] shadow-md transition group-hover:scale-105">
-          <i className="ph-fill ph-play text-lg" aria-hidden="true" />
+      <span className="absolute inset-0 grid place-items-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <span className="grid h-12 w-12 place-items-center bg-signal text-white shadow-xl">
+          <Play size={20} aria-hidden="true" fill="currentColor" />
         </span>
       </span>
-      <span className="absolute left-3 top-3 h-2 w-2 rounded-full bg-[var(--color-amber)]" aria-hidden="true" />
     </button>
   );
 }
