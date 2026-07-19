@@ -381,7 +381,7 @@ function Contact() {
               </span>
             </a>
 
-            <div className="mt-8 flex flex-wrap gap-6 border-t border-hair pt-6 lg:border-t-0 lg:pt-0 justify-start lg:justify-end">
+            <div className="mt-8 flex flex-wrap gap-6 border-t border-hair pt-6 lg:border-t-0 lg:pt-0 justify-center lg:justify-end">
               {socials.filter(s => s.label !== "Email").map((s) => (
                 <a
                   key={s.label}
@@ -402,7 +402,7 @@ function Contact() {
           </div>
         </div>
 
-        <div className="reveal-item mt-24 flex flex-col gap-4 border-t border-hair pt-8 font-mono text-[11px] text-steel sm:flex-row sm:items-center sm:justify-between">
+        <div className="reveal-item mt-24 flex flex-col gap-4 border-t border-hair pt-8 font-mono text-[11px] text-steel items-center sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Irgi Febryansyah</span>
           <LiveClock />
         </div>

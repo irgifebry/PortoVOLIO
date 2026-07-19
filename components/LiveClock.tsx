@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-export default function LiveClock() {
+type LiveClockProps = {
+  className?: string;
+};
+
+export default function LiveClock({ className }: LiveClockProps) {
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -23,7 +27,7 @@ export default function LiveClock() {
   }, []);
 
   return (
-    <span className="telemetry" suppressHydrationWarning>
+    <span className={`telemetry ${className ?? ""}`} suppressHydrationWarning>
       {time || "00:00:00"}
     </span>
   );
