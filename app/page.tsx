@@ -9,6 +9,7 @@ import Nav from "@/components/Nav";
 import LiveClock from "@/components/LiveClock";
 import VideoCard from "@/components/VideoCard";
 import VideoModal from "@/components/VideoModal";
+import Typewriter from "@/components/Typewriter";
 import {
   clientProjects,
   buildProjects,
@@ -106,7 +107,14 @@ function Hero() {
         <div className="reveal-item relative border-l border-dashed border-signal/30 pl-6 py-2">
           <span className="absolute -top-2 left-6 font-mono text-[8px] uppercase tracking-wider text-signal bg-canvas px-1.5 select-none">Bio &middot; Text</span>
           <p className="font-sans text-lg sm:text-xl md:text-2xl text-ink/70 leading-relaxed max-w-3xl">
-            I shape interfaces in Figma, build them in React, and architect the networks and servers underneath.
+            <Typewriter
+              phrases={[
+                "I shape interfaces in Figma, build them in React, and architect the networks and servers underneath.",
+                "A full-stack designer and engineer with a passion for clean interfaces and solid infrastructure.",
+                "Bridging design and engineering — from pixel-perfect UI to resilient server architecture.",
+                "Designer by trade, engineer at heart. Turning complex problems into seamless experiences.",
+              ]}
+            />
           </p>
         </div>
 
