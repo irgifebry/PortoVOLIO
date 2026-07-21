@@ -35,6 +35,8 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
+import SmoothScroll from "@/components/SmoothScroll";
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -67,6 +69,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <SmoothScroll />
       </body>
     </html>
   );
