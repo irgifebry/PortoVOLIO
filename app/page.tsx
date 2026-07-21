@@ -402,7 +402,7 @@ function Contact() {
           </div>
         </div>
 
-        <div className="reveal-item mt-24 flex flex-col gap-4 border-t border-hair pt-8 font-mono text-[11px] text-steel items-center sm:flex-row sm:items-center sm:justify-between">
+        <div className="reveal-item mt-12 sm:mt-24 flex flex-col gap-4 border-t border-hair pt-8 font-mono text-[11px] text-steel items-center sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Irgi Febryansyah</span>
           <LiveClock />
         </div>

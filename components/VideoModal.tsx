@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { X } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Flip } from "gsap/Flip";
@@ -128,16 +127,6 @@ export default function VideoModal() {
         className="absolute inset-0 cursor-default"
         tabIndex={-1}
       />
-
-      <button
-        type="button"
-        onClick={close}
-        aria-label="Close video"
-        style={closeBtnPos ? { top: closeBtnPos.top, right: closeBtnPos.right } : undefined}
-        className="fixed top-3 right-3 z-[70] grid h-10 w-10 place-items-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/80 cursor-pointer"
-      >
-        <X size={20} aria-hidden="true" />
-      </button>
 
       <div ref={videoWrapperRef} className="overflow-hidden bg-black shadow-2xl">
         <div className="flex h-full w-full items-center justify-center">
