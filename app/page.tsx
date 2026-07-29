@@ -109,10 +109,10 @@ function Hero() {
           <p className="font-sans text-lg sm:text-xl md:text-2xl text-ink/70 leading-relaxed max-w-3xl">
             <Typewriter
               phrases={[
-                "I shape interfaces in Figma, build them in React, and architect the networks and servers underneath.",
-                "A full-stack designer and engineer with a passion for clean interfaces and solid infrastructure.",
-                "Bridging design and engineering — from pixel-perfect UI to resilient server architecture.",
-                "Designer by trade, engineer at heart. Turning complex problems into seamless experiences.",
+                "I design stuff in Figma, build it in React, and keep the servers from catching fire.",
+                "Full-stack designer & engineer. I care a lot about clean UIs and not waking up to a broken server at 3am.",
+                "I speak both designer and engineer. Pixels on the surface, solid infra underneath.",
+                "Designer by day, engineer by night. Complex problems? I just make 'em look easy.",
               ]}
             />
           </p>
@@ -160,20 +160,19 @@ function About() {
         <div className="reveal-section grid gap-12 lg:grid-cols-[250px_1fr]">
           <div>
             <h2 className="font-display text-4xl italic text-ink">About</h2>
-            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">The philosophy</p>
+            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">What I do</p>
           </div>
           <div className="grid gap-12 lg:grid-cols-2">
             <div className="reveal-item space-y-6 text-lg leading-relaxed text-ink/70">
               <p>
-                I work at the intersection of design and engineering. I shape
-                interfaces in Figma, then build them in React, React Native, and
-                Android — and when the product ships, I keep the servers,
-                networks, and hardware underneath it running.
+                I work at the intersection of design and engineering. Sketch stuff
+                in Figma, build it in React / React Native / Android, and keep
+                the servers from crashing at 2am.
               </p>
               <p className="text-steel">
-                Most people pick one side. I chose to understand the full picture,
-                because the best interface is one whose foundation does not fall
-                over at 2 a.m.
+                Most people pick a lane. I chose to understand the full picture,
+                because the best interface is one whose foundation does not
+                fall over in the middle of the night.
               </p>
             </div>
 
@@ -209,7 +208,7 @@ function Experience() {
         <div className="reveal-section grid gap-12 lg:grid-cols-[250px_1fr]">
           <div>
             <h2 className="font-display text-4xl italic text-ink">Experience</h2>
-            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">The path</p>
+            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">Where I've been</p>
           </div>
           <div className="w-full reveal-item">
             <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-2 border-b border-hair pb-4">
@@ -241,9 +240,9 @@ function Projects() {
         <div className="reveal-section grid gap-12 lg:grid-cols-[250px_1fr] items-start">
           <div className="lg:sticky lg:top-24 h-fit">
             <h2 className="font-display text-4xl italic text-ink">Work</h2>
-            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">The outputs</p>
+            <p className="mt-2 font-mono text-[11px] text-steel uppercase tracking-wider">Stuff I've made</p>
             <p className="mt-4 max-w-[180px] text-xs text-steel leading-relaxed">
-              Curated solutions across client projects, personal systems, and open source modules.
+              Stuff I built for clients, for fun, and for the open source community.
             </p>
           </div>
 
@@ -370,10 +369,10 @@ function Contact() {
         <div className="grid gap-12 lg:grid-cols-[1fr_350px]">
           <div>
             <h2 className="reveal-item font-display text-5xl sm:text-6xl lg:text-7xl font-normal leading-tight text-ink">
-              Let us build <span className="italic text-steel">something</span> solid.
+              Let's build <span className="italic text-steel">something</span> solid.
             </h2>
             <p className="reveal-item mt-6 max-w-lg text-lg text-steel leading-relaxed">
-              Have an interface to design, a product to build, or a network to keep running? I would like to hear about it.
+              Got a design, a product, or a network that needs some love? I'd love to hear about it.
             </p>
           </div>
 

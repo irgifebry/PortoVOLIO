@@ -24,12 +24,12 @@ const mono = Space_Mono({
 export const metadata: Metadata = {
   title: "Irgi Febryansyah — Designer / Engineer",
   description:
-    "Designs interfaces, builds them in React, React Native, and Android, then keeps the servers, networks, and hardware underneath alive.",
+    "Designs things, builds 'em in React / React Native / Android, and keeps the infra from catching fire.",
   metadataBase: new URL("https://portofolio-irgi.vercel.app"),
   openGraph: {
     title: "Irgi Febryansyah — Designer / Engineer",
     description:
-      "Designs interfaces, builds them in React, React Native, and Android, then keeps the servers, networks, and hardware underneath alive.",
+      "Designs things, builds 'em in React / React Native / Android, and keeps the infra from catching fire.",
     type: "website",
   },
   icons: { icon: "/favicon.svg" },
