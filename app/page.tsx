@@ -1,15 +1,10 @@
-"use client";
-
-import { useRef } from "react";
 import { ArrowUpRight, Mail, ArrowDown } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import Nav from "@/components/Nav";
 import LiveClock from "@/components/LiveClock";
 import VideoCard from "@/components/VideoCard";
 import VideoModal from "@/components/VideoModal";
 import Typewriter from "@/components/Typewriter";
+import PageAnimations from "@/components/PageAnimations";
 import {
   clientProjects,
   buildProjects,
@@ -20,58 +15,19 @@ import {
   fieldLog,
 } from "@/lib/projects";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
-
 const totalProjects =
   clientProjects.length + buildProjects.length + moduleProjects.length;
 const stackLayers = designStack.length + infraStack.length;
 
 export default function Page() {
-  const mainRef = useRef<HTMLElement>(null);
-
-  useGSAP(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-
-    const sections = gsap.utils.toArray<HTMLElement>(".reveal-section");
-    sections.forEach((section) => {
-      const children = section.querySelectorAll(".reveal-item");
-      if (children.length > 0) {
-        gsap.from(children, {
-          y: 24,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.05,
-          ease: "power2.out",
-          scrollTrigger: { trigger: section, start: "top 85%", once: true },
-        });
-      }
-    });
-
-    const counters = gsap.utils.toArray<HTMLElement>(".count-up");
-    counters.forEach((el) => {
-      const target = Number(el.dataset.value);
-      const obj = { v: 0 };
-      gsap.to(obj, {
-        v: target,
-        duration: 1.2,
-        ease: "power1.out",
-        delay: 0.2,
-        scrollTrigger: { trigger: el, start: "top 95%", once: true },
-        onUpdate: () => {
-          el.textContent = String(Math.round(obj.v));
-        },
-      });
-    });
-  }, { scope: mainRef });
-
   return (
     <>
       <a href="#main" className="skip-link">Skip to content</a>
       <Nav />
       <VideoModal />
+      <PageAnimations />
 
-      <main ref={mainRef} id="main" className="w-full">
+      <main id="main" className="w-full">
         <Hero />
         <About />
         <Experience />
@@ -106,7 +62,11 @@ function Hero() {
 
         <div className="reveal-item relative border-l border-dashed border-signal/30 pl-6 py-2">
           <span className="absolute -top-2 left-6 font-mono text-[8px] uppercase tracking-wider text-signal bg-canvas px-1.5 select-none">Bio &middot; Text</span>
-          <p className="font-sans text-lg sm:text-xl md:text-2xl text-ink/70 leading-relaxed max-w-3xl">
+          {/* Static fallback terindeks crawler; Typewriter animasi di atasnya */}
+          <p
+            className="font-sans text-lg sm:text-xl md:text-2xl text-ink/70 leading-relaxed max-w-3xl"
+            aria-label="UI/UX designer dan full-stack engineer spesialis React, React Native, dan Android. Tersedia untuk proyek freelance dan kolaborasi."
+          >
             <Typewriter
               phrases={[
                 "I design stuff in Figma, build it in React, and keep the servers from catching fire.",
