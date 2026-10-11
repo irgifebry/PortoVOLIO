@@ -9,7 +9,6 @@ gsap.registerPlugin(Flip, useGSAP);
 
 export default function VideoModal() {
   const [data, setData] = useState<{ src: string; slug: string; rect: DOMRect } | null>(null);
-  const [closeBtnPos, setCloseBtnPos] = useState<{ top: number; right: number } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoWrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -49,38 +48,22 @@ export default function VideoModal() {
     const destY = vh / 2 - data.rect.top - cardH / 2;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (vw < 768) {
-      const videoTop = vh / 2 - (cardH * targetScale) / 2;
-      const videoRight = vw / 2 - (cardW * targetScale) / 2;
-      setCloseBtnPos({ top: videoTop + 12, right: videoRight + 12 });
-    } else {
-      setCloseBtnPos(null);
-    }
-
     gsap.to(videoWrapperRef.current, {
       x: destX,
       y: destY,
       scaleX: targetScale,
       scaleY: targetScale,
-      borderRadius: "8px",
+      borderRadius: "24px",
       duration: reduced ? 0 : 0.5,
       ease: "power3.out",
     });
 
     gsap.to(containerRef.current, {
-      backgroundColor: "rgba(9, 9, 11, 0.75)",
+      backgroundColor: "rgba(20, 18, 4, 0.78)",
       backdropFilter: "blur(12px)",
       duration: reduced ? 0 : 0.4,
       ease: "power2.out",
     });
-  }, [data]);
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") close();
-    }
-    if (data) document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
   }, [data]);
 
   function close() {
@@ -110,6 +93,17 @@ export default function VideoModal() {
     });
   }
 
+  // Escape-to-close. Runs after `close` is (re)defined each render so the
+  // handler always sees current state — no stale closure, no dep array.
+  useEffect(() => {
+    if (!data) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") close();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  });
+
   if (!data) return null;
 
   return (
@@ -126,9 +120,15 @@ export default function VideoModal() {
         onClick={close}
         className="absolute inset-0 cursor-default"
         tabIndex={-1}
-      />
+        aria-label="Close video"
+      >
+        <span className="sr-only">Close video</span>
+      </button>
 
-      <div ref={videoWrapperRef} className="overflow-hidden bg-black shadow-2xl">
+      <div
+        ref={videoWrapperRef}
+        className="overflow-hidden rounded-3xl bg-black shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/10"
+      >
         <div className="flex h-full w-full items-center justify-center">
           <video
             ref={videoRef}

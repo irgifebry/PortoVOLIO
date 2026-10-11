@@ -1,46 +1,46 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter, Space_Mono } from "next/font/google";
+import { JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const BASE_URL = "https://irgifebry.vercel.app";
 
-const display = Instrument_Serif({
+const TITLE = "Irgi Febryansyah — UI/UX Designer & Full-Stack Engineer";
+const DESCRIPTION =
+  "UI/UX designer dan full-stack engineer spesialis React, React Native, dan Android. Tersedia untuk proyek freelance dan kolaborasi.";
+
+const display = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
+  weight: ["500", "700"],
   variable: "--font-display",
 });
 
-const body = Inter({
+const body = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-body",
 });
 
-const mono = Space_Mono({
+const mono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
   variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Irgi Febryansyah — UI/UX Designer & Full-Stack Engineer",
-  description:
-    "UI/UX designer dan full-stack engineer spesialis React, React Native, dan Android. Tersedia untuk proyek freelance dan kolaborasi.",
+  title: TITLE,
+  description: DESCRIPTION,
   metadataBase: new URL(BASE_URL),
   openGraph: {
-    title: "Irgi Febryansyah — UI/UX Designer & Full-Stack Engineer",
-    description:
-      "UI/UX designer dan full-stack engineer spesialis React, React Native, dan Android. Tersedia untuk proyek freelance dan kolaborasi.",
+    title: TITLE,
+    description: DESCRIPTION,
     type: "website",
     url: BASE_URL,
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Irgi Febryansyah — Designer / Engineer" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Irgi Febryansyah — UI/UX Designer & Full-Stack Engineer",
-    description:
-      "UI/UX designer dan full-stack engineer spesialis React, React Native, dan Android.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
   icons: { icon: "/favicon.svg" },
 };
@@ -51,11 +51,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`dark ${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -87,25 +83,25 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
-              } catch (_) {}
+                var stored = localStorage.getItem('theme');
+                var isLight = stored === 'light';
+                document.documentElement.classList.toggle('light', isLight);
+                document.documentElement.classList.toggle('dark', !isLight);
+              } catch (_) {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+              }
             `,
           }}
         />
       </head>
-      <body className="min-h-full">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-rose-500 focus:px-3 focus:py-2 focus:text-white focus:rounded-md"
-        >
+      <body className="min-h-full antialiased">
+        <a href="#main" className="skip-link">
           Skip to content
         </a>
-        {children}
+        {/* Must mount BEFORE PageAnimations so getLenis() resolves in its effect */}
         <SmoothScroll />
+        {children}
       </body>
     </html>
   );

@@ -36,9 +36,7 @@ export default function VideoCard({ src, label, slug }: VideoCardProps) {
   function open(e: React.MouseEvent) {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     window.dispatchEvent(
-      new CustomEvent("open-video", {
-        detail: { src, slug, rect },
-      }),
+      new CustomEvent("open-video", { detail: { src, slug, rect } }),
     );
   }
 
@@ -47,23 +45,26 @@ export default function VideoCard({ src, label, slug }: VideoCardProps) {
       type="button"
       onClick={open}
       aria-label={`Play ${label} demo video`}
-      className="group relative block w-full overflow-hidden bg-zinc-950 cursor-pointer"
+      className="video-frame group"
       data-flip-id={`video-${slug}`}
     >
-      <span className="aspect-[16/9] block" />
+      <span className="block aspect-[16/9]" />
       <video
         ref={videoRef}
         muted
         loop
         playsInline
         preload="none"
-        className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+        className="absolute inset-0 h-full w-full object-cover"
         data-flip-id={`video-el-${slug}`}
       />
-      <span className="absolute inset-0 grid place-items-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <span className="grid h-12 w-12 place-items-center bg-signal text-white shadow-xl">
+      <span className="absolute inset-0 grid place-items-center bg-black/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
+        <span className="play-badge">
           <Play size={20} aria-hidden="true" fill="currentColor" />
         </span>
+      </span>
+      <span className="absolute left-3 top-3 pill !bg-black/55 !text-white !border-white/20">
+        Demo
       </span>
     </button>
   );

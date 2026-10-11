@@ -27,7 +27,10 @@ export default function LiveClock({ className }: LiveClockProps) {
   }, []);
 
   return (
-    <span className={`telemetry ${className ?? ""}`} suppressHydrationWarning>
+    <span
+      className={`font-mono text-[11px] uppercase tracking-[0.14em] text-steel tabular-nums ${className ?? ""}`}
+      suppressHydrationWarning
+    >
       {time || "00:00:00"}
     </span>
   );

@@ -1,6 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="8" fill="#0E1219"/>
-  <path d="M16 18 L16 46 L26 46" fill="none" stroke="#E8590C" stroke-width="4" stroke-linecap="square"/>
-  <path d="M48 18 L48 46 L38 46" fill="none" stroke="#E8590C" stroke-width="4" stroke-linecap="square"/>
-  <rect x="29" y="29" width="6" height="6" fill="#E7EAEF"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- canvas tile -->
+  <rect width="64" height="64" rx="14" fill="#141204"/>
+
+  <!-- "if" monogram, lowercase — display typeface, bold -->
+  <rect x="14" y="11" width="9" height="8" fill="#e8985e"/>
+  <g fill="#f6efdf">
+    <path d="M14 23h9v30h-9z"/>
+    <path d="M35 11h9v42h-9z"/>
+    <path d="M32 22h19v7H32z"/>
+  </g>
 </svg>
