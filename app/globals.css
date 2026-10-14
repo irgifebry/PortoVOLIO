@@ -1088,7 +1088,7 @@ html.js-lines .masked-line__in {
    that was already fully painted.
    ------------------------------------------------------------------ */
 .nav-drawer {
-  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: translate 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nav-drawer__link {

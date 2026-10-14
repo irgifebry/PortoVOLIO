@@ -95,7 +95,7 @@ export default function Nav() {
       <div
         aria-hidden={!open}
         inert={!open}
-        className={`nav-drawer fixed inset-0 z-50 bg-bg md:hidden motion-reduce:transition-none ${open ? "is-open translate-x-0" : "pointer-events-none translate-x-full"}`}
+        className={`nav-drawer fixed inset-0 z-50 origin-top bg-bg md:hidden motion-reduce:transition-none ${open ? "is-open translate-y-0" : "pointer-events-none -translate-y-full"}`}
       >
         <div className="shell flex h-full flex-col justify-between pb-10 pt-24">
           <nav aria-label="Menu" className="flex flex-col">
