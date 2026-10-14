@@ -9,15 +9,15 @@ export default function AppleIcon() {
   return new ImageResponse(
     (
       <svg xmlns="http://www.w3.org/2000/svg" width={size.width} height={size.height} viewBox="0 0 64 64">
-        <rect width="64" height="64" rx="14" fill="#141204" />
-        <rect x="14" y="11" width="9" height="8" fill="#e8985e" />
-        <g fill="#f6efdf">
-          <path d="M14 23h9v30h-9z" />
-          <path d="M35 11h9v42h-9z" />
-          <path d="M32 22h19v7H32z" />
+        <rect width="64" height="64" fill="#0b0b0b" />
+        <g fill="#e1ac10">
+          <path d="M10 12h14v7H10zM14 19h6v26h-6zM10 45h14v7H10z" />
+        </g>
+        <g fill="#eaeaea">
+          <path d="M31 12h8v40h-8zM31 12h22v8H31zM31 29h17v7H31z" />
         </g>
       </svg>
     ),
-    { ...size }
+    { ...size },
   );
 }

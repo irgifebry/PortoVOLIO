@@ -1,25 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { Sun, Moon } from "lucide-react";
 
-export default function ThemeToggle({ className = "" }: { className?: string }) {
+/**
+ * Mutates the <html> classes and localStorage directly — the blocking
+ * inline script in app/layout.tsx is the source of truth, so there is
+ * deliberately no theme context competing with it.
+ */
+export default function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
-    const root = document.documentElement;
-    setTheme(root.classList.contains("light") ? "light" : "dark");
+    setTheme(document.documentElement.classList.contains("light") ? "light" : "dark");
   }, []);
 
-  const toggle = () => {
+  const toggle = (event: MouseEvent<HTMLButtonElement>) => {
     const root = document.documentElement;
     const next = root.classList.contains("light") ? "dark" : "light";
-    root.classList.toggle("light", next === "light");
-    root.classList.toggle("dark", next === "dark");
-    try {
-      localStorage.setItem("theme", next);
-    } catch {
-      /* ignore */
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const applyTheme = () => {
+      root.classList.toggle("light", next === "light");
+      root.classList.toggle("dark", next === "dark");
+      try {
+        localStorage.setItem("theme", next);
+      } catch {
+        /* private mode — the toggle still works for this session */
+      }
+    };
+
+    if (document.startViewTransition && !reduceMotion) {
+      root.style.setProperty("--theme-x", `${event.clientX}px`);
+      root.style.setProperty("--theme-y", `${event.clientY}px`);
+      document.startViewTransition(applyTheme);
+    } else {
+      applyTheme();
     }
     setTheme(next);
   };
@@ -29,24 +44,13 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
       type="button"
       onClick={toggle}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-      className={`btn btn-ghost !px-3.5 !py-2.5 ${className}`}
+      className="icon-btn"
     >
-      <span className="relative block h-4 w-4">
-        <Sun
-          size={16}
-          aria-hidden="true"
-          className={`absolute inset-0 transition-all duration-300 ${
-            theme === "dark" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"
-          }`}
-        />
-        <Moon
-          size={16}
-          aria-hidden="true"
-          className={`absolute inset-0 transition-all duration-300 ${
-            theme === "dark" ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"
-          }`}
-        />
-      </span>
+      {theme === "dark" ? (
+        <Sun size={17} aria-hidden="true" />
+      ) : (
+        <Moon size={17} aria-hidden="true" />
+      )}
     </button>
   );
 }

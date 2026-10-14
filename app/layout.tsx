@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import { Anton, Work_Sans } from "next/font/google";
 import "./globals.css";
 
 const BASE_URL = "https://irgifebry.vercel.app";
@@ -8,22 +8,16 @@ const TITLE = "Irgi Febryansyah — UI/UX Designer & Full-Stack Engineer";
 const DESCRIPTION =
   "UI/UX designer dan full-stack engineer spesialis React, React Native, dan Android. Tersedia untuk proyek freelance dan kolaborasi.";
 
-const display = Space_Grotesk({
+/* Anton is the poster face: one heavy cut, compressed, set in caps. */
+const display = Anton({
   subsets: ["latin"],
-  weight: ["500", "700"],
-  variable: "--font-display",
+  weight: "400",
+  variable: "--f-display",
 });
 
-const body = Plus_Jakarta_Sans({
+const body = Work_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-body",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-mono",
+  variable: "--f-sans",
 });
 
 export const metadata: Metadata = {
@@ -51,7 +45,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`dark ${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`dark ${display.variable} ${body.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

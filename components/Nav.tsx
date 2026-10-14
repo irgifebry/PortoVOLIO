@@ -1,25 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
-  { href: "#top", label: "Home", num: "01" },
-  { href: "#about", label: "About", num: "02" },
-  { href: "#services", label: "Services", num: "03" },
-  { href: "#experience", label: "Experience", num: "04" },
-  { href: "#work", label: "Work", num: "05" },
-  { href: "#contact", label: "Contact", num: "06" },
-];
-
-const sectionIds = links.map((l) => l.href.slice(1));
+  { href: "#work", label: "Work" },
+  { href: "#services", label: "Services" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
+]
 
 export default function Nav() {
-  const [active, setActive] = useState("top");
-  const [open, setOpen] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -30,23 +24,11 @@ export default function Nav() {
       },
       { rootMargin: "-50% 0px -50% 0px", threshold: 0 },
     );
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
+    links.forEach((l) => {
+      const el = document.getElementById(l.href.slice(1));
       if (el) io.observe(el);
     });
     return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const h = document.documentElement;
-      const max = h.scrollHeight - h.clientHeight;
-      setProgress(max > 0 ? (h.scrollTop / max) * 100 : 0);
-      setScrolled(h.scrollTop > 40);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -56,50 +38,15 @@ export default function Nav() {
     };
   }, [open]);
 
-  const go = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    // SmoothScroll owns anchor scrolling (Lenis); only close the drawer here.
-    if (!document.getElementById(id)) return;
-    setOpen(false);
-  };
-
   return (
     <>
-      <div className="scroll-progress" style={{ width: `${progress}%` }} aria-hidden="true" />
-
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          scrolled ? "py-2.5" : "py-4 sm:py-6"
-        }`}
-      >
-        <div
-          aria-hidden="true"
-          className={`nav-scrim ${scrolled ? "is-scrolled" : ""}`}
-        />
-        <div
-          aria-hidden="true"
-          className={`nav-shade ${scrolled ? "is-scrolled" : ""}`}
-        />
-        <div
-          aria-hidden="true"
-          className={`nav-blur ${scrolled ? "is-scrolled" : ""}`}
-        />
-        <div
-          aria-hidden="true"
-          className={`nav-line ${scrolled ? "is-scrolled" : ""}`}
-        />
-
-        <div className="mx-auto flex w-full max-w-[1400px] items-center justify-end gap-4 px-4 sm:px-6 lg:justify-center lg:px-10">
-          <nav
-            aria-label="Main navigation"
-            className={`nav-shell hidden items-center gap-0.5 p-1.5 pl-2.5 transition-all duration-500 lg:flex ${
-              scrolled ? "opacity-100" : "opacity-90"
-            }`}
-          >
+      <header className="nav-bar">
+        <div className="shell flex items-center justify-between py-4">
+          <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                onClick={(e) => go(e, l.href.slice(1))}
                 data-active={active === l.href.slice(1)}
                 aria-current={active === l.href.slice(1) ? "true" : undefined}
                 className="nav-link"
@@ -109,71 +56,49 @@ export default function Nav() {
             ))}
           </nav>
 
-          <div className="flex shrink-0 items-center gap-2">
-            <ThemeToggle />
-            <a href="mailto:irgifebry2006@gmail.com" className="btn btn-primary hidden !py-2.5 !px-5 !text-sm sm:inline-flex">
-              Email
-              <ArrowUpRight size={15} aria-hidden="true" />
+          <div className="ml-auto flex items-center gap-3">
+            <a href="#contact" className="btn btn-accent hidden !py-2.5 !px-5 nav-type md:inline-flex">
+              Start a project
             </a>
+            <ThemeToggle />
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="btn btn-ghost !px-3 !py-2.5 lg:hidden"
+              className="icon-btn md:hidden"
             >
-              {open ? <X size={16} aria-hidden="true" /> : <Menu size={16} aria-hidden="true" />}
+              {open ? <X size={17} aria-hidden="true" /> : <Menu size={17} aria-hidden="true" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile drawer */}
+      {/* Drawer. Rendered only while open: a closed overlay sitting in the
+          layout is still measured as large text over the page. The drawer is
+          the only other thing that touches body.overflow, and never at the
+          same time as anything else. */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
         aria-hidden={!open}
+        inert={!open}
+        className={`fixed inset-0 z-50 bg-bg transition-transform duration-300 ease-out motion-reduce:transition-none md:hidden ${open ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
       >
-        <div
-          className={`absolute inset-0 bg-canvas/95 backdrop-blur-2xl transition-opacity duration-400 ${
-            open ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => setOpen(false)}
-        />
-        <nav
-          aria-label="Mobile navigation"
-          className={`absolute inset-x-4 top-24 flex max-h-[calc(100dvh-7rem)] flex-col gap-2 overflow-y-auto overscroll-contain transition-all duration-500 ${
-            open ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
-          }`}
-        >
-          {links.map((l, i) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={(e) => go(e, l.href.slice(1))}
-              style={{ transitionDelay: `${open ? 120 + i * 50 : 0}ms` }}
-              className={`flex shrink-0 items-center justify-between rounded-3xl border px-5 py-4 transition-all duration-500 sm:px-6 sm:py-5 ${
-                open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
-              } ${
-                active === l.href.slice(1)
-                  ? "border-signal bg-signal text-on-accent"
-                  : "border-hair bg-panel text-ink"
-              }`}
-            >
-              <span className="font-display text-xl font-bold tracking-tight sm:text-2xl">
+        <div className="shell flex h-full flex-col justify-between pb-10 pt-24">
+          <nav aria-label="Menu" className="flex flex-col">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="py-4 font-display text-[13vw] uppercase leading-[0.9] tracking-tight"
+              >
                 {l.label}
-              </span>
-              <span className="font-mono text-[11px] opacity-60">{l.num}</span>
-            </a>
-          ))}
-          <a
-            href="mailto:irgifebry2006@gmail.com"
-            className="btn btn-pop mt-2 shrink-0 !py-4 text-sm"
-            onClick={() => setOpen(false)}
-          >
-            irgifebry2006@gmail.com
-          </a>
-        </nav>
+              </a>
+            ))}
+          </nav>
+          <p className="text-muted">Available for freelance work.</p>
+        </div>
       </div>
     </>
-  );
+  )
 }

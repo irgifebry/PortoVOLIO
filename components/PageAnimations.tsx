@@ -7,28 +7,34 @@ import { getLenis } from "@/components/SmoothScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * The motion layer. Three jobs, nothing else:
+ *
+ *   1. bridge Lenis into ScrollTrigger, or every trigger below the fold
+ *      reads a scroll position that never moves;
+ *   2. give each [data-reveal-item] exactly one entrance tween;
+ *   3. never leave content invisible if a trigger is missed.
+ *
+ * The pinned poster is NOT animated here — it is `position: sticky` in CSS
+ * and driven by ordinary scrolling.
+ *
+ * Invariants that are easy to break and expensive to debug:
+ *   - never nest [data-reveal] scopes (a second tween re-applies opacity:0);
+ *   - never add a second rAF loop or call ScrollTrigger.refresh() after mount
+ *     (SmoothScroll already owns the frame, and refresh replays every reveal);
+ *   - never gate this on a device check rather than the reduced-motion query.
+ */
 export default function PageAnimations() {
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
 
     const ctx = gsap.context(() => {
-      /* ---------- bridge Lenis (smooth scroll) into ScrollTrigger ----------
-         Without this, ScrollTrigger reads native scroll position, which Lenis
-         never updates -> triggers below the fold never fire and content stays
-         stuck at opacity 0. */
       const lenis = getLenis();
-      if (lenis) {
-        // SmoothScroll already drives lenis.raf in its own rAF loop — do NOT
-        // add a second one here or the two fight over scroll position.
-        lenis.on("scroll", ScrollTrigger.update);
-      }
+      if (lenis) lenis.on("scroll", ScrollTrigger.update);
 
-      /* ---------- section reveals ----------
-         Each element gets exactly ONE tween. Nested [data-reveal] scopes would
-         otherwise tween the same nodes twice and the later tween re-applies
-         opacity:0, leaving content permanently invisible. */
       const animated = new WeakSet<Element>();
+
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((section) => {
         const items = Array.from(
           section.querySelectorAll<HTMLElement>("[data-reveal-item]"),
@@ -37,91 +43,27 @@ export default function PageAnimations() {
           animated.add(el);
           return true;
         });
-        if (items.length) {
-          gsap.from(items, {
-            y: 40,
-            opacity: 0,
-            duration: 0.85,
-            stagger: 0.07,
-            ease: "power3.out",
-            scrollTrigger: { trigger: section, start: "top 82%", once: true },
-          });
-        }
-      });
+        if (!items.length) return;
 
-      /* ---------- hero headline mask reveal (fires on load, not scroll) ---------- */
-      const heroLines = gsap.utils.toArray<HTMLElement>("[data-line-hero]");
-      if (heroLines.length) {
-        gsap.from(heroLines, {
-          yPercent: 110,
-          duration: 1.1,
-          ease: "expo.out",
-          stagger: 0.1,
-          delay: 0.15,
-        });
-      }
-
-      /* ---------- counters ----------
-         Hero counters animate on load (they're above the fold). Any other
-         .count-up still waits for its ScrollTrigger. */
-      gsap.utils.toArray<HTMLElement>(".count-up").forEach((el) => {
-        const target = Number(el.dataset.value ?? "0");
-        const obj = { v: 0 };
-        gsap.to(obj, {
-          v: target,
-          duration: 1.6,
-          ease: "power2.out",
-          delay: 0.6,
-          onUpdate: () => {
-            el.textContent = String(Math.round(obj.v));
-          },
-        });
-      });
-
-      /* ---------- parallax float ---------- */
-      gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
-        const depth = Number(el.dataset.parallax ?? "60");
-        gsap.to(el, {
-          yPercent: depth,
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
-        });
-      });
-
-      /* ---------- rotating hero sticker ---------- */
-      const sticker = document.querySelector("[data-sticker]");
-      if (sticker) {
-        gsap.to(sticker, {
-          rotate: 360,
-          ease: "none",
-          scrollTrigger: { trigger: document.body, start: "top top", end: "bottom top", scrub: 1.2 },
-        });
-      }
-
-      /* ---------- progress bar on section headers ---------- */
-      gsap.utils.toArray<HTMLElement>("[data-rule]").forEach((rule) => {
-        gsap.from(rule, {
-          scaleX: 0,
-          transformOrigin: "left center",
-          duration: 1.2,
-          ease: "expo.out",
-          scrollTrigger: { trigger: rule, start: "top 92%", once: true },
+        gsap.from(items, {
+          y: 28,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.075,
+          ease: "power3.out",
+          scrollTrigger: { trigger: section, start: "top 82%", once: true },
         });
       });
     });
 
-    ScrollTrigger.refresh();
-
-    /* ---------- safety net ----------
-       Never leave content permanently invisible. If a trigger missed (font/layout
-       shift, restored scroll position, odd breakpoint), force anything still
-       hidden back to visible. NOTE: no ScrollTrigger.refresh() here — refresh
-       restarts every `from` tween and replays the reveal. */
+    /* Safety net. Font swap, a restored scroll position or an odd
+       breakpoint can all mean a trigger never fires. Nothing may stay
+       invisible — so anything still hidden after four seconds is put back.
+       No refresh() here: that would restart every `from` tween. */
     const failsafe = window.setTimeout(() => {
-      gsap.utils.toArray<HTMLElement>("[data-reveal-item], [data-line-hero]").forEach((el) => {
-        const cs = getComputedStyle(el);
-        if (parseFloat(cs.opacity) < 0.9) {
-          gsap.set(el, { opacity: 1, y: 0, yPercent: 0, clearProps: "transform" });
+      gsap.utils.toArray<HTMLElement>("[data-reveal-item]").forEach((el) => {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.9) {
+          gsap.set(el, { opacity: 1, y: 0, clearProps: "transform" });
         }
       });
     }, 4000);

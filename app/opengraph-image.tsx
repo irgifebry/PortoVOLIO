@@ -5,115 +5,92 @@ export const alt = "Irgi Febryansyah — UI/UX Designer & Full-Stack Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+const BG = "#0b0b0b";
+const INK = "#f2ede0";
+const MUTED = "#8d8577";
+const ACCENT = "#e1ac10";
+
+/**
+ * Flat, no gradients and no rules — the same poster the site opens on.
+ * next/og renders with a system sans, so the weight is pushed rather
+ * than set in Anton.
+ */
 export default function OgImage() {
   return new ImageResponse(
     (
       <div
         style={{
-          background: "#141204",
+          background: BG,
           width: "100%",
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "space-between",
           padding: "72px 80px",
-          position: "relative",
-          overflow: "hidden",
         }}
       >
-        {/* accent blobs */}
-        <div
-          style={{
-            position: "absolute",
-            top: -180,
-            right: -120,
-            width: 520,
-            height: 520,
-            borderRadius: 9999,
-            background: "rgba(232,152,94,0.18)",
-            filter: "blur(90px)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -220,
-            left: -100,
-            width: 520,
-            height: 520,
-            borderRadius: 9999,
-            background: "rgba(169,113,75,0.26)",
-            filter: "blur(90px)",
-          }}
-        />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 24,
+              fontWeight: 700,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+              color: ACCENT,
+            }}
+          >
+            UI/UX design &amp; engineering
+          </div>
 
-        {/* top rule */}
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 44 }}>
-          <div style={{ width: 56, height: 6, borderRadius: 9999, background: "#e8985e" }} />
-          <div style={{ fontSize: 20, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8985e" }}>
-            UI/UX DESIGNER &amp; FULL-STACK ENGINEER
+          <div
+            style={{
+              marginTop: 28,
+              fontSize: 150,
+              fontWeight: 800,
+              color: INK,
+              lineHeight: 0.88,
+              letterSpacing: "-0.04em",
+              display: "flex",
+            }}
+          >
+            IRGI
+          </div>
+          <div
+            style={{
+              fontSize: 150,
+              fontWeight: 800,
+              color: ACCENT,
+              lineHeight: 0.9,
+              letterSpacing: "-0.04em",
+              display: "flex",
+            }}
+          >
+            FEBRYANSYAH
+          </div>
+
+          <div
+            style={{
+              marginTop: 36,
+              fontSize: 30,
+              color: MUTED,
+              maxWidth: 760,
+              lineHeight: 1.4,
+              display: "flex",
+            }}
+          >
+            The same person draws the interface, writes the code, and keeps it
+            running.
           </div>
         </div>
 
-        {/* name */}
-        <div
-          style={{
-            fontSize: 112,
-            fontWeight: 700,
-            color: "#f6efdf",
-            lineHeight: 0.9,
-            letterSpacing: "-0.045em",
-            display: "flex",
-          }}
-        >
-          IRGI
-        </div>
-        <div
-          style={{
-            fontSize: 112,
-            fontWeight: 700,
-            color: "transparent",
-            WebkitTextStroke: "3px #f6efdf",
-            lineHeight: 0.92,
-            letterSpacing: "-0.045em",
-            display: "flex",
-          }}
-        >
-          FEBRYANSYAH
-        </div>
-
-        {/* bio */}
-        <div
-          style={{
-            marginTop: 40,
-            fontSize: 28,
-            color: "rgba(246,239,223,0.55)",
-            maxWidth: 820,
-            lineHeight: 1.45,
-            display: "flex",
-          }}
-        >
-          React, React Native, Android, and Linux infrastructure.
-        </div>
-
-        {/* footer row */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 60,
-            left: 80,
-            right: 80,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderTop: "2px solid rgba(246,239,223,0.14)",
-            paddingTop: 24,
-          }}
-        >
-          <div style={{ fontSize: 22, letterSpacing: "0.18em", color: "rgba(246,239,223,0.5)" }}>
-            REACT * REACT NATIVE * ANDROID * LINUX
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ fontSize: 24, color: MUTED, display: "flex" }}>
+            React · React Native · Android · Linux
           </div>
-          <div style={{ fontSize: 22, color: "#e8985e" }}>irgifebry.vercel.app</div>
+          <div style={{ fontSize: 24, fontWeight: 700, color: ACCENT, display: "flex" }}>
+            irgifebry.vercel.app
+          </div>
         </div>
       </div>
     ),
