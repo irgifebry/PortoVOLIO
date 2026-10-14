@@ -123,13 +123,19 @@ export const indexProjects: IndexProject[] = [
 /* ------------------------------------------------------------------
    SERVICES — each one carries a project that proves it, rather than
    a row of interchangeable icons.
+
+   The bullet lists are split into the two halves on purpose: `design`
+   is what gets decided in Figma, `build` is what gets written to make
+   it real. Both are real work, and the page's whole claim is that the
+   same pair of hands does both. The lens toggle switches between them,
+   so it is showing two true things rather than reshuffling one.
    ------------------------------------------------------------------ */
 
 export type Service = {
   title: string
   blurb: string
-  /** Plain lines, not chips. */
-  lines: string[]
+  design: string[]
+  build: string[]
   proof: { label: string; url?: string }
 }
 
@@ -138,11 +144,16 @@ export const services: Service[] = [
     title: "Product & UI Design",
     blurb:
       "Wireframes, interactive prototypes and design systems in Figma, then the implementation. The person who drew it also writes it.",
-    lines: [
+    design: [
       "Wireframes and user flows",
       "Interactive prototypes",
       "Design systems in Figma",
+      "Accessibility and contrast passes",
+    ],
+    build: [
       "Interface written in HTML and CSS",
+      "The design file and the CSS stay in step",
+      "Component states built, not implied",
     ],
     proof: { label: "U-Cademy LMS", url: undefined },
   },
@@ -150,7 +161,11 @@ export const services: Service[] = [
     title: "Web Engineering",
     blurb:
       "Front-ends in React and TypeScript, plus the backend, the schema and the payment integration sitting behind them.",
-    lines: [
+    design: [
+      "Page layouts and component specs",
+      "Empty, loading, error and full states",
+    ],
+    build: [
       "React and TypeScript front-ends",
       "Laravel and PHP back-ends",
       "Database schema and migrations",
@@ -162,7 +177,11 @@ export const services: Service[] = [
     title: "Mobile Apps",
     blurb:
       "Android and cross-platform apps built end to end. Native Kotlin and Java, or React Native when that suits the job better.",
-    lines: [
+    design: [
+      "Mobile flows and navigation graphs",
+      "Touch targets sized for a thumb",
+    ],
+    build: [
       "Native Android in Kotlin and Java",
       "React Native where it fits",
       "Background services and sensors",
@@ -174,7 +193,11 @@ export const services: Service[] = [
     title: "Infrastructure & Ops",
     blurb:
       "Linux servers, networking and hardware. The unglamorous half that decides whether any of the above stays up.",
-    lines: [
+    design: [
+      "Monitoring views and log readers",
+      "Alert thresholds and what they should say",
+    ],
+    build: [
       "Linux server administration",
       "Network and routing",
       "Hardware repair and maintenance",
@@ -190,6 +213,12 @@ export const services: Service[] = [
 
 export const statement =
   "I design the interface and then I build it, deploy it and keep it running. One person, so nothing is lost between the mockup and the thing that ships."
+
+/* The hero is a headline, so it obeys headline rules: two lines or fewer at
+   every width. It is the one place the page says what it is, so it is cut
+   hard rather than written long. The lines are authored separately because
+   the masked reveal needs to know where they break. */
+export const headline = ["Design it.", "Then ship it."]
 
 export const aboutParagraph =
   "Most people hand off a design and hope the person building it reads it the same way. Here there is no handoff. The same person draws the screens, writes the React, writes the Android, and sets up the server it runs on. So an interface decision is always one the code can actually support."
@@ -225,6 +254,24 @@ export const stacks = {
     "Python",
     "Scikit-Learn",
   ],
+}
+
+/* ------------------------------------------------------------------
+   THE NUMBERS — every one of these is countable from the content
+   above. Nothing here is an estimate or a claim about skill.
+   ------------------------------------------------------------------ */
+
+export const figures = {
+  shipped: {
+    value: panels.length + indexProjects.length,
+    label: "projects shipped",
+    note: "Four client and personal builds with footage, plus four open-source and client projects listed under Also built.",
+  },
+  areas: {
+    value: services.length,
+    label: "service areas",
+    note: "Design, web, mobile and infrastructure. All four are shipped by the same person.",
+  },
 }
 
 /* ------------------------------------------------------------------

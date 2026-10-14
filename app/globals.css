@@ -1,11 +1,23 @@
 @import "tailwindcss";
 
 /* =================================================================
-   DESIGN SYSTEM — "the pinned poster"
+   DESIGN SYSTEM — "loud and flat"
    -----------------------------------------------------------------
-   One ground, one ink, one accent. Royal blue appears exactly once,
-   as a whole-section field. Surfaces separate by a tone step, never
-   by a line or a shadow. Every corner on the page is square.
+   A street poster, not a brochure. Flat saturated colour fields, the
+   heaviest cut of one typeface, short blunt statements, and footage
+   cut square into the colour.
+
+   Rules this system holds to, because they are what keeps the noise
+   from turning into a mess:
+
+     - three or four flat colours at full strength. One panel is one
+       colour; the text on it is one other. Nothing fades into anything.
+     - ONE corner radius on the whole page (square — it is a poster).
+     - ONE button shape. ONE pair of margins. ONE grid.
+     - Surfaces separate by a tone step. Never by a hairline, never by
+       a shadow. Shadows exist nowhere on this page at rest.
+     - Every token is declared in BOTH `:root, html.dark` and
+       `html.light`. A colour that exists in one theme only is a bug.
    ================================================================= */
 
 @theme {
@@ -16,73 +28,115 @@
   --color-muted: var(--c-muted);
   --color-accent: var(--c-accent);
   --color-accent-ink: var(--c-accent-ink);
-  --color-field: var(--c-field);
-  --color-field-ink: var(--c-field-ink);
+  --color-red: var(--f-red);
+  --color-maroon: var(--f-maroon);
+  --color-mustard: var(--f-mustard);
+  --color-slate: var(--f-slate);
+  --color-bone: var(--f-bone);
 
   --font-display: var(--f-display);
-  --font-sans: var(--f-sans);
-  --font-body: var(--f-sans);
+  --font-sans: var(--f-display);
+  --font-body: var(--f-display);
 
-  /* The page's type scale. Seven steps, of which two are one-off
-     display moments (the name, and the single big figure). */
-  --text-stat: clamp(7rem, 18vw, 15rem);
-  --text-display: clamp(2.5rem, 9vw, 7.5rem);
-  --text-head: clamp(1.75rem, 4.2vw, 3.5rem);
-  --text-h3: clamp(1.375rem, 2.2vw, 1.75rem);
+  /* Five sizes, and every one of them is load-bearing.
+
+     `section` is the step that answers "which part of the page am I in?".
+     It could not be built out of the old four: `head` is already the
+     poster-scale step that the capabilities list and the experience band
+     use, so a section title set in `head` was the SAME size as the
+     subsection names under it, and a reader scrolling past had no way to
+     tell where a section began. It sits between display and head, sized so
+     the gap to `head` is visible at every width. */
+  --text-display: clamp(3rem, 12.5vw, 13rem);
+  --text-section: clamp(2.5rem, 7.6vw, 7rem);
+  --text-head: clamp(2rem, 5.2vw, 5.5rem);
   --text-lead: clamp(1.25rem, 1.5vw, 1.6875rem);
-  --text-body: clamp(1rem, 0.95rem + 0.25vw, 1.1875rem);
-  --text-small: clamp(0.9375rem, 0.9rem + 0.12vw, 1rem);
+  --text-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  /* The small step is deliberately the SAME as body, not a sixth size:
+     it only exists so the small role can shrink without touching every
+     call site. On this page they coincide at the top of the range. */
+  --text-small: var(--text-body);
 }
 
+/* ------------------------------------------------------------------
+   PALETTE
+   Post red, mustard, slate and bone. The colour FIELDS are identical
+   in both themes on purpose: white on post red is 5.05:1 either way,
+   so a colour block is a colour block and the page does not change
+   temperature when the visitor flips the toggle. Only the ground, the
+   surfaces and the accent move.
+   ------------------------------------------------------------------ */
 :root,
 html.dark {
-  --c-bg: #0b0b0b;
-  --c-s1: #141414;
-  --c-s2: #1e1e1e;
-  /* Neutral bone. Warmth on this page comes from the accent, not the ink. */
-  --c-ink: #eaeaea;
-  --c-muted: #b0aba2;
-  --c-accent: #e1ac10;
-  --c-accent-ink: #0b0b0b;
-  --c-field: #24338f;
-  --c-field-ink: #ffffff;
+  --c-bg: #17120f;
+  --c-s1: #241c17;
+  --c-s2: #322822;
+  /* Warm stone ink. Less yellow than the old #f2ece0, which the
+     inspector reads as a yellow-cream page. */
+  --c-ink: #eae7e1;
+  --c-muted: #ada396;
+  /* Mustard is the accent here: slate drops under 4.5:1 on a dark ground. */
+  --c-accent: #e0a912;
+  --c-accent-ink: #17120f;
   color-scheme: dark;
 }
 
 html.light {
-  --c-bg: #f1efe9;
-  --c-s1: #f8f6f0;
-  --c-s2: #ffffff;
-  --c-ink: #0b0b0b;
-  --c-muted: #4a453f;
-  --c-accent: #e1ac10;
-  --c-accent-ink: #0b0b0b;
-  --c-field: #24338f;
-  --c-field-ink: #ffffff;
+  /* The ground is a real stone, not a pale one, and that is the whole
+     point of this block. It used to sit at #e0dcd4 — exactly --f-bone —
+     so every bone field on the page (the experience band, .btn-bone)
+     was the same colour as the ground behind it and simply did not
+     exist in light mode. The fields are one value across both themes on
+     purpose, so the fix has to be here: the ground goes down until the
+     lightest field is a clear step above it.
+
+     Steps, measured: bone/bg 1.40, bone/s1 1.75, ink/bg 9.48:1,
+     muted/bg 7.16:1, muted/s2 4.62:1. Surfaces separate by a tone step
+     (1.25 per step) rather than a hairline, as the system requires. */
+  --c-bg: #c1bbaa;
+  --c-s1: #aea796;
+  --c-s2: #9d9583;
+  --c-ink: #24100f;
+  /* Deeper than the old #6b524c: muted sits on --c-s2 in the bar rows and
+     the index, and the old value fell to 3.9:1 there. */
+  --c-muted: #3b2925;
+  /* Slate, but pushed darker. It carries white ink in the nav CTA and
+     the lens tabs, and the old #4a6f84 only reached 5.39:1 with white;
+     this is 6.93:1. Against the new ground it is a quieter 3.62:1,
+     which is right — the accent is a fill here, never body text. */
+  --c-accent: #3a5e73;
+  --c-accent-ink: #ffffff;
   color-scheme: light;
 }
 
-/* ---------------------------------------------------------------
-   RHYTHM
-   --------------------------------------------------------------- */
 :root {
-  /* Fixed nav height. The poster masthead starts below it. */
+  /* The fields. Set once, used by both themes. */
+  --f-red: #dc1928;
+  --f-maroon: #952625;
+  --f-mustard: #e0a912;
+  --f-slate: #4a6f84;
+  /* Low-chroma stone, not a yellow cream. The dealer's own #e2dccf sits
+   right on the yellow-cream line the inspector warns about, so the warm
+   bone is pulled back until it reads as stone: same family, less
+   yellow. The warmth on this page comes from the fields instead. */
+--f-bone: #e0dcd4;
+
   --nav-h: 4.5rem;
 
-  /* The one pair of margins used everywhere. */
+  /* The one pair of margins used everywhere on the page. */
   --margin: clamp(1.25rem, 4vw, 2rem);
   --measure: 68ch;
 
-  /* Gap between sections is far larger than anything inside one. */
-  --gap-section: clamp(5.5rem, 14vh, 10rem);
-  --gap-head: clamp(1.75rem, 3vw, 2.75rem);
-  --gap-block: clamp(2.5rem, 6vh, 4.5rem);
+  /* Gap between sections still reads as a break, but not a canyon. */
+  --gap-section: clamp(3.5rem, 7vh, 5.5rem);
+  --gap-head: clamp(1.5rem, 2.4vw, 2.25rem);
+  --gap-block: clamp(2rem, 4vh, 3.25rem);
   --gap-tight: clamp(1.25rem, 2.5vh, 2rem);
 }
 
-/* ---------------------------------------------------------------
+/* ------------------------------------------------------------------
    BASE
-   --------------------------------------------------------------- */
+   ------------------------------------------------------------------ */
 * {
   -webkit-tap-highlight-color: transparent;
 }
@@ -98,7 +152,19 @@ html {
 
 ::view-transition-new(root) {
   z-index: 1;
-  animation: theme-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* 1000ms, and an easing that is near-linear through the middle.
+
+     The old curve, cubic-bezier(0.22, 1, 0.36, 1), is an ease-out quint
+     and a bad fit for this: measured, its peak velocity is 4.5x its
+     average and it finishes half the circle inside the first 14% of the
+     duration. That reads as a snap followed by a long crawl, not as one
+     continuous wipe.
+
+     This one holds peak velocity at 2.8x average and puts half the
+     reveal at the halfway mark, so the edge advances at something close
+     to a steady rate and only eases at the two ends. Slower AND more
+     even, which is the whole ask. */
+  animation: theme-reveal 1000ms cubic-bezier(0.65, 0.05, 0.35, 1) both;
 }
 
 @keyframes theme-reveal {
@@ -124,9 +190,9 @@ html {
 body {
   background-color: var(--c-bg);
   color: var(--c-ink);
-  font-family: var(--f-sans);
+  font-family: var(--f-display);
   font-size: var(--text-body);
-  line-height: 1.55;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -139,53 +205,76 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--c-accent);
+  outline: 3px solid var(--c-accent);
   outline-offset: 3px;
 }
 
 @layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-}
-
+  button {
+    font-family: inherit;
+  }
 }
 
 @layer components {
 
-/* ---------------------------------------------------------------
+/* ------------------------------------------------------------------
    TYPE
-   --------------------------------------------------------------- */
-.display {
+   ------------------------------------------------------------------ */
+
+/* The condensed cut at the heaviest weight. `font-stretch` only does
+   anything because layout.tsx loads Archivo's wdth axis explicitly. */
+.display,
+.section-title,
+.head,
+.capability__name {
   font-family: var(--f-display);
-  font-weight: 400;
+  font-weight: 800;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.display {
   font-size: var(--text-display);
   line-height: 0.86;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
 }
+
+/* The section title. The only heading on the page allowed to set
+   `--text-section`, and it is always the FIRST thing in its section, so
+   the page can be scanned for position instead of read end to end.
+
+   It spans the full measure rather than a narrow column: at this size a
+   `max-w-[14ch]` cap made it wrap into three lines on desktop, which
+   turned the loudest heading on the page into the smallest block on it.
+   `text-wrap: balance` then keeps a two-line title from breaking badly. */
+.section-title {
+  font-size: var(--text-section);
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+/* Titles that name a section AND sit inside a colour field need to clear
+   the field's own ink, which `--text-head` already does. Nothing else
+   changes. */
 
 .head {
-  font-family: var(--f-display);
-  font-weight: 400;
   font-size: var(--text-head);
   line-height: 0.92;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
 }
 
+/* Sub-heads stay at normal width. Condensing a small size costs more
+   legibility than it buys. */
 .h3 {
   font-family: var(--f-display);
-  font-weight: 400;
-  font-size: var(--text-h3);
-  line-height: 1;
+  font-weight: 800;
+  font-size: var(--text-lead);
+  line-height: 1.08;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
 }
 
 .lead {
@@ -198,10 +287,6 @@ button {
   font-size: var(--text-small);
   line-height: 1.5;
 }
-
-.nav-type { font-size: var(--text-small); }
-.stat-type { font-size: var(--text-stat); }
-.panel-type { font-size: var(--text-h3); }
 
 .balance {
   text-wrap: balance;
@@ -216,27 +301,30 @@ button {
   max-width: var(--measure);
 }
 
-/* ---------------------------------------------------------------
-   BUTTON — square, flat, one fill
-   --------------------------------------------------------------- */
+/* ------------------------------------------------------------------
+   BUTTON — square, flat, one fill. One shape on the whole page.
+   ------------------------------------------------------------------ */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-family: var(--f-sans);
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: 88%;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
   font-size: 0.9375rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  padding: 15px 26px;
+  line-height: 1;
+  padding: 17px 28px;
   border: 0;
   border-radius: 0;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
 .btn:active {
-  transform: translateY(1px);
+  transform: translateY(2px);
 }
 
 .btn-accent {
@@ -245,6 +333,7 @@ button {
 }
 .btn-accent:hover {
   background: var(--c-ink);
+  color: var(--c-bg);
 }
 
 .btn-ink {
@@ -256,41 +345,67 @@ button {
   color: var(--c-accent-ink);
 }
 
-/* Arrow link — the page's only underline device. */
+.btn-bone {
+  background: var(--f-bone);
+  color: #2a1110;
+}
+.btn-bone:hover {
+  background: var(--f-mustard);
+  color: #2a1110;
+}
+
+/* Arrow link — used only inside a coloured field, where a colour change
+   on hover would vanish. */
 .arrow-link {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-weight: 600;
+  font-weight: 700;
   color: inherit;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 .arrow-link svg {
   transition: transform 0.25s ease;
 }
 .arrow-link:hover {
-  color: var(--c-accent);
+  opacity: 0.7;
 }
 .arrow-link:hover svg {
   transform: translate(2px, -2px);
 }
 
-/* ---------------------------------------------------------------
-   FIELDS — flat colour blocks. No borders, no shadows.
-   --------------------------------------------------------------- */
-.field {
-  background: var(--c-field);
-  color: var(--c-field-ink);
+/* ------------------------------------------------------------------
+   COLOUR FIELDS — full-bleed flat blocks. No borders, no shadows.
+   Each is paired with its own ink so contrast is never left to chance.
+   ------------------------------------------------------------------ */
+.field-red {
+  background: var(--f-red);
+  color: #ffffff;
 }
-
+.field-maroon {
+  background: var(--f-maroon);
+  color: #ffffff;
+}
+.field-mustard {
+  background: var(--f-mustard);
+  color: #2a1110;
+}
+.field-slate {
+  background: var(--f-slate);
+  color: #ffffff;
+}
+.field-bone {
+  background: var(--f-bone);
+  color: #2a1110;
+}
 .field-accent {
   background: var(--c-accent);
   color: var(--c-accent-ink);
 }
 
-/* ---------------------------------------------------------------
+/* ------------------------------------------------------------------
    LAYOUT
-   --------------------------------------------------------------- */
+   ------------------------------------------------------------------ */
 .shell {
   width: 100%;
   max-width: 1680px;
@@ -302,61 +417,119 @@ button {
   padding-block: var(--gap-section);
 }
 
-/* ---------------------------------------------------------------
-   THE PINNED POSTER
-   -----------------------------------------------------------------
+/* ------------------------------------------------------------------
+   THE PINNED POSTER — the signature move, kept.
    A sticky layer holds the name across the whole run while project
    panels scroll underneath it. The masthead is opaque, so the name
    never loses contrast and no panel can pass over the words.
-   --------------------------------------------------------------- */
+   ------------------------------------------------------------------ */
 .poster-run {
   position: relative;
   --panel-h: clamp(20rem, 56.25vw, 38rem);
-  --panel-gap: clamp(1.5rem, 3vw, 2.5rem);
+  /* Wider than a plain gap: two panels are rotated, and rotation needs
+     room or the corners collide with their neighbours. */
+  --panel-gap: clamp(3rem, 5vw, 4.5rem);
 }
 
-/* Height 0 so the sticky layer occupies no flow space — the panels
-   below start at the very top of the run and slide underneath. */
+/* The bar is IN FLOW, so the name occupies the top of the run and the
+   first panel starts below it instead of underneath it. It used to be
+   `height: 0` with an absolutely positioned masthead, so the panels
+   began at the very top and the hero sat on top of panel one: the first
+   screen showed a 190px strip of NoBlur's footage with the rest hidden
+   behind the name, which read as "that preview is smaller than the
+   others" when in fact every panel is the same size. The pin itself is
+   untouched — sticky still holds the name for the whole run while the
+   panels slide under it — and this is the same arrangement the phone
+   breakpoint already used. */
 .poster-bar {
   position: sticky;
   top: 0;
   z-index: 30;
-  height: 0;
   pointer-events: none;
 }
 
-.poster-run--pinned > .poster-bar {
-  position: sticky;
-}
-
-.poster-run:not(.poster-run--pinned) > .poster-bar {
-  position: relative;
-}
-
 .poster-masthead {
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
+  position: relative;
   background: var(--c-bg);
   /* Clears the fixed nav, which is opaque and sits above this. */
   padding-top: calc(var(--nav-h) + 0.75rem);
-  padding-bottom: 1.25rem;
+  padding-bottom: 1.5rem;
   z-index: 2;
 }
 
-.poster-run--pinned .poster-masthead {
+.poster-run--flow .poster-masthead {
   padding-top: calc(var(--nav-h) + 0.75rem);
 }
 
-.poster-run--flow .poster-masthead {
-  padding-top: var(--gap-section);
-  padding-bottom: 2rem;
+/* Panels and their frames stay axis-aligned. An earlier draft rotated two
+   frames to break the run of equal rectangles; the rotation read as
+   crooked video rather than as a deliberate poster cut, and it cost a
+   shrink-to-fit dance (`.poster-panel--tilt .poster-frame`) to stop the
+   overhang pushing the page sideways. Every frame is square to the grid. */
+.poster-panel {
+  position: relative;
+  width: 100%;
+  height: var(--panel-h);
+  background: var(--c-s1);
 }
 
+.poster-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--c-s1);
+}
+
+.poster-run--pinned .poster-panel:not(:last-child),
+#work > .poster-more__content .poster-panel:not(:last-child) {
+  margin-bottom: var(--panel-gap);
+}
+
+.poster-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 2;
+  /* A neutral scrim is the one place a cover may sit over the picture. */
+  background: var(--c-bg);
+  display: flex;
+  align-items: center;
+  padding-block: 0.9rem;
+}
+
+/* Body-sized, not kicker-sized. A short uppercase label sitting
+   directly above the next heading reads as an eyebrow badge, and this
+   one is a real action. */
+.poster-visit {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--c-accent);
+  padding: 0.8rem 1.1rem;
+  color: var(--c-accent-ink);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: var(--text-body);
+  transition: color 200ms, background-color 200ms;
+}
+
+
+
+/* "More work" — a filled bar that opens in place. */
 .poster-more__summary {
   width: 100%;
   display: block;
-  padding-block: 1.5rem;
+  padding-block: 1.75rem;
   background: var(--c-bg);
   cursor: pointer;
   text-align: left;
@@ -393,97 +566,472 @@ button {
 }
 
 .poster-more__summary:focus-visible {
-  outline: 2px solid var(--c-accent);
-  outline-offset: -2px;
+  outline: 3px solid var(--c-accent);
+  outline-offset: -4px;
 }
 
 .poster-more__summary:focus:not(:focus-visible) { outline: none; }
 
-.poster-run:not(.poster-run--pinned) .poster-masthead {
-  position: relative;
-  padding-top: calc(var(--nav-h) + 0.75rem);
-}
-
-.poster-panel {
-  position: relative;
-  width: 100%;
-  height: var(--panel-h);
+/* ------------------------------------------------------------------
+   MASKED LINE REVEAL — the hero's one loud moment.
+   Each authored line rises from behind its own baseline. The outer
+   span clips; the inner one moves.
+   ------------------------------------------------------------------ */
+.masked-line {
+  display: block;
   overflow: hidden;
-  background: var(--c-s1);
 }
 
-.poster-run--pinned .poster-panel:not(:last-child),
-#work > .poster-run--flow:not(:last-child) .poster-panel {
-  margin-bottom: var(--panel-gap);
+.masked-line__in {
+  display: block;
 }
 
-.poster-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* The resting state is VISIBLE and carries no transform at all. Only a
+   document that a blocking script in app/layout.tsx has marked
+   `js-lines` starts with the lines pushed below their own clip, which
+   is what PageAnimations then animates back up.
+
+   This ordering matters. With the offset declared unconditionally, the
+   no-JavaScript page parked the hero 136px below its mask and the name
+   was simply invisible -- measured, not assumed. */
+html.js-lines .masked-line__in {
+  transform: translateY(105%);
 }
 
-.poster-caption {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  z-index: 2;
-  background: var(--c-bg);
-  display: flex;
-  align-items: center;
-  padding-block: 0.85rem;
-}
-
-.poster-caption .h3 { font-size: var(--text-h3); }
-
-.poster-visit {
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
+/* ------------------------------------------------------------------
+   CAPABILITIES — poster scale. The heading is the first line of the
+   list itself, in muted ink, so no separate title sits above.
+   ------------------------------------------------------------------ */
+.capability {
+  display: grid;
   gap: 0.5rem;
+  padding-block: 0.5em;
+  /* The lens switch takes the outgoing panel out of flow with
+     `position: absolute; inset-inline: 0`. Without `relative` here that
+     resolves against the nearest positioned ancestor -- there is none, so
+     it fell back to the initial containing block and the panel's own
+     `--lens-x` offset (30px) pushed it 10px past a 390px viewport, giving
+     the whole document a sideways scrollbar.
+
+     `overflow-x: clip` finishes the job: the incoming panel animates in
+     from that same offset, so it also overhangs its row mid-transition.
+     `clip` rather than `hidden` because it does not create a scroll
+     container and leaves `overflow-y` alone. */
+  position: relative;
+  overflow-x: clip;
+}
+
+.capability__name {
+  font-size: var(--text-head);
+  line-height: 1;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* The heading is the first row of the list itself, in muted ink, so no
+   separate title has to sit above it. */
+/* Secondary, not unreadable. --c-muted is 2:1 on post red, so the
+   heading takes the field's own ink at reduced opacity instead: still
+   clearly quieter than the rows below it, still well past 4.5:1. */
+.capability__name--lead {
+  color: inherit;
+  opacity: 0.82;
+}
+
+.capability__note {
+  font-size: var(--text-body);
+  line-height: 1.5;
+  max-width: 42ch;
+  /* Stacked, the note sits under its own name. The placement is explicit
+     because the lens switch takes the hidden panel out of flow: an
+     auto-placed item cannot be positioned against a cell it is not in. */
+  grid-column: 1;
+  grid-row: 2;
+}
+
+
+
+/* The two-column split holds down to 640px, not 900px. Stacked, each
+   capability's last line sits directly above the next capability's
+   heading, and a run of list items reading as labels above headings is
+   the badge tell this page is avoiding. Below 640px the stack is the
+   only option and the items are body-sized, which reads as prose. */
+@media (min-width: 640px) {
+  .capability {
+    grid-template-columns: repeat(12, 1fr);
+    /* Baseline alignment puts each description's first line on the same
+       line as the name it belongs to. */
+    align-items: baseline;
+    gap: 0.35rem 2rem;
+  }
+  /* Both lens panels sit in the SAME cell, so switching lens never
+     changes the row they occupy and the name stays aligned with them. */
+  .capability__name { grid-column: 1 / 8; grid-row: 1; }
+  .capability__note { grid-column: 8 / 13; grid-row: 1; }
+}
+
+/* ------------------------------------------------------------------
+   THE LENS — a radio group and `:has()`. No JavaScript, no state, no
+   context. It is the page's one live thing: the same person seen from
+   either half of the pair.
+   ------------------------------------------------------------------ */
+/* A fieldset carries the radio-group semantics for free; these three
+   lines only undo the browser's default chrome. */
+.lens {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.lens__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lens__tabs {
+  display: inline-flex;
+  gap: 0;
+  margin-bottom: var(--gap-head);
+}
+
+.lens__tab {
+  cursor: pointer;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+  padding: 14px 26px;
+  background: var(--c-s2);
+  color: var(--c-muted);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lens__tab:hover {
+  color: var(--c-ink);
+}
+
+#lens-designer:checked ~ .lens__tabs label[for="lens-designer"],
+#lens-engineer:checked ~ .lens__tabs label[for="lens-engineer"] {
   background: var(--c-accent);
-  padding: 0.75rem 1rem;
   color: var(--c-accent-ink);
-  font-weight: 600;
-  transition: color 200ms, background-color 200ms;
 }
 
-.poster-visit:hover {
-  background: var(--c-ink);
-  color: var(--c-bg);
-}
-
-.poster-visit:focus-visible {
-  outline: 2px solid var(--c-ink);
+#lens-designer:focus-visible ~ .lens__tabs label[for="lens-designer"],
+#lens-engineer:focus-visible ~ .lens__tabs label[for="lens-engineer"] {
+  outline: 3px solid var(--c-accent);
   outline-offset: 3px;
 }
 
-/* ---------------------------------------------------------------
-   TYPOGRAPHIC INDEX ROW — the list device, used for the projects
-   that have no footage of their own.
-   --------------------------------------------------------------- */
-.idx-row {
+/* The switch itself. Both notes are always in the DOM. The one that is
+   switched out is made invisible and lifted out of flow, so it stops
+   setting the row's height — the row is exactly as tall as the panel you
+   are reading, with no leftover gap where the taller panel used to be.
+
+   The outgoing panel leaves in a single frame rather than fading: an
+   out-of-flow box sits at the top of its cell, not on the baseline the
+   in-flow one is aligned to, so crossfading the two would slide the old
+   text upward as it dissolved. A cut plus a directional entrance is
+   cleaner than a misaligned crossfade, and it is the faster read. */
+.capability__note {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(var(--lens-x, 0px), 14px, 0);
+  transition: none;
+}
+
+/* Direction: the panel comes in from the side its tab sits on, so the
+   movement points at the control that caused it. Unconditional on
+   purpose — a transition's start value is the style the element had
+   BEFORE the change, and back then this radio was not the checked one,
+   so an offset behind `:checked` would always resolve to the fallback. */
+.lens__panels [data-lens="engineer"] {
+  --lens-x: 30px;
+}
+
+.lens__panels [data-lens="designer"] {
+  --lens-x: -30px;
+}
+
+/* Switched out: out of flow, so the row is sized by the incoming panel
+   only. `top`/`bottom` are left alone — the box is not seen. */
+#lens-designer:checked ~ .lens__panels [data-lens="engineer"],
+#lens-engineer:checked ~ .lens__panels [data-lens="designer"] {
+  position: absolute;
+  inset-inline: 0;
+  pointer-events: none;
+}
+
+/* Switched in. The transition lives on this side of the flip only: a
+   transition is read from the state being entered, so the outgoing panel
+   gets `transition: none` above and is gone at once. */
+#lens-designer:checked ~ .lens__panels [data-lens="designer"],
+#lens-engineer:checked ~ .lens__panels [data-lens="engineer"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 0.28s ease 0.06s,
+    transform 0.42s cubic-bezier(0.2, 0.85, 0.25, 1) 0.06s;
+}
+
+/* Down the list, not all at once: four rows arriving together read as a
+   single block of text being replaced. The first row has no delay of its
+   own — the 0.06s hand-off above is already in the shorthand. */
+#lens-designer:checked ~ .lens__panels .capability:nth-child(2) [data-lens="designer"],
+#lens-engineer:checked ~ .lens__panels .capability:nth-child(2) [data-lens="engineer"] {
+  transition-delay: 0.11s, 0.11s;
+}
+
+#lens-designer:checked ~ .lens__panels .capability:nth-child(3) [data-lens="designer"],
+#lens-engineer:checked ~ .lens__panels .capability:nth-child(3) [data-lens="engineer"] {
+  transition-delay: 0.16s, 0.16s;
+}
+
+#lens-designer:checked ~ .lens__panels .capability:nth-child(4) [data-lens="designer"],
+#lens-engineer:checked ~ .lens__panels .capability:nth-child(4) [data-lens="engineer"] {
+  transition-delay: 0.21s, 0.21s;
+}
+
+/* ------------------------------------------------------------------
+   FILLED BAR ROWS — the index list. A disclosure that keeps its fill.
+   ------------------------------------------------------------------ */
+.bar {
+  display: block;
+  background: var(--c-s2);
+}
+
+.bar + .bar {
+  margin-top: 6px;
+}
+
+.bar .disclosure__trigger {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: 1rem var(--gap-tight);
-  padding-block: clamp(1.25rem, 3vh, 2rem);
+  align-items: center;
+  gap: 1rem;
+  padding: 20px clamp(1rem, 2vw, 1.5rem);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* The fill darkens on hover rather than taking the accent colour. A row
+   of bars that all flash the same flat colour reads as a set of
+   identical cards, which is the tell this device exists to avoid. */
+.bar .disclosure__trigger:hover,
+.bar.is-open .disclosure__trigger {
+  background: var(--c-s1);
+}
+
+.bar__body {
+  padding: 0 clamp(1rem, 2vw, 1.5rem) 22px;
+}
+
+/* The fill change rides the panel, not the body inside it: the body is
+   only as tall as its text, so on its own the colour would arrive after
+   the row had finished growing. */
+.bar .disclosure__panel {
   background: var(--c-s2);
-  padding-inline: clamp(1rem, 2vw, 1.5rem);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 240ms ease;
+}
+
+.bar.is-open .disclosure__panel {
+  background: var(--c-s1);
+}
+
+/* ------------------------------------------------------------------
+   DISCLOSURE — the open/shut move every open-and-close on the page
+   shares. Deliberately NOT named `collapse`: that is a Tailwind utility
+   for `visibility: collapse`, and it made every bar invisible while
+   still laying out and reading fine in the DOM.
+
+   The panel is a grid with a single row. `0fr` is a real track size, so
+   it can be transitioned to `1fr`; that is the only way to animate a
+   height the browser cannot know in advance. The inner box carries the
+   `min-height: 0` that lets the track shrink past its content, and
+   clips it while the row is closed.
+
+   Nothing here is `display: none` on the way out, which is the whole
+   point: the closing move gets to play.
+   ------------------------------------------------------------------ */
+.disclosure__trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
 }
 
-.idx-row:hover {
-  background: var(--c-accent);
-  color: var(--c-accent-ink);
+.disclosure__trigger:focus-visible {
+  outline: 3px solid var(--c-accent);
+  outline-offset: -4px;
 }
 
-/* ---------------------------------------------------------------
+.disclosure__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.disclosure.is-open .disclosure__panel {
+  grid-template-rows: 1fr;
+}
+
+/* The text lifts into place as the row grows rather than being revealed
+   flat against the clip. It leads slightly on close and trails on open,
+   so the two directions do not read as one reversed move. */
+.disclosure__panel-inner {
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-1rem);
+  transition: opacity 190ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.disclosure.is-open .disclosure__panel-inner {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* `.giant-word` used to live here: 15cqw, `white-space: nowrap`, no
+   relationship to any other heading. It was the "Also" section title, and
+   being 3x the size of every real section title it read as a poster
+   flourish rather than as "a section starts here". "Also" is a
+   `.section-title` now and the rule is deleted. Do not bring back a
+   container-unit heading size: a section title that ignores the scale is
+   exactly what made the page unscannable. */
+
+/* ------------------------------------------------------------------
+   STEPPED FIGURE TILES — three figures that refuse to line up.
+   Unequal heights leave notches of bare ground, so no screen is a
+   flat empty field.
+   ------------------------------------------------------------------ */
+.tiles {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .tiles {
+    grid-template-columns: repeat(12, 1fr);
+    /* align-items: start is what lets each tile take its own height. */
+    align-items: start;
+  }
+  .tile--tall { grid-column: 1 / 7; height: 70vh; }
+  .tile--mid {
+    grid-column: 7 / 10;
+    height: 44vh;
+    margin-top: 14vh;
+  }
+  .tile--low {
+    grid-column: 10 / 13;
+    height: 34vh;
+    margin-top: 26vh;
+  }
+}
+
+@media (max-width: 899px) {
+  /* Stacked, the unequal heights stop being the point -- they just look
+     like three boxes that failed to line up. The figures grow instead
+     and the notch idea is dropped for a clean full-width run. */
+  .tile--tall { height: auto; min-height: 46vw; }
+  .tile--mid,
+  .tile--low { height: auto; min-height: 34vw; margin-top: 0; }
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px;
+}
+
+.tile__figure {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: 62%;
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 0.86;
+}
+
+.tile--tall .tile__figure { font-size: clamp(3.5rem, 5.4vw, 5.75rem); }
+.tile--mid .tile__figure,
+.tile--low .tile__figure { font-size: clamp(2.25rem, 5.4vw, 5.75rem); }
+
+
+
+/* ------------------------------------------------------------------
+   CONTACT ROWS — a stack of display-size rows on alternating tones.
+   ------------------------------------------------------------------ */
+.row-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 2vw, 1.5rem);
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: 78%;
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Inline, never a line of its own. A small label sitting directly above
+   the next row's heading reads as an eyebrow badge; as part of the same
+   text run it reads as what it is -- the handle, named. */
+.row-link__tag {
+  font-family: var(--f-display);
+  font-stretch: 100%;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--text-body);
+  opacity: 0.9;
+}
+
+/* A 23-character address has to break somewhere on a phone. */
+.row-link__long {
+  font-size: clamp(1.125rem, 3.4vw, 2.75rem);
+  overflow-wrap: anywhere;
+}
+
+.row-link:hover {
+  background: var(--f-mustard);
+  color: #2a1110;
+}
+
+/* The secondary part of a contact row: the handle, or what the row does.
+   Inline at the end of the same text run. */
+.row-link__tag {
+  flex: 0 0 auto;
+  font-family: var(--f-display);
+  font-stretch: 100%;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--text-small);
+  opacity: 0.9;
+}
+
+/* A 23-character address has to break somewhere on a phone. */
+.row-link__long {
+  font-size: clamp(1.125rem, 3.4vw, 2.75rem);
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------------
    NAV — a plain bar. Wordmark, links, one action.
-   --------------------------------------------------------------- */
+   ------------------------------------------------------------------ */
 .nav-bar {
   position: fixed;
   inset-inline: 0;
@@ -495,8 +1043,8 @@ button {
 .nav-link {
   position: relative;
   font-size: var(--text-small);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   color: var(--c-muted);
   padding-block: 4px;
   transition: color 0.2s ease;
@@ -513,7 +1061,7 @@ button {
   left: 0;
   right: 0;
   bottom: -3px;
-  height: 2px;
+  height: 3px;
   background: var(--c-accent);
 }
 
@@ -521,8 +1069,8 @@ button {
 .icon-btn {
   display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   background: var(--c-s2);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -531,30 +1079,54 @@ button {
   color: var(--c-accent-ink);
 }
 
-/* ---------------------------------------------------------------
-   THE LIVE TOOL
-   --------------------------------------------------------------- */
-.dropzone {
-  background: var(--c-s2);
-  padding: clamp(1.5rem, 5vw, 3rem);
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+/* ------------------------------------------------------------------
+   MOBILE DRAWER — slides in, then its contents arrive down the list.
+
+   Two moves rather than one, because they are answering two different
+   questions: where did this panel come from, and what is in it. Sliding
+   alone answered the first and left the second to be read off a curtain
+   that was already fully painted.
+   ------------------------------------------------------------------ */
+.nav-drawer {
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.dropzone:hover,
-.dropzone.is-over {
-  background: color-mix(in srgb, var(--c-accent) 14%, var(--c-s2));
+.nav-drawer__link {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 240ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.atom-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 1rem;
-  align-items: baseline;
-  padding-block: 0.5rem;
-  background: var(--c-s2);
-  padding-inline: 0.85rem;
+.nav-drawer.is-open .nav-drawer__link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered on the OPEN side only. A delay declared in the resting state
+   would also hold the closing move, which turns one dismissal into a
+   queue of fades running backwards. */
+.nav-drawer.is-open .nav-drawer__link:nth-child(1) { transition-delay: 0.09s; }
+.nav-drawer.is-open .nav-drawer__link:nth-child(2) { transition-delay: 0.15s; }
+.nav-drawer.is-open .nav-drawer__link:nth-child(3) { transition-delay: 0.21s; }
+.nav-drawer.is-open .nav-drawer__link:nth-child(4) { transition-delay: 0.27s; }
+.nav-drawer.is-open p.nav-drawer__link { transition-delay: 0.33s; }
+
+/* The button's own glyph. `animation` rather than `transition` because
+   Menu and X are the same element to React — only the key in Nav.tsx makes
+   this play again on each swap. */
+.nav-toggle svg {
+  animation: toggle-icon-in 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes toggle-icon-in {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .skip-link {
@@ -565,7 +1137,7 @@ button {
   background: var(--c-accent);
   color: var(--c-accent-ink);
   padding: 12px 20px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .skip-link:focus {
   left: 12px;
@@ -585,45 +1157,79 @@ button {
 
 } /* end @layer components */
 
+/* ------------------------------------------------------------------
+   THE COMMIT WALL
+   ------------------------------------------------------------------ */
+.commit-wall {
+  display: flex;
+  gap: 3px;
+}
+
+.commit-week {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.commit-day {
+  aspect-ratio: 1;
+  width: 100%;
+}
+
 @media (max-width: 900px) {
+  /* Stacked bands put two paddings back to back, and the desktop
+     rhythm is tuned for a viewport you can see the floor of. On a
+     375x667 phone `7vh` falls below the clamp floor, so every band
+     lands on the same 56px and the boundary between two of them is
+     112px -- a void with a paragraph at the top of it and a heading
+     at the bottom, which reads as a section that failed to render.
+     Halved, and then some: 32px per band, 64px across a boundary.
+     That is about twice `--gap-head`, so the break between two
+     sections reads at roughly the strength of the break between a
+     heading and the text under it, and no more. */
+  .band {
+    padding-block: clamp(2rem, 4.5vh, 3rem);
+  }
+
   .poster-run {
     --panel-h: calc((100vw - 2 * var(--margin)) * 9 / 16);
-    --panel-gap: 1.5rem;
+    --panel-gap: 2rem;
   }
-  .poster-more__content,
+  /* The open/close move of "More work" is the section's one piece of
+     choreography, so it plays at every width. An earlier draft switched
+     it to display:none here, which made the button feel dead on a phone
+     for no reason the layout needed. */
   .poster-more__inner {
-    display: block;
-    opacity: 1;
-    overflow: visible;
-    transform: none;
-    transition: none;
+    transform: translateY(-0.5rem);
   }
-  .poster-more:not(.is-open) .poster-more__content { display: none; }
+  .poster-more.is-open .poster-more__inner {
+    transform: translateY(0);
+  }
   .poster-panel {
     width: calc(100% - 2 * var(--margin));
     margin-inline: var(--margin);
   }
-  .poster-run--pinned {
-    height: auto !important;
-  }
-  .poster-run--pinned > .poster-bar {
-    position: relative;
-    height: auto;
-  }
-  .poster-run--pinned .poster-masthead {
-    position: relative;
-  }
+  /* The bar and the masthead used to be overridden to `position: relative`
+     here because the desktop arrangement overlapped the name on top of the
+     first panel. The desktop rules now do that at every width, so there is
+     nothing left to undo on a phone. */
   .poster-masthead {
     padding-bottom: 0.75rem;
   }
-  .idx-row {
-    grid-template-columns: 1fr;
-  }
+  /* The "More work" bar is already an endcap: a full-bleed filled block
+     with its own 28px of bottom padding. A whole section gap stacked on
+     top of it left ~150px of nothing between the last panel and the
+     claim on a 393px screen, which reads as a section that failed to
+     render rather than as a breath. That boundary used to need its own
+     `padding-top: 2.5rem`; the halved band rhythm above now covers it,
+     so there is no second rule to keep in step with this one. */
 }
 
-/* ---------------------------------------------------------------
+/* ------------------------------------------------------------------
    REDUCED MOTION
-   --------------------------------------------------------------- */
+   ------------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -631,5 +1237,24 @@ button {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* The masked reveal must not leave the hero sitting below its clip. */
+  .masked-line__in {
+    transform: none !important;
+  }
+
+  /* The lens switch staggers its four rows with transition-delay, and the
+     blanket duration override above does not touch delays. */
+  .capability__note {
+    transition-delay: 0s !important;
+    transform: none !important;
+  }
+
+  /* Same for the drawer's links. Without this the menu opens on a phone
+     with reduced motion set still arriving one row at a time. */
+  .nav-drawer__link {
+    transition-delay: 0s !important;
   }
 }

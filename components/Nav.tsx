@@ -66,9 +66,17 @@ export default function Nav() {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="icon-btn md:hidden"
+              className="icon-btn nav-toggle md:hidden"
             >
-              {open ? <X size={17} aria-hidden="true" /> : <Menu size={17} aria-hidden="true" />}
+              {/* The key forces a remount on every swap. Menu and X are both an `svg`
+                  to React, so without it the same element is patched in
+                  place and the entrance plays once, at mount, instead of
+                  on every open and close. */}
+              {open ? (
+                <X key="x" size={17} aria-hidden="true" />
+              ) : (
+                <Menu key="menu" size={17} aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
@@ -77,11 +85,17 @@ export default function Nav() {
       {/* Drawer. Rendered only while open: a closed overlay sitting in the
           layout is still measured as large text over the page. The drawer is
           the only other thing that touches body.overflow, and never at the
-          same time as anything else. */}
+          same time as anything else.
+
+          It stays mounted when shut so it can slide — but the slide alone
+          read as a curtain with the contents already painted on it, so the
+          links arrive down the list behind it. Delays are declared on the
+          open state only, which is why closing is immediate rather than a
+          queue of fades running backwards. */}
       <div
         aria-hidden={!open}
         inert={!open}
-        className={`fixed inset-0 z-50 bg-bg transition-transform duration-300 ease-out motion-reduce:transition-none md:hidden ${open ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
+        className={`nav-drawer fixed inset-0 z-50 bg-bg md:hidden motion-reduce:transition-none ${open ? "is-open translate-x-0" : "pointer-events-none translate-x-full"}`}
       >
         <div className="shell flex h-full flex-col justify-between pb-10 pt-24">
           <nav aria-label="Menu" className="flex flex-col">
@@ -90,13 +104,13 @@ export default function Nav() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="py-4 font-display text-[13vw] uppercase leading-[0.9] tracking-tight"
+                className="nav-drawer__link py-4 font-display text-[13vw] uppercase leading-[0.9] tracking-tight"
               >
                 {l.label}
               </a>
             ))}
           </nav>
-          <p className="text-muted">Available for freelance work.</p>
+          <p className="nav-drawer__link text-muted">Available for freelance work.</p>
         </div>
       </div>
     </>

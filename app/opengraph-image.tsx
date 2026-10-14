@@ -1,19 +1,19 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Irgi Febryansyah — UI/UX Designer & Full-Stack Engineer";
+export const alt = "Irgi Febryansyah, UI/UX designer and full-stack engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const BG = "#0b0b0b";
-const INK = "#f2ede0";
-const MUTED = "#8d8577";
-const ACCENT = "#e1ac10";
+const BG = "#17120f";
+const BONE = "#f2ece0";
+const MUTED = "#b3a294";
+const ACCENT = "#e0a912";
 
 /**
- * Flat, no gradients and no rules — the same poster the site opens on.
- * next/og renders with a system sans, so the weight is pushed rather
- * than set in Anton.
+ * Flat, no gradients and no rules — the same poster the site opens on,
+ * in the site's own colours. next/og renders with a system sans, so the
+ * weight is pushed rather than set in Archivo.
  */
 export default function OgImage() {
   return new ImageResponse(
@@ -48,7 +48,7 @@ export default function OgImage() {
               marginTop: 28,
               fontSize: 150,
               fontWeight: 800,
-              color: INK,
+              color: BONE,
               lineHeight: 0.88,
               letterSpacing: "-0.04em",
               display: "flex",

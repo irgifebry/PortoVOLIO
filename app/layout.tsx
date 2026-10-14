@@ -1,23 +1,27 @@
 import type { Metadata } from "next";
-import { Anton, Work_Sans } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 
 const BASE_URL = "https://irgifebry.vercel.app";
 
-const TITLE = "Irgi Febryansyah — UI/UX Designer & Full-Stack Engineer";
+const TITLE = "Irgi Febryansyah — UI/UX design and engineering, one person";
 const DESCRIPTION =
-  "UI/UX designer dan full-stack engineer spesialis React, React Native, dan Android. Tersedia untuk proyek freelance dan kolaborasi.";
+  "UI/UX designer and full-stack engineer in Indonesia. The same person draws the interface, writes the code and keeps it running. Available for freelance and collaboration.";
 
-/* Anton is the poster face: one heavy cut, compressed, set in caps. */
-const display = Anton({
+/**
+ * One family for the whole page. Archivo's `wdth` axis does the work that
+ * three separate faces used to do: headlines are set at the narrowest cut and
+ * the heaviest weight, running text relaxes back to normal width. The axis is
+ * loaded explicitly -- without `axes: ["wdth"]` next/font serves the static
+ * cut and `font-stretch` below is silently ignored.
+ *
+ * Both variable names survive from the previous build so that nothing
+ * downstream has to churn.
+ */
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: "400",
+  axes: ["wdth"],
   variable: "--f-display",
-});
-
-const body = Work_Sans({
-  subsets: ["latin"],
-  variable: "--f-sans",
 });
 
 export const metadata: Metadata = {
@@ -45,7 +49,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`dark ${display.variable} ${body.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`dark ${archivo.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -71,6 +75,16 @@ export default function RootLayout({
                 "Network Administration",
               ],
             }),
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            /* Marks the document before first paint, so the hero's
+               masked-line reveal never flashes: the lines are already
+               below their clip when the page first renders, and with no
+               JavaScript at all the class is never set and the hero is
+               visible and simply still. */
+            __html: `document.documentElement.classList.add('js-lines');`,
           }}
         />
         <script
