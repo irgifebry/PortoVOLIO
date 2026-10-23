@@ -70,6 +70,17 @@ export const panels: Panel[] = [
     year: "2026",
     alt: "The PlayShop.ID storefront: a row of game cards for Call of Duty Mobile, Free Fire, Genshin Impact, Mobile Legends and PUBG Mobile, each with a green price.",
   },
+  {
+    slug: "needledrop",
+    title: "NeedleDrop",
+    kicker: "Drop the needle on one track. Get the whole session.",
+    video: "/videos/NeedleDrop.mp4",
+    poster: "/posters/NeedleDrop.jpg",
+    url: "https://needdrop.vercel.app/",
+    role: "Next.js, TypeScript, Tailwind",
+    year: "2026",
+    alt: "The needledrop interface: a dark page headed DROP THE NEEDLE. GET THE SESSION., with a seed search box and a generated playlist of twenty tracks below.",
+  },
 ]
 
 /* ------------------------------------------------------------------
@@ -265,7 +276,7 @@ export const figures = {
   shipped: {
     value: panels.length + indexProjects.length,
     label: "projects shipped",
-    note: "Four client and personal builds with footage, plus four open-source and client projects listed under Also built.",
+    note: "Five client and personal builds with footage, plus four open-source and client projects listed under Also built.",
   },
   areas: {
     value: services.length,
