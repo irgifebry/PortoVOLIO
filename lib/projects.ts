@@ -81,6 +81,16 @@ export const panels: Panel[] = [
     year: "2026",
     alt: "The needledrop interface: a dark page headed DROP THE NEEDLE. GET THE SESSION., with a seed search box and a generated playlist of twenty tracks below.",
   },
+  {
+    slug: "byte-brew",
+    title: "Byte Brew",
+    kicker: "Specialty coffee shop site with menu, space gallery and order dialog",
+    video: "/videos/ByteBrew.mp4",
+    poster: "/posters/ByteBrew.jpg",
+    role: "Next.js, React, Tailwind",
+    year: "2026",
+    alt: "The Byte Brew website: a cream page with amber accents, a hero, featured menu cards, a space gallery, testimonials and a call to action.",
+  },
 ]
 
 /* ------------------------------------------------------------------
