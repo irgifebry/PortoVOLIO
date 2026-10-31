@@ -8,6 +8,8 @@ type Props = {
   alt: string
   /** Only the panel nearest the middle of the viewport is allowed to play. */
   active: boolean
+  /** Play continuously regardless of viewport position. */
+  autoplay?: boolean
 };
 
 /**
@@ -18,7 +20,7 @@ type Props = {
  * instead of four. With reduced motion the source is never assigned at all
  * and the poster frame stays — the panel still reads as a picture.
  */
-export default function PanelVideo({ src, poster, alt, active }: Props) {
+export default function PanelVideo({ src, poster, alt, active, autoplay = false }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [attached, setAttached] = useState(false);
 
@@ -42,12 +44,12 @@ export default function PanelVideo({ src, poster, alt, active }: Props) {
   useEffect(() => {
     const el = ref.current;
     if (!el || !attached) return;
-    if (active) {
+    if (active || autoplay) {
       void el.play().catch(() => {});
     } else {
       el.pause();
     }
-  }, [active, attached]);
+  }, [active, attached, autoplay]);
 
   return (
     <video

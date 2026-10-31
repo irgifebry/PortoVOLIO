@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Nav from "@/components/Nav";
-import PinnedPoster from "@/components/PinnedPoster";
 import PageAnimations from "@/components/PageAnimations";
+import PanelVideo from "@/components/PanelVideo";
 import Lens from "@/components/Lens";
 import Disclosure from "@/components/Disclosure";
 import {
+  panels,
   indexProjects,
   statement,
   aboutParagraph,
@@ -19,12 +20,11 @@ import {
 import { getActivity, ACTIVITY_WEEKS, type Activity } from "@/lib/github";
 
 export const metadata: Metadata = {
-  title: "Irgi Febryansyah, design and engineering, one person",
+  title: "Irgi Febryansyah — UI/UX design and engineering, one person",
   description:
     "UI/UX designer and full-stack engineer in Indonesia. The same person draws the interface, writes the code and keeps it running.",
 };
 
-/** The hero reads live GitHub activity, so the route is ISR. */
 export const revalidate = 3600;
 
 export default async function Page() {
@@ -36,8 +36,9 @@ export default async function Page() {
       <PageAnimations />
 
       <main id="main">
-        <PinnedPoster />
+        <Hero />
         <Intro />
+        <Work />
         <Capabilities />
         <Index />
         <About activity={activity} />
@@ -50,18 +51,54 @@ export default async function Page() {
   );
 }
 
-/* =================================================================
-   INTRO — the claim, with the two headline lines as its furniture.
-   The headline above is the name; this is what the name means.
-   ================================================================= */
+function Hero() {
+  return (
+    <section
+      id="hero"
+      className="relative flex min-h-svh flex-col justify-between overflow-hidden bg-bg px-[var(--margin)] pb-8 pt-[calc(var(--nav-h)+2rem)]"
+    >
+      <div className="flex items-start justify-between gap-6 text-small">
+        <span className="text-muted">Designer / Engineer</span>
+        <a href="#contact" className="arrow-link text-muted">
+          Start a project
+          <ArrowUpRight size={14} aria-hidden="true" />
+        </a>
+      </div>
+
+      <h1
+        className="display w-full leading-[0.85] tracking-[-0.04em]"
+        data-hero-line
+        style={{ fontSize: "clamp(60px, 14vw, 220px)" }}
+      >
+        Irgi
+        <br />
+        Febryansyah
+      </h1>
+
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <p className="max-w-[40ch] text-lead leading-tight">
+          The same person draws the interface, writes the code and keeps it
+          running.
+        </p>
+        <a href="#work" className="arrow-link">
+          See the work
+          <ArrowUpRight size={15} aria-hidden="true" />
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function Intro() {
   return (
-    <section className="band">
+    <section className="field-cream band">
       <div className="shell grid gap-10 md:grid-cols-12" data-reveal>
-        <div className="md:col-span-7" data-reveal-item>
+        <div className="md:col-span-5" data-reveal-item>
           <h2 className="section-title">No handoff</h2>
-          <p className="lead balance mt-6">{statement}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-6">
+        </div>
+        <div className="md:col-span-6 md:col-start-7" data-reveal-item>
+          <p className="lead balance">{statement}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <a href="#contact" className="btn btn-ink">
               Start a project
               <ArrowRight size={16} aria-hidden="true" />
@@ -72,35 +109,76 @@ function Intro() {
             </a>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <div
-          className="flex flex-col gap-5 md:col-span-4 md:col-start-9"
-          data-reveal-item
-        >
-          <div className="flex items-center gap-3">
-            <span className="size-3 shrink-0 bg-accent" aria-hidden="true" />
-            <span className="font-bold">Taking freelance work</span>
-          </div>
-          <p className="text-muted">
-            Remote from Indonesia. Available for design, front-end, Android
-            and infrastructure work.
+function Work() {
+  return (
+    <section id="work" className="bg-bg band">
+      <div className="shell" data-reveal>
+        <div className="mb-[var(--gap-head)] flex flex-wrap items-end justify-between gap-6">
+          <h2 className="section-title" data-reveal-item>
+            Work
+          </h2>
+          <p className="measure text-muted" data-reveal-item>
+            Six projects with footage of themselves. The rest live in the index
+            below.
           </p>
-          <p className="text-muted">
-            Replies usually land within a business day.
-          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2" data-reveal>
+          {panels.map((p) => (
+            <article
+              key={p.slug}
+              className="group relative overflow-hidden rounded-[24px] bg-s1"
+              data-reveal-item
+            >
+              <div
+                className="group relative w-full overflow-hidden"
+                style={{ aspectRatio: "16/9" }}
+              >
+                <PanelVideo
+                  src={p.video}
+                  poster={p.poster}
+                  alt={p.alt}
+                  active={false}
+                  autoplay
+                />
+              </div>
+              <div className="grid grid-cols-[1fr_auto] items-center gap-4 p-6">
+                <div>
+                  <h3 className="h3">{p.title}</h3>
+                  <p className="mt-1 text-muted">{p.kicker}</p>
+                  <p className="mt-1 text-small text-muted">
+                    <span className="tnum">{p.year}</span> · {p.role}
+                  </p>
+                </div>
+                {p.url && (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="arrow-link text-small justify-self-end"
+                    aria-label={`${p.title} (opens in a new tab)`}
+                  >
+                    Visit
+                    <ArrowUpRight size={13} aria-hidden="true" />
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-/* =================================================================
-   CAPABILITIES — a poster-scale list on a full colour field, with the
-   lens above it. The heading is the first row of the list itself.
-   ================================================================= */
 function Capabilities() {
   return (
-    <section id="services" className="field-red band">
+    <section id="services" className="field-lime band">
       <div className="shell" data-reveal>
         <Lens />
       </div>
@@ -108,24 +186,12 @@ function Capabilities() {
   );
 }
 
-/* =================================================================
-   INDEX — the projects with no footage. Filled bars that open in
-   place, so it never reads as another panel run.
-   ================================================================= */
 function Index() {
   return (
-    /* `band` on both sides, like every other section on the page. With only
-       a bottom pad the giant word sat flush against the red field above it
-       while the rest of the page got a full section gap either side. */
-    <section className="band">
+    <section className="field-violet band">
       <div className="shell" data-reveal>
-        {/* Not `giant-word`. That class is 15cqw, which was doing a
-            section title's job with no size relationship to any other
-            heading on the page -- so it read as a poster flourish, not as
-            "this is a section". `section-title` puts it on the same scale
-            as every other section title, which is the whole point. */}
         <h2 className="section-title" data-reveal-item>
-          Also
+          Also built
         </h2>
 
         <div className="mt-[var(--gap-head)]">
@@ -145,9 +211,7 @@ function Index() {
                 summary={
                   <>
                     <span className="h3">{p.title}</span>
-                    <span className="small shrink-0 opacity-70">
-                      {p.meta}
-                    </span>
+                    <span className="small shrink-0 opacity-70">{p.meta}</span>
                   </>
                 }
               >
@@ -170,22 +234,14 @@ function Index() {
             );
           })}
         </div>
-
-        <p className="measure mt-8 text-muted" data-reveal-item>
-          An LMS, two Android apps and a moon-visibility model. No demo
-          footage for any of them yet, so they get bars instead of a panel.
-        </p>
       </div>
     </section>
   );
 }
 
-/* =================================================================
-   ABOUT — the paragraph, the real stacks, and the live commit wall.
-   ================================================================= */
 function About({ activity }: { activity: Activity | null }) {
   return (
-    <section id="about" className="band">
+    <section id="about" className="field-cream band">
       <div className="shell" data-reveal>
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-6" data-reveal-item>
@@ -219,11 +275,6 @@ function About({ activity }: { activity: Activity | null }) {
   );
 }
 
-/* =================================================================
-   COMMIT WALL — real data, straight from the public calendar.
-   role="img" keeps a screen reader on the summary rather than reading
-   out every cell.
-   ================================================================= */
 const activityLevels = [
   "bg-s2",
   "bg-accent/25",
@@ -237,7 +288,6 @@ const monthShort = [
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
 
-/** Deterministic and server-side only — no locale or timezone drift. */
 function formatDay(date: string): string {
   const [year, month, day] = date.split("-").map(Number);
   return `${day} ${monthShort[month - 1]} ${year}`;
@@ -287,52 +337,32 @@ function CommitWall({ activity }: { activity: Activity }) {
   );
 }
 
-/* =================================================================
-   NUMBERS — three stepped tiles that refuse to line up. Every figure
-   is countable from the work above. When GitHub is unreachable the
-   first tile falls back to the shipped count, which is also real.
-   ================================================================= */
 function Numbers({ activity }: { activity: Activity | null }) {
   const commits = activity
     ? { value: activity.total, note: `Commits in the last ${ACTIVITY_WEEKS} weeks, pulled from the public GitHub calendar at build time.` }
     : { value: figures.shipped.value, note: "The shipped-project count, used while the contribution calendar is unreachable." };
 
   return (
-    <section className="field-mustard band">
-      {/* The scope was missing here, so the heading and the three tiles
-          carried `data-reveal-item` with no trigger to ever fire them: this
-          section was the one part of the page that appeared with no
-          entrance at all. */}
+    <section className="field-red band">
       <div className="shell" data-reveal>
-        {/* The heading sits in the notch above the right-hand tiles, as the
-            blueprint describes. It is in normal flow, so it must come
-            before them in the DOM to occupy that space. */}
-        {/* No `max-w-[14ch]` cap: at section-title size that wrapped the
-            title into three lines on desktop, which made the loudest
-            heading on the mustard field the smallest block on it. */}
         <h2 className="section-title mb-[var(--gap-head)]" data-reveal-item>
           What the work adds up to
         </h2>
 
         <div className="tiles mt-[var(--gap-head)]">
-          {/* Explicit field classes, not `field-accent`. The accent resolves to
-                mustard in dark mode, which is the colour of the section
-                behind it -- so the tall tile vanished against its own
-                background. The tiles must be chosen by what sits NEXT to
-                them, not by the theme's accent. */}
-          <div className="tile tile--tall field-red" data-reveal-item>
+          <div className="tile tile--tall field-cream" data-reveal-item>
             <span className="tile__figure tnum">{commits.value}</span>
             <span className="max-w-[34ch] leading-relaxed">{commits.note}</span>
           </div>
 
-          <div className="tile tile--mid field-slate" data-reveal-item>
+          <div className="tile tile--mid field-cream" data-reveal-item>
             <span className="tile__figure tnum">{figures.shipped.value}</span>
             <span className="max-w-[30ch] leading-relaxed">
               {figures.shipped.label}. {figures.shipped.note}
             </span>
           </div>
 
-          <div className="tile tile--low field-maroon" data-reveal-item>
+          <div className="tile tile--low field-cream" data-reveal-item>
             <span className="tile__figure tnum">{figures.areas.value}</span>
             <span className="max-w-[30ch] leading-relaxed">
               {figures.areas.label}. {figures.areas.note}
@@ -344,26 +374,15 @@ function Numbers({ activity }: { activity: Activity | null }) {
   );
 }
 
-/* =================================================================
-   EXPERIENCE — one role, so it gets one wide row, not a card.
-   ================================================================= */
 function Experience() {
   return (
-    <section className="band">
+    <section className="field-pink band">
       <div className="shell" data-reveal>
-        {/* The section had no title of its own: the bone band went straight
-            to the employer's name, which is a subheading pretending to be a
-            section title. The title sits above the band, in the page's own
-            ground, so the band reads as the content of this section. */}
         <h2 className="section-title mb-[var(--gap-head)]" data-reveal-item>
           Experience
         </h2>
 
-        {/* One role, so it gets one wide band with the three items as running
-            prose under it. As a bordered three-column grid it read as a
-            row of identical cards, which is the tell this section is
-            meant to avoid. */}
-        <div className="field-bone p-[clamp(1.5rem,4vw,3.5rem)]" data-reveal-item>
+        <div className="field-cream p-[clamp(1.5rem,4vw,3.5rem)]" data-reveal-item>
           <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
             <h3 className="head">{fieldLog.title}</h3>
             <p className="tnum text-lead font-bold">{fieldLog.period}</p>
@@ -387,12 +406,9 @@ function Experience() {
   );
 }
 
-/* =================================================================
-   CONTACT — a stack of display-size rows on alternating tones.
-   ================================================================= */
 function Contact() {
   return (
-    <section id="contact" className="band">
+    <section id="contact" className="field-cream band">
       <div className="shell">
         <div className="grid gap-10 md:grid-cols-12" data-reveal>
           <div className="md:col-span-5" data-reveal-item>
@@ -403,14 +419,7 @@ function Contact() {
           </div>
 
           <div className="md:col-span-7" data-reveal-item>
-            {/* The handle is the row's own affordance: a row this size is
-                unmistakably a link, so it carries no icon. A repeated
-                icon on four identical rows turns the stack back into the
-                card row it was meant to replace. */}
-            <a
-              href={`mailto:${email}`}
-              className="row-link field-red"
-            >
+            <a href={`mailto:${email}`} className="row-link field-red">
               <span className="row-link__long">{email}</span>
               <span className="row-link__tag">Write to Irgi</span>
             </a>
@@ -421,7 +430,7 @@ function Contact() {
                 href={s.url}
                 target="_blank"
                 rel="noreferrer"
-                className="row-link field-slate mt-[6px]"
+                className="row-link field-violet mt-[6px]"
                 aria-label={`${s.label}, ${s.handle} (opens in a new tab)`}
               >
                 <span>{s.label}</span>
@@ -435,30 +444,14 @@ function Contact() {
   );
 }
 
-/* =================================================================
-   FOOTER — small print only. The invitation, the mail link and the
-   social rows already live in CONTACT; repeating them here would say
-   the same thing a third time at a third volume.
-
-   No colour field here, and that is deliberate: the small print sits on
-   the page's own ground. The footer used to carry `field-ink`, which is
-   not a class in globals.css — it rendered transparent either way, but
-   the markup claimed a colour block that never existed.
-   ================================================================= */
 function Footer() {
   return (
-    <footer>
-      {/* One row when both halves fit, a deliberate stack when they do
-         not. `flex-wrap` + `justify-between` used to handle the narrow
-         case by wrapping: on a 360px phone the line measures 282px of
-         the 320px content box, so the year fell to a second line and
-         sat flush under the start of the first — an orphan, not a
-         layout. Stacked, it reads as two lines of small print. */}
+    <footer className="bg-bg">
       <div className="shell flex flex-col items-start gap-2 pb-8 pt-[var(--gap-block)] sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-        <p className="text-small opacity-75">
+        <p className="text-small text-muted">
           Design &amp; engineering, from Indonesia
         </p>
-        <span className="tnum text-small opacity-75">
+        <span className="tnum text-small text-muted">
           &copy; {new Date().getFullYear()}
         </span>
       </div>

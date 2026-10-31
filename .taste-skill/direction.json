@@ -1,0 +1,579 @@
+{
+ "version": 1,
+ "at": "2026-10-31T14:01:17.516Z",
+ "seed": 1276663735,
+ "redraws": 0,
+ "input": {
+  "brief": "Gen-Z creative tech agency portfolio, one person studio, loud flat, modern startup agency",
+  "sector": "agency",
+  "tone": "playful",
+  "have": [
+   "video"
+  ],
+  "keep": [],
+  "avoid": [],
+  "sections": [
+   "work",
+   "features",
+   "about",
+   "stats",
+   "contact"
+  ],
+  "direction": "loud-flat-poster"
+ },
+ "imagery": "atmosphere",
+ "allow": [],
+ "direction": {
+  "id": "loud-flat-poster",
+  "name": "Loud and flat",
+  "sectors": [
+   "agency",
+   "consumer-app",
+   "music",
+   "event",
+   "education",
+   "nonprofit",
+   "physical-product",
+   "saas",
+   "culture"
+  ],
+  "tones": [
+   "bold",
+   "playful"
+  ],
+  "needs": [],
+  "idea": "A page with the directness of a street poster: flat saturated colour, the heaviest type you can find, short blunt statements, and photographs cut out and stuck on. It is for subjects with a voice. Write the page as things a person would actually say out loud, and let the design say them at full volume. The craft is in the control beneath the noise: a strict grid, two or three colours, and exact alignment keep it from becoming a mess.",
+  "composition": "Hero: a statement of three to six words in ultra-heavy type at 11–15vw, filling the width, lines stacked tight (leading 0.85), flush left with 20–28px margins, on a flat saturated ground. One cut-out or hard-cropped photograph overlaps the type from the right or bottom, tilted 3–6 degrees. A single chunky button in the contrasting flat colour. Sections are solid panels in alternating palette colours: one is a row of short statements each on its own panel of unequal width; one is a single photograph bleeding off two edges with a caption block set over a solid colour bar; one is a large plain list. Panels meet edge to edge. Corners are square or use one large radius (28–40px) consistently.",
+  "typography": "The heaviest weight available, set tight, mostly lowercase or mostly uppercase (choose one). Body text is a plain grotesk at 18–20px.",
+  "typeClasses": [
+   "heavy-black",
+   "condensed-heavy",
+   "extended-heavy",
+   "rounded-friendly"
+  ],
+  "colour": "Three or four flat colours at full strength including black or white. Each panel is one colour; text on it is one other.",
+  "paletteTags": [
+   "flat-loud"
+  ],
+  "imagery": "Photographs with attitude, cropped hard or cut to a simple shape with `clip-path` (circle, arch, blunt polygon), slightly rotated, overlapping the type. Two or three on the page.",
+  "sectionTags": [
+   "poster",
+   "colour-field",
+   "type-led"
+  ],
+  "motion": "edge-marquee",
+  "richness": "Colour mass, type mass, and overlap.",
+  "pitfalls": "Headlines still obey the two-line rule: at 13vw that means very few words, which is correct for this voice. No outlines, no offset shadows, no sticker confetti. Rotation is for two or three images only, never for text blocks.",
+  "seenIn": [
+   "aww-warm-fuzzy",
+   "aww-aardvark-book-club",
+   "opl-uglycash",
+   "opl-depo-budget-app",
+   "aww-trevor-noah"
+  ],
+  "allow": []
+ },
+ "hero": {
+  "id": "two-line-statement-full-width",
+  "name": "Two-line statement, full width",
+  "archetype": "type-poster",
+  "directions": [
+   "type-only-statement",
+   "loud-flat-poster"
+  ],
+  "needs": [],
+  "blueprint": "Paper and ink only; no image. The wordmark at 15px sits top-left and two or three text links at the same size top-right, both on 24px margins; there is no bar. The statement fills the upper two thirds: two lines at clamp(96px, 12.5vw, 200px), medium to bold weight, tracking -0.05em, leading 0.86, starting 15% below the top edge. The first line is flush to the left margin and the second flush to the right margin, so the pair spans the full width and steps across the screen. Size the type so the longer line runs margin to margin: tune the vw value to the character count and test it at 1440 and 390. Between the statement and the bottom row about 18% of the height is left empty. The bottom row sits on one baseline 28px above the bottom edge: one supporting sentence at 22px on the left, max 44ch on two lines, and the single action bottom-right as a solid ink rectangle with square corners. There is no colour beyond ground and ink.",
+  "mobile": "Both lines turn flush left on 16px margins at 17vw, leading 0.9, starting at 14% of the height and filling the width. A gap of about 20% of the screen follows. The sentence sits at 17px above a full-width action, both anchored to the bottom with 20px to spare. Navigation reduces to the wordmark and one menu word.",
+  "headline": "A 3-5 word statement on two lines, at most 11 characters per line so 17vw type fits a phone.",
+  "motion": "masked-headline",
+  "seenIn": [
+   "aww-produx-design",
+   "opl-specia1ne",
+   "aww-made-with-gsap-1"
+  ]
+ },
+ "type": {
+  "id": "chillax-semibold",
+  "name": "Chillax",
+  "class": "rounded-friendly",
+  "display": {
+   "family": "Chillax",
+   "source": "fontshare",
+   "slug": "chillax",
+   "weights": [
+    600
+   ],
+   "italic": false,
+   "settings": "weight 600 · tracking -0.03em · leading 1.0 · sentence case",
+   "css": "<link rel=\"preconnect\" href=\"https://api.fontshare.com\">\n<link rel=\"preconnect\" href=\"https://cdn.fontshare.com\" crossorigin>\n<link href=\"https://api.fontshare.com/v2/css?f[]=chillax@400,500,600&display=swap\" rel=\"stylesheet\">"
+  },
+  "text": {
+   "family": "Chillax",
+   "source": "fontshare",
+   "slug": "chillax",
+   "weights": [
+    400,
+    500
+   ],
+   "italic": false,
+   "settings": "400 for body, 500 for emphasis · leading 1.5 · tracking 0",
+   "css": "<link rel=\"preconnect\" href=\"https://api.fontshare.com\">\n<link rel=\"preconnect\" href=\"https://cdn.fontshare.com\" crossorigin>\n<link href=\"https://api.fontshare.com/v2/css?f[]=chillax@400,500,600&display=swap\" rel=\"stylesheet\">"
+  },
+  "standsInFor": [
+   "SF Pro Rounded",
+   "Open Runde"
+  ],
+  "note": "A soft geometric sans with wide round letters and relaxed joins, warm at semibold and easy at text size. Suits consumer apps, community products, cafes and small friendly brands.",
+  "seenIn": [
+   "opl-uncle-rudy",
+   "opl-mat"
+  ],
+  "links": [
+   "https://api.fontshare.com/v2/css?f[]=chillax@400,500,600&display=swap"
+  ],
+  "scale": {
+   "step-small": "clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem)",
+   "step-body": "clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem)",
+   "step-lead": "clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem)",
+   "step-head": "clamp(2rem, 1.3rem + 3.2vw, 4rem)"
+  }
+ },
+ "palette": {
+  "id": "report-blocks",
+  "name": "Report blocks",
+  "tags": [
+   "flat-loud"
+  ],
+  "bg": "#ffffff",
+  "surface": "#f6f6f6",
+  "ink": "#000000",
+  "muted": "#5f5f5f",
+  "accent": "#fe7141",
+  "accentInk": "#000000",
+  "fields": [
+   {
+    "bg": "#fe7141",
+    "ink": "#000000"
+   },
+   {
+    "bg": "#d1ddd3",
+    "ink": "#000000"
+   },
+   {
+    "bg": "#f0ff1c",
+    "ink": "#000000"
+   },
+   {
+    "bg": "#000000",
+    "ink": "#f4f4f4"
+   }
+  ],
+  "note": "A white base with flat blocks of orange, sage, acid yellow and black assigned to whole modules: figure tiles, quote panels and chapter bands. Text is black on every colour and off-white on black, and orange is also the button colour.",
+  "seenIn": [
+   "aww-ai-in-design-report-2026"
+  ]
+ },
+ "photos": {
+  "set": "people",
+  "title": "People",
+  "note": "figures, silhouettes and portraits, mostly unposed",
+  "treatment": null,
+  "others": [
+   "fog-and-quiet",
+   "mountain",
+   "hands-and-making",
+   "architecture"
+  ],
+  "photos": [
+   {
+    "id": 669,
+    "alt": "Person in a mustard jacket and grey beanie seen from behind in fog",
+    "tone": "light",
+    "colours": [
+     "mustard",
+     "pale grey",
+     "white"
+    ],
+    "mono": false,
+    "calm": "left",
+    "quality": 5,
+    "ratio": 1.41,
+    "by": "Luke Pamer",
+    "page": "https://unsplash.com/photos/oUhr-qMTJoc"
+   },
+   {
+    "id": 338,
+    "alt": "Person in a hooded coat seen from behind facing a misty sea",
+    "tone": "mid",
+    "colours": [
+     "slate blue",
+     "grey",
+     "charcoal"
+    ],
+    "mono": false,
+    "calm": "left",
+    "quality": 5,
+    "ratio": 1.5,
+    "by": "Patryk Sobczak",
+    "page": "https://unsplash.com/photos/9VPtNW84vGI"
+   },
+   {
+    "id": 91,
+    "alt": "Person in dark jacket holding a vintage twin-lens camera, monochrome",
+    "tone": "mid",
+    "colours": [
+     "grey",
+     "black"
+    ],
+    "mono": true,
+    "calm": "none",
+    "quality": 4,
+    "ratio": 1.5,
+    "by": "Jennifer Trovato",
+    "page": "https://unsplash.com/photos/baRYCsjO6z4"
+   },
+   {
+    "id": 768,
+    "alt": "Person sitting alone on a bench facing sandy dunes",
+    "tone": "light",
+    "colours": [
+     "sand beige",
+     "pale blue",
+     "soft white"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 4,
+    "ratio": 1.5,
+    "by": "Mikael Kristenson",
+    "page": "https://unsplash.com/photos/3f4sQIums6k"
+   },
+   {
+    "id": 726,
+    "alt": "Person in a red jacket standing in a snowy, misty landscape",
+    "tone": "light",
+    "colours": [
+     "white",
+     "pale grey",
+     "red"
+    ],
+    "mono": false,
+    "calm": "bottom",
+    "quality": 4,
+    "ratio": 1.5,
+    "by": "Caleb George",
+    "page": "https://unsplash.com/photos/BrXiun04yr4"
+   },
+   {
+    "id": 1005,
+    "alt": "Person in a scarf seen from behind, looking at the sea at dusk",
+    "tone": "mid",
+    "colours": [
+     "warm sand",
+     "dark brown",
+     "pale peach"
+    ],
+    "mono": false,
+    "calm": "left",
+    "quality": 4,
+    "ratio": 1.5,
+    "by": "Matthew Wiebe",
+    "page": "https://unsplash.com/photos/tBtuxtLvAZs"
+   },
+   {
+    "id": 375,
+    "alt": "Person in a hooded jacket sitting among white daisies at dusk",
+    "tone": "dark",
+    "colours": [
+     "navy",
+     "dark green",
+     "white"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 4,
+    "ratio": 1.5,
+    "by": "Wellington Sanipe",
+    "page": "https://unsplash.com/photos/3jUTmrmdNVg"
+   },
+   {
+    "id": 1009,
+    "alt": "Back of a person's head beneath a wide pale blue sky",
+    "tone": "light",
+    "colours": [
+     "pale blue",
+     "soft white",
+     "dark brown"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 4,
+    "ratio": 0.67,
+    "by": "Christopher Campbell",
+    "page": "https://unsplash.com/photos/CMWRIzyMKZk"
+   }
+  ]
+ },
+ "motion": {
+  "id": "masked-headline",
+  "name": "Masked headline",
+  "description": "On load, each line of the headline rises from behind its own baseline, about 900ms with a strong ease-out, the second line 110ms after the first; the supporting sentence and the action then fade up together. Nothing else on the page performs. Because headlines are two lines at most, you author the line breaks and wrap each line yourself. Recipe: 'Masked line reveal' in references/motion.md."
+ },
+ "sections": [
+  {
+   "id": "work-big-names-fixed-preview",
+   "role": "work",
+   "name": "Big names, fixed preview",
+   "shape": "index",
+   "tags": [
+    "type-led",
+    "photo-led"
+   ],
+   "directions": [
+    "name-as-monument",
+    "borrowed-category",
+    "loud-flat-poster",
+    "dark-room",
+    "split-stage"
+   ],
+   "needs": [],
+   "blueprint": "Project names are the index. In columns 1–8, five to nine names stack one per line at clamp(44px, 5.4vw, 80px), leading 1.0, each row a link with 10px of vertical padding. All names rest in the ink at 35% opacity except the active one, which is full ink; the first is active by default, and hover or keyboard focus moves the state. To the right of each name, on its baseline at 14px: the discipline and the year. In columns 9–12 a `position: sticky; top: 15vh` frame, 4:5 and 26vw wide with square corners, shows the active project's photograph; all images are stacked in the frame and swapped by opacity over 200ms. A two-word heading at 28px sits top-left, 48px above the first name. Nothing is drawn between rows: the size of the type and the dimming do the separating.",
+   "mobile": "Names at 9.5vw, all in full ink, one per line; discipline and year sit beneath each name at 13px. There is no sticky frame: each name is preceded by its own photograph at 16:10, full width, so the list becomes image then name, repeated, with 40px between projects.",
+   "seenIn": [
+    "opl-belen-jones",
+    "opl-specia1ne",
+    "aww-artem-shcherbakov",
+    "opl-neuropelvic-surgery"
+   ]
+  },
+  {
+   "id": "features-four-cards-dealt-into-a-fan",
+   "role": "features",
+   "name": "Four cards dealt into a fan",
+   "shape": "pinned",
+   "tags": [
+    "colour-field",
+    "poster"
+   ],
+   "directions": [
+    "pinned-poster",
+    "loud-flat-poster",
+    "borrowed-category",
+    "colour-chapters",
+    "specimen-catalogue"
+   ],
+   "needs": [],
+   "blueprint": "Four values, rules or features, each on a card dealt onto the table as the page scrolls. A wrapper about 400svh tall holds a sticky stage of 100svh on the page's darkest flat ground. Each card is a portrait panel of 340×400px with a 20px radius, filled with its own palette colour (four colours that differ clearly in lightness), no border, no shadow. On a card, with 28px padding: its name at 32px in heavy capitals on one or two lines at the top, a photograph or a single picture of the thing at 60% of the card's width in the middle, and one sentence at 16px at the foot. Card one lands alone at the centre; each further quarter of the wrapper deals the next from below the bottom edge, landing 250px to the right of the one before, rotated between -4 and 4 degrees and overlapping only its right 90px, until the four form a fan about 1,090px wide centred on the stage. Keep each card's name, picture and sentence inside its left 240px, so no card ever covers another's words. In the study the cards overlap by two thirds and bury the earlier titles; here nothing lies on top of text. The heading, two to four words at clamp(40px, 4vw, 60px), sits top-left on the stage on the 32px margin with one sentence at 17px under it. The stage releases after the fourth card has settled; under reduced motion the fan is simply there.",
+   "mobile": "No pin. The cards sit in one row that scrolls sideways with scroll-snap, each 82% of the width with the next peeking in at the right edge, all upright. The heading and sentence sit above the row.",
+   "seenIn": [
+    "aww-made-with-gsap-1"
+   ]
+  },
+  {
+   "id": "about-team-colour-tiles",
+   "role": "about",
+   "name": "Team on colour tiles",
+   "shape": "grid",
+   "tags": [
+    "photo-led",
+    "colour-field",
+    "dense"
+   ],
+   "directions": [
+    "specimen-catalogue",
+    "contact-sheet",
+    "colour-chapters",
+    "dense-tiles",
+    "loud-flat-poster"
+   ],
+   "needs": [],
+   "blueprint": "A one-line heading of two or three words at 28–36px sits top-left; nothing sits to its right. 40px below, a grid of portrait tiles: six columns with 12px gaps across the full content width for 12 or more people, four columns for 4–8. Every tile is a 4:5 photograph treated identically so mixed-quality headshots look like one set: `filter: grayscale(1) contrast(1.15)` with `mix-blend-mode: multiply` over a flat tint, the tints rotating through four palette colours in a fixed order. Square corners or one small radius. Under each tile, left-aligned to its edge with 10px of space: the name at 15px in full ink and the role at 13px in the soft ink, up to two lines. Rows are 36px apart. A leftover tile in the last row stays at the left; it is not centred. No hover lift and no social icons.",
+   "mobile": "Two columns with 8px gaps; tiles stay 4:5 with names at 14px beneath. For more than ten people, switch to three columns and show the name only. The heading sits above at 24px. Tints keep their rotation, so the grid reads as a checkerboard of colours.",
+   "seenIn": [
+    "opl-compile",
+    "opl-select26",
+    "opl-alterg-resources"
+   ]
+  },
+  {
+   "id": "stats-one-figure-owns-the-screen",
+   "role": "stats",
+   "name": "One figure owns the screen",
+   "shape": "statement",
+   "tags": [
+    "type-led",
+    "poster"
+   ],
+   "directions": [
+    "type-only-statement",
+    "editorial-report",
+    "colour-chapters",
+    "loud-flat-poster",
+    "borrowed-category",
+    "pinned-poster"
+   ],
+   "needs": [],
+   "blueprint": "One number, one screen. A flat field at least 90svh tall. At the top-left, starting on the page's main axis, a one-line claim of two to five words at 36–44px: this is the heading. Then a long gap of 22–28vh. At the bottom-left on the same edge, a single figure at clamp(180px, 23vw, 380px), leading 0.8, tight tracking, with its unit (a percent sign, 'x', 'hrs') set as a superscript one third of the figure's size and aligned to the figure's cap height. Directly beneath, flush with the figure's left edge, a caption of three lines at 16–17px, 32ch wide, saying exactly what was measured and when. The right half of the field stays empty; resist filling it. The figure is static text in lining numerals and does not animate. A source line, if needed, sits at the bottom-right at 15px.",
+   "mobile": "The claim sits at the top at 28px. The figure is 46vw, flush left, with its superscript unit; if it has four characters or more, drop it to 34vw so it stays on one line. The caption follows at 16px across 80% of the width. Minimum height 80svh.",
+   "seenIn": [
+    "opl-the-state-of-software-delivery-in-health",
+    "opl-the-content-architecture"
+   ]
+  },
+  {
+   "id": "contact-clip-out-coupon",
+   "role": "contact",
+   "name": "Clip-out coupon form",
+   "shape": "split",
+   "tags": [
+    "object-led",
+    "colour-field"
+   ],
+   "directions": [
+    "page-is-the-object",
+    "one-motif",
+    "borrowed-category",
+    "loud-flat-poster",
+    "specimen-catalogue"
+   ],
+   "needs": [],
+   "blueprint": "The form is a coupon to cut out. One filled card in a strong flat colour, about 2.2:1, spans columns 2–11 with a 14px radius, with 120px of ground above and below. Semicircular notches 28px across are cut into its top and bottom edges at the 46% mark with `clip-path` or an SVG `mask`, and a vertical row of round dots (a dotted `border-left` 5px thick in the ground colour) joins the two notches as the perforation. Left of the perforation, with 48px padding: a two-line heading of three to five words at clamp(28px, 3vw, 44px) in heavy capitals at the top, and one sentence at 16px at the bottom. Right of it: four inputs stacked with 10px gaps, each a filled block 52px tall in a lighter tone of the card with its placeholder at 16px, then a full-width solid submit bar 56px tall in the darkest ink. Inputs keep visually hidden `label` elements.",
+   "mobile": "The card turns upright and spans the width with 12px margins. The perforation becomes horizontal: notches on the left and right edges, dots across. Heading and sentence sit above it; the four inputs and the submit bar sit below, each 54px tall.",
+   "seenIn": [
+    "opl-the-sapphic-bar-index",
+    "opl-rafael-derolez-2026"
+   ]
+  }
+ ],
+ "references": [
+  {
+   "id": "opl-depo-budget-app",
+   "name": "Depo Budget App",
+   "url": "https://depobudget.com",
+   "source": "One Page Love",
+   "kind": "consumer-app",
+   "score": 6.9,
+   "idea": "Budgeting reduced to one daily number, dressed in neo-brutalist sticker graphics: flat primaries, thick black outlines and a hard offset shadow on every box.",
+   "mood": [
+    "bold",
+    "cheerful",
+    "blunt",
+    "cartoonish"
+   ],
+   "archetype": "split-text-media",
+   "hero": "Saturated blue field with a faint grid of 100px squares. A 72px header holds a white wordmark left and a black store badge right, above a 3px black rule. Left column, starting 7% in and vertically centred: a cream box with black border holding one line of uppercase mono, a two-line white headline in very heavy grotesque at 5.3vw, two lines of 20px white copy, and a coral button with black border and hard offset shadow. Right of centre: an illustrated phone tilted about 4 degrees, 24% of the width and nearly full height, thick black outline, star stickers on two corners. A lime marquee strip closes the bottom.",
+   "type": "Archivo Black at 76px with -0.025em tracking for headings (white on colour, black on cream), DM Sans at 16 to 20px for copy, and a system monospace in small capitals for labels and amounts. About a 4:1 jump; three faces.",
+   "colour": "#1769e7 #f6eedf #c8e832 #7c3aed #3cbdb1 #ff5c40 — Each section takes a different flat fill: blue, cream, purple, teal, blue again, then a black footer. Lime, coral, amber and red fill cards and buttons; black outlines hold it together.",
+   "imagery": "Flat vector phone frames with thick black outlines showing simplified app screens in the page palette, light and dark themes alternating; four-point star stickers as decoration. No photography.",
+   "layout": "Content sits in a 1230px container with 105px margins. Sections are full-width colour blocks separated by 3px black rules; each opens with a left-aligned heavy heading and one line of copy, followed by a row of outlined cards or phones. The rhythm is uniform.",
+   "sections": [
+    {
+     "role": "how-it-works",
+     "description": "Cream section. A left-aligned heading and one line of copy, then four equal cards in a row with 16px gaps, each a different flat colour (amber, red, teal, lime) with a 2px black border and a 4px hard offset shadow. Inside each: a mono index number top-left, a bold label, one line of copy, a black hairline, then an amount in mono with a tiny uppercase caption."
+    },
+    {
+     "role": "showcase",
+     "description": "Purple section. A white one-line heading spans the container with a single line of copy beneath, then four phone screens in a row at equal width, alternating light and dark app themes, each in a thick black rounded frame. The phones run about a screen tall; a one-line white caption is centred under each at the bottom of the section."
+    },
+    {
+     "role": "features",
+     "description": "Teal section. A small amber mono label in a bordered box sits above a black heavy heading and one line of copy. Below, a three-by-three grid of white cards with black borders and hard shadows; each card is one short row with a line icon at left, a bold title and a single line of small grey copy. Cards are about 100px tall with 20px gaps."
+    }
+   ],
+   "steal": [
+    "Give each section its own flat saturated fill and separate them with a 3px black rule, so colour does the sectioning.",
+    "Apply one physical rule to every box (2px black border plus 4px hard offset shadow, no blur) so buttons, cards and phones read as one kit.",
+    "Show the product's core number as an oversized figure in a lime card rather than as a screenshot."
+   ]
+  },
+  {
+   "id": "aww-trevor-noah",
+   "name": "Trevor Noah",
+   "url": "https://www.trevornoah.com/",
+   "source": "Awwwards Site of the Day",
+   "kind": "culture",
+   "score": 7.8,
+   "idea": "The comedian as a paper cut-out sticker: his head is torn open and the things he makes (stand-up, books, video) spill out and become the navigation.",
+   "mood": [
+    "playful",
+    "bold",
+    "collage",
+    "warm",
+    "cheeky"
+   ],
+   "archetype": "giant-wordmark",
+   "hero": "The desktop capture caught a blank navy frame before the canvas painted; the next frame and the mobile shot show the scene. A deep navy field. The name runs across the top in bold pink grotesk on one line, sized to nearly touch both edges. Centred below is a photographic cut-out of the face with a thick white sticker outline and a torn top edge, from which glossy 3D objects (microphone, book, video player, brain, heart) erupt. Circular arrow buttons sit at the left and right edges; a torn-paper white label beneath the face names the current category. A hairline, a text ticker and a pink pill close the bottom.",
+   "type": "Die Grotesk D bold for the wordmark (361px in the digest), Die Grotesk C for everything else with body near 19px. Tight tracking, title case. Statements run at about 4vw and emphasise words by switching them to pink, never by changing weight or face.",
+   "colour": "#1d2440 #f78fb3 #f6f7ee #2b2b2b — One navy field for the entire page. Pink marks the wordmark, emphasised words and one pill; cream-white fills buttons and paper shapes. Photos bring the only other colour.",
+   "imagery": "Photo cut-outs of the face with thick white die-cut outlines and torn edges, toy-like 3D objects, and small stage photos shaped as peeling stickers or rounded tiles, tilted a few degrees and loosely clustered.",
+   "layout": "Centred, one idea per screen on an unbroken navy ground: statement, section title with drifting objects, a lone pill button. The fixed header has the pink name left and two cream pills right. Elements enter from the edges and overlap instead of sitting in columns.",
+   "sections": [
+    {
+     "role": "intro",
+     "description": "A centred four-line statement in white at about 4vw, the lines stepped and ragged instead of squared off, with one long word in pink on the first line. It occupies the lower half of the viewport while the upper half stays empty navy, and appears to build line by line."
+    },
+    {
+     "role": "gallery",
+     "description": "A two-line centred title, first line white and second pink, at about 2.5vw. Beneath it a loose cluster of tilted objects rises from the bottom edge: a 3D video-player tile in the middle, small rounded photo tiles and a 3D microphone to its left, all overlapping. On the next screen the objects have drifted upward past a single cream pill button centred in empty space."
+    },
+    {
+     "role": "footer",
+     "description": "Split footer. Left half: a second, larger cut-out of the face, tilted and cropped by the left and bottom edges, with a small white speech bubble above it. Right half: a five-row menu, each row a tiny index number at left and a bold label at about 2.5vw, separated by hairlines. Legal text is tiny along the bottom."
+    }
+   ],
+   "steal": [
+    "Cut the subject out of a photo with a thick white sticker border and a torn edge so photography behaves like illustration.",
+    "Emphasise words in a statement by colour alone (pink within white) while keeping one face and one weight.",
+    "Turn the footer into a large numbered menu beside a cropped portrait whose speech bubble addresses the departing visitor."
+   ],
+   "media": "Media covers essentially the whole first screen: a fixed WebGL layer behind everything, a photographic cut-out of the face with a torn top taking about a third of the width and the bottom two thirds of the height, props bursting out of it over the wordmark. Later the props re-form into a collage of tilted sticker photos round a 3D object and a stack of books, torn-paper strips mark the colour changes, and a giant cropped portrait peeks from the footer corner, every photo an alpha cut-out with an 8-10px white sticker outline and no video anywhere.",
+   "motion": "A load of about 7.3s plays as a large counter to 100, the intact face sticker, the crown tearing away, props spilling out and the name last, and Lenis then drives the fixed WebGL stage as the props fly down and re-form per chapter, the ground changing navy, charcoal, navy at torn-paper dividers. Headline lines rise from translateY(120%) through a clip-path over 1.2s cubic-bezier(0.215,0.61,0.355,1) and stickers pop in from scale 0 on an overshoot curve the house layer does not use, while 11 reduced-motion rules zero every duration."
+  },
+  {
+   "id": "opl-rsquad",
+   "name": "RSquad",
+   "url": "https://rsquad.io",
+   "source": "One Page Love",
+   "kind": "agency",
+   "score": 7.5,
+   "idea": "The six letters of the name are detached red monospace glyphs that float over the whole page and reshuffle their constellation as you scroll, while the actual content sits quietly underneath in tiny mono.",
+   "mood": [
+    "irreverent",
+    "stark",
+    "cryptic",
+    "playful",
+    "confident"
+   ],
+   "archetype": "type-poster",
+   "hero": "White viewport with no imagery. Three tiny uppercase mono nav words sit on the top edge at far left, exact centre and far right, the active one underlined. The wordmark is exploded into six red monospace capitals, each about 12% of viewport height, placed on a loose ring roughly 45% of the viewport wide: R alone at top centre, S and D at mid-left and mid-right, Q and A lower, U at bottom centre, with three small red vertical blocks as punctuation between them. Inside the ring sits a two-line 20px mono tagline, a small hooked arrow and one underlined text link. The outer thirds are empty.",
+   "type": "Elma Mono Variable at weight 300, uppercase, 20px for nav, taglines and body; the red letters are the same mono enlarged about six times. Cortese Trial, a light flared serif in tight capitals, sets pull quotes at about 4.4vw; Inter for small link captions. Three sizes in total.",
+   "colour": "#ffffff #fa2420 #111111 #000000 #d9d9d9 — White ground with thin black text and one saturated signal red reserved for the floating letters and blocks; the closing screen inverts to black with white and red line ornaments.",
+   "imagery": "No photographs. The red letters are the imagery, plus small engraved-style ornamental roman numerals inside dotted selection boxes and, on the last black screen, white line-drawn vines with red star flowers.",
+   "layout": "One centred column about a third of the viewport wide with huge side margins. Sections are short centred stacks: ornamental numeral, two-word title, mono paragraph, then two or three columns of underlined links with one-line captions. Wide serif quotes break the narrow rhythm.",
+   "sections": [
+    {
+     "role": "features",
+     "description": "Chapter block: at top centre a tall dotted-outline box with tiny square corner handles, like a selected frame in a design tool, holds an engraved roman numeral and a two-word stacked title; dotted diagonals fan out beneath it like a tent. Below comes a centred two-line mono paragraph, then a row of two or three underlined project names, each marked by a small black square above and a one-line sans caption below."
+    },
+    {
+     "role": "testimonial",
+     "description": "Pull quote in light serif capitals at roughly 4.4vw, centred, five tightly leaded lines about 60% of viewport width, wrapped in guillemets and filling the top half of the screen. Red mono letters and blocks pass over and between the words, deliberately colliding with the text. No attribution, rule or card; the next numbered chapter box starts directly below."
+    },
+    {
+     "role": "intro",
+     "description": "A three-line mono paragraph centred at the top, then three short sans statements arranged as a triangle (two side by side, one below centre), each topped by a small black square. The block ends with a two-line serif-capitals sign-off at about 4vw, centred, with the red letters clustered directly on top of it."
+    },
+    {
+     "role": "cta",
+     "description": "Closing screen flips to solid black: a second serif-capitals quote in white, centred, with one small mono line above it. White line-drawn vines and red star flowers creep in from the lower corners and right edge, and the red letters now run in a loose vertical chain through the quote. The three-word nav stays pinned in white."
+    }
+   ],
+   "steal": [
+    "Break the wordmark into single glyphs and place them as a loose ring around the tagline, keeping the centre for a two-line statement and one text link.",
+    "Use one typeface at only two extremes (20px mono for everything, the same mono at six times the size in the accent colour) and bring in a serif-capitals face solely for quotes.",
+    "Mark chapters with a dotted selection box with corner handles around an ornamental numeral instead of a heading bar or eyebrow."
+   ]
+  }
+ ],
+ "scenes": []
+}

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Archivo } from "next/font/google";
 import "./globals.css";
 
 const BASE_URL = "https://irgifebry.vercel.app";
@@ -18,11 +17,7 @@ const DESCRIPTION =
  * Both variable names survive from the previous build so that nothing
  * downstream has to churn.
  */
-const archivo = Archivo({
-  subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--f-display",
-});
+/* Erode loaded via Fontshare link in <head> (see below) */
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -49,8 +44,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`dark ${archivo.variable}`} suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+    <link href="https://api.fontshare.com/v2/css?f[]=erode@400,401,500,600&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

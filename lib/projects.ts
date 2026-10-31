@@ -23,6 +23,8 @@ export type Panel = {
   role: string
   year: string
   alt: string
+  /** Native video aspect ratio (w/h) so the preview matches the clip. */
+  aspect: string
 }
 
 export const panels: Panel[] = [
@@ -36,6 +38,7 @@ export const panels: Panel[] = [
     role: "JavaScript, HTML5, CSS",
     year: "2026",
     alt: "The NoBlur interface: a dark workbench with a yellow heading, a settings panel on the left, a drop zone in the centre and a system log on the right.",
+    aspect: "1366/768",
   },
   {
     slug: "restaurant-monalisa",
@@ -44,9 +47,10 @@ export const panels: Panel[] = [
     video: "/videos/Monalisa.mp4",
     poster: "/posters/Monalisa.jpg",
     url: "https://monalisaresto.site.je/",
-    role: "Frontend, UI/UX",
+    role: "PostgreSQL, JavaScript, React",
     year: "2026",
     alt: "The Monalisa Resto website: a cream page headed Harmonirasa dan Estetika beside an ornate gold-framed portrait of the Mona Lisa.",
+    aspect: "959/540",
   },
   {
     slug: "instainsight",
@@ -58,6 +62,7 @@ export const panels: Panel[] = [
     role: "React, TypeScript, Tailwind",
     year: "2026",
     alt: "The InstaInsight interface: a dark navy page headed In Your Circle, with a yellow Desktop tab selected and three numbered steps for scanning Instagram followers.",
+    aspect: "959/540",
   },
   {
     slug: "playshop",
@@ -69,6 +74,7 @@ export const panels: Panel[] = [
     role: "PHP, MySQL, JavaScript",
     year: "2026",
     alt: "The PlayShop.ID storefront: a row of game cards for Call of Duty Mobile, Free Fire, Genshin Impact, Mobile Legends and PUBG Mobile, each with a green price.",
+    aspect: "1280/642",
   },
   {
     slug: "needledrop",
@@ -80,6 +86,7 @@ export const panels: Panel[] = [
     role: "Next.js, TypeScript, Tailwind",
     year: "2026",
     alt: "The needledrop interface: a dark page headed DROP THE NEEDLE. GET THE SESSION., with a seed search box and a generated playlist of twenty tracks below.",
+    aspect: "960/540",
   },
   {
     slug: "byte-brew",
@@ -87,9 +94,11 @@ export const panels: Panel[] = [
     kicker: "Specialty coffee shop site with menu, space gallery and order dialog",
     video: "/videos/ByteBrew.mp4",
     poster: "/posters/ByteBrew.jpg",
+    url: "https://bytbrew.vercel.app/",
     role: "Next.js, React, Tailwind",
     year: "2026",
     alt: "The Byte Brew website: a cream page with amber accents, a hero, featured menu cards, a space gallery, testimonials and a call to action.",
+    aspect: "1280/642",
   },
 ]
 

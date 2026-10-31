@@ -13,7 +13,66 @@ const links = [
 
 export default function Nav() {
   const [active, setActive] = useState("");
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [navBg, setNavBg] = useState<string>("");
+  const [navInk, setNavInk] = useState<string>("");
+  const [light, setLight] = useState({ x: 50, y: 0 });
+
+  const luminance = (hex: string) => {
+    const m = hex.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!m) return 0.5;
+    const [r, g, b] = [Number(m[1]), Number(m[2]), Number(m[3])].map((v) => {
+      const c = v / 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const y = 72 + 1;
+      const sections = Array.from(
+        document.querySelectorAll<HTMLElement>("main > section"),
+      );
+      let target: HTMLElement | null = null;
+      for (const s of sections) {
+        const r = s.getBoundingClientRect();
+        if (r.top <= y && r.bottom >= y) {
+          target = s;
+          break;
+        }
+      }
+      if (target) {
+        const cs = getComputedStyle(target);
+        const bg = cs.backgroundColor;
+        setNavBg(bg);
+        setNavInk(luminance(bg) > 0.5 ? "#0a0a0a" : "#f5f5f0");
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      setLight({
+        x: ((e.clientX - rect.left) / rect.width) * 100,
+        y: ((e.clientY - rect.top) / rect.height) * 100,
+      });
+    };
+    const el = document.querySelector(".nav-bar > .shell") as HTMLElement | null;
+    if (!el) return;
+    el.addEventListener("mousemove", onMove);
+    return () => el.removeEventListener("mousemove", onMove);
+  }, []);
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -40,8 +99,15 @@ export default function Nav() {
 
   return (
     <>
-      <header className="nav-bar">
-        <div className="shell flex items-center justify-between py-4">
+      <header
+        className={`nav-bar${scrolled ? " is-scrolled" : ""}`}
+        style={
+          scrolled
+            ? ({ "--nav-bg": navBg, "--nav-ink": navInk } as React.CSSProperties)
+            : ({ "--nav-bg": "var(--c-bg)", "--nav-ink": "var(--c-ink)" } as React.CSSProperties)
+        }
+      >
+        <div className="shell flex items-center justify-between py-2">
           <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
             {links.map((l) => (
               <a
@@ -57,7 +123,10 @@ export default function Nav() {
           </nav>
 
           <div className="ml-auto flex items-center gap-3">
-            <a href="#contact" className="btn btn-accent hidden !py-2.5 !px-5 nav-type md:inline-flex">
+            <a
+              href="#contact"
+              className="btn btn-accent hidden !py-2.5 !px-5 md:inline-flex"
+            >
               Start a project
             </a>
             <ThemeToggle />
