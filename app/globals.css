@@ -8,8 +8,6 @@
   --color-muted: var(--c-muted);
   --color-accent: var(--c-accent);
   --color-accent-ink: var(--c-accent-ink);
-  --color-red: var(--f-red);
-  --color-pink: var(--f-pink);
   --color-lime: var(--f-lime);
   --color-violet: var(--f-violet);
   --color-cream: var(--f-cream);
@@ -26,32 +24,18 @@
   --text-small: var(--text-body);
 }
 
-:root,
-html.dark {
+:root {
   --c-bg: #0c0a08;
   --c-s1: #181512;
   --c-s2: #231f1a;
   --c-ink: #ffffff;
-  --c-muted: #8f8a84;
+  --c-muted: #a09992;
   --c-accent: #c9a45a;
   --c-accent-ink: #0c0a08;
   color-scheme: dark;
 }
 
-html.light {
-  --c-bg: #f5f1e6;
-  --c-s1: #ebe5d6;
-  --c-s2: #ddd5c0;
-  --c-ink: #0c0a08;
-  --c-muted: #6b6560;
-  --c-accent: #0c0a08;
-  --c-accent-ink: #f5f1e6;
-  color-scheme: light;
-}
-
 :root {
-  --f-red: #ff3b5c;
-  --f-pink: #ff5fa2;
   --f-lime: #d4ff3a;
   --f-violet: #7c5cff;
   --f-cream: #f5f5f0;
@@ -132,8 +116,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--c-muted) transparent; }
   .arrow-link:hover { opacity: 0.7; }
   .arrow-link:hover svg { transform: translate(2px, -2px); }
 
-  .field-red { background: var(--f-red); color: #fff; }
-  .field-pink { background: var(--f-pink); color: #fff; }
   .field-lime { background: var(--f-lime); color: #0a0a0a; }
   .field-violet { background: var(--f-violet); color: #fff; }
   .field-cream { background: var(--f-cream); color: #0a0a0a; }

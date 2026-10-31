@@ -343,7 +343,7 @@ function Numbers({ activity }: { activity: Activity | null }) {
     : { value: figures.shipped.value, note: "The shipped-project count, used while the contribution calendar is unreachable." };
 
   return (
-    <section className="field-red band">
+    <section className="field-violet band">
       <div className="shell" data-reveal>
         <h2 className="section-title mb-[var(--gap-head)]" data-reveal-item>
           What the work adds up to
@@ -376,7 +376,7 @@ function Numbers({ activity }: { activity: Activity | null }) {
 
 function Experience() {
   return (
-    <section className="field-pink band">
+    <section className="field-lime band">
       <div className="shell" data-reveal>
         <h2 className="section-title mb-[var(--gap-head)]" data-reveal-item>
           Experience
@@ -419,7 +419,7 @@ function Contact() {
           </div>
 
           <div className="md:col-span-7" data-reveal-item>
-            <a href={`mailto:${email}`} className="row-link field-red">
+            <a href={`mailto:${email}`} className="row-link field-violet">
               <span className="row-link__long">{email}</span>
               <span className="row-link__tag">Write to Irgi</span>
             </a>

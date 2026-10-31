@@ -89,14 +89,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var stored = localStorage.getItem('theme');
-                var isLight = stored === 'light';
-                document.documentElement.classList.toggle('light', isLight);
-                document.documentElement.classList.toggle('dark', !isLight);
-              } catch (_) {
                 document.documentElement.classList.remove('light');
                 document.documentElement.classList.add('dark');
-              }
+              } catch (_) {}
             `,
           }}
         />

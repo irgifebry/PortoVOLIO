@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   { href: "#work", label: "Work" },
@@ -129,7 +128,6 @@ export default function Nav() {
             >
               Start a project
             </a>
-            <ThemeToggle />
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
